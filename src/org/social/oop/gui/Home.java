@@ -1,12 +1,15 @@
-package org.scholar.oop.gui;
+package org.social.oop.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -15,16 +18,19 @@ public class Home extends JFrame{
 	private JButton buttonLoginPage;
 	private JButton buttonRegisterPage;
 	private JPanel panelRouteButtons;
-	
+	private JPanel panelWelcome;
+	private JLabel labelWelcome;
 	
 	
 	public Home() {
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		this.setSize(900,500);
+		
 		this.setVisible(true);
 		
 		this.createRouteButtons();
+		this.createWelcome();
 	}
 	
 	public void createRouteButtons() {
@@ -45,6 +51,18 @@ public class Home extends JFrame{
 				BorderLayout.SOUTH);
 	}
 	
+	
+	public void createWelcome() {
+		this.panelWelcome = new JPanel();
+		this.panelWelcome.setLayout(new FlowLayout(FlowLayout.CENTER));
+		
+		this.labelWelcome = new JLabel("Welcome!!!");
+		labelWelcome.setFont(new Font("Serif", Font.BOLD, 20));
+		this.panelWelcome.add(labelWelcome);
+		
+		
+		this.getContentPane().add(this.panelWelcome, BorderLayout.CENTER);
+	}
 	
 	public class EnterFormLogin implements ActionListener{
 		@Override

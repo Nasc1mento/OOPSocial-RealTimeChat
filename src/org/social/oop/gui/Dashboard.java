@@ -1,4 +1,4 @@
-package org.scholar.oop.gui;
+package org.social.oop.gui;
 
 import java.awt.BorderLayout;
 

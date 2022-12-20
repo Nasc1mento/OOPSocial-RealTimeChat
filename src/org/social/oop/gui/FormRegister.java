@@ -1,6 +1,7 @@
-package org.scholar.oop.gui;
+package org.social.oop.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,8 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import org.scholar.oop.gui.FormLogin.EnterDashboard;
-import org.scholar.oop.gui.FormLogin.EnterHome;
+
 
 public class FormRegister extends JFrame{
 	
@@ -21,11 +21,13 @@ public class FormRegister extends JFrame{
 	private JButton buttonReturnHome;
 	private JTextField textFieldName;
 	private JTextField textFieldEmail;
+	private JTextField textFieldPhone;
 	private JTextField textFieldPassword;
 	private JTextField textFieldConfirmPassword;
 	private JPanel panelButtonForm;
 	private JPanel panelForm;
 	private JLabel labelEmail;
+	private JLabel labelPhone;
 	private JLabel labelPassword;
 	private JLabel labelName;
 	private JLabel labelConfirmPassword;
@@ -42,23 +44,27 @@ public class FormRegister extends JFrame{
 	public void createForm() {
 		
 		this.panelForm = new JPanel();
-		this.textFieldName = new JTextField(35);
-		this.textFieldEmail = new JTextField(30);
-		this.textFieldPassword = new JTextField(25);
-		this.textFieldConfirmPassword = new JTextField(25);
-		this.labelName = new JLabel("Name");
-		this.labelEmail = new JLabel("Email");
-		this.labelPassword = new JLabel("Password");
-		this.labelConfirmPassword = new JLabel("Confirm Password");
+		this.textFieldName = new JTextField(80);
+		this.textFieldEmail = new JTextField(80);
+		this.textFieldPhone = new JTextField(80);
+		this.textFieldPassword = new JTextField(80);
+		this.textFieldConfirmPassword = new JTextField(80);
+		this.labelName = new JLabel("Name: ");
+		this.labelEmail = new JLabel("Email: ");
+		this.labelPhone = new JLabel("Phone: ");
+		this.labelPassword = new JLabel("Password: " );
+		this.labelConfirmPassword = new JLabel("Confirm Password:");
 		
 		
 		
-		this.setLayout(new FlowLayout(FlowLayout.LEADING,10,10));
+		this.setLayout(new FlowLayout(FlowLayout.CENTER,10,10));
 		
 		this.add(this.labelName);
 		this.add(this.textFieldName);
 		this.add(this.labelEmail);
 		this.add(this.textFieldEmail);
+		this.add(this.labelPhone);
+		this.add(this.textFieldPhone);
 		this.add(this.labelPassword);
 		this.add(this.textFieldPassword);
 		this.add(this.labelConfirmPassword);

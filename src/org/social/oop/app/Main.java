@@ -1,8 +1,8 @@
-package org.scholar.oop.app;
+package org.social.oop.app;
 
 import javax.swing.SwingUtilities;
 
-import org.scholar.oop.gui.Home;
+import org.social.oop.gui.Home;
 
 public class Main {
 	public static void main(String[] args) {

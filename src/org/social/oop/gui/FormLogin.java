@@ -1,4 +1,4 @@
-package org.scholar.oop.gui;
+package org.social.oop.gui;
 
 
 import java.awt.BorderLayout;
@@ -40,12 +40,12 @@ public class FormLogin extends JFrame{
 	public void createForm() {
 		
 		this.panelForm = new JPanel();
-		this.textFieldEmail = new JTextField(25);
-		this.textFieldPassword = new JTextField(25);
-		this.labelEmail = new JLabel("Name");
+		this.textFieldEmail = new JTextField(80);
+		this.textFieldPassword = new JTextField(80);
+		this.labelEmail = new JLabel("Email");
 		this.labelPassword = new JLabel("Password");
 		
-		this.setLayout(new FlowLayout(FlowLayout.LEADING,10,10));
+		this.setLayout(new FlowLayout(FlowLayout.CENTER,10,10));
 		
 		this.add(this.labelEmail);
 		this.add(this.textFieldEmail);
@@ -74,6 +74,7 @@ public class FormLogin extends JFrame{
 				BorderLayout.SOUTH);
 		
 	}
+	
 	
 	public class EnterDashboard implements ActionListener {
 
