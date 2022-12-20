@@ -21,7 +21,7 @@ public class Home extends JFrame{
 	public Home() {
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
-		this.setSize(500,500);
+		this.setSize(900,500);
 		this.setVisible(true);
 		
 		this.createRouteButtons();
@@ -42,7 +42,7 @@ public class Home extends JFrame{
 		this.panelRouteButtons.add(buttonRegisterPage);
 		
 		this.getContentPane().add(this.panelRouteButtons, 
-				BorderLayout.CENTER);
+				BorderLayout.SOUTH);
 	}
 	
 	
