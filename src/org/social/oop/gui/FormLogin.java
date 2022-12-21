@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import org.social.oop.exception.EmailAndOrLoginNotMatchException;
 import org.social.oop.model.User;
 import org.social.oop.persistence.UserDAO;
 
@@ -88,7 +89,7 @@ public class FormLogin extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				if (UserDAO.getInstance().authUser(new User(textFieldEmail.getText(),textFieldPassword.getText()))) {
+				UserDAO.getInstance().authUser(new User(textFieldEmail.getText(),textFieldPassword.getText()));
 					SwingUtilities.invokeLater(new Runnable() {
 						@Override
 						public void run() {
@@ -96,11 +97,8 @@ public class FormLogin extends JFrame{
 							new Dashboard();
 						}
 					});
-				}else {
-					JOptionPane.showMessageDialog(null, "Email and/or Password do not match!!!");
-				}
-			}catch(Exception exception) {
-				exception.printStackTrace();
+			}catch(EmailAndOrLoginNotMatchException exception) {
+				JOptionPane.showMessageDialog(null, exception.getMessage());
 			}
 		}
 	}
@@ -118,8 +116,5 @@ public class FormLogin extends JFrame{
 				}
 			});
 		}
-		
 	}
-	
-	
 }

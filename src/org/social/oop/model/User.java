@@ -7,19 +7,22 @@ public class User {
 	private int id;
 	private String name;
 	private String email;
-	private String password;
 	private String phone;
+	private String password;
+	private String confirmPassword;
 	
 	
 	
 	
-	public User(int id, String name, String email, String password, String telefone) {
+	
+	public User(int id, String name, String email, String phone, String password, String confirmPassword) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.phone = telefone;
+		this.phone = phone;
+		this.confirmPassword = confirmPassword;
 	}
 
 
@@ -97,8 +100,22 @@ public class User {
 
 
 
-	public void setPhone(String telefone) {
-		this.phone = telefone;
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+
+	
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+
+
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 
@@ -121,7 +138,7 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(id, other.id);
+		return Objects.equals(this.id, other.id);
 	}
 
 
@@ -129,8 +146,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", telefone="
-				+ phone + "]";
+		return "User [id=" + this.id + ", name=" + this.name + ", email=" + this.email + ", password=" + this.password + ", telefone="
+				+ this.phone + "]";
 	}
 	
 }

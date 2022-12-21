@@ -17,6 +17,7 @@ import javax.swing.SwingUtilities;
 
 import org.social.oop.exception.EmailFieldNotFilledException;
 import org.social.oop.exception.NameFieldNotFilledException;
+import org.social.oop.exception.PasswordConfirmationDoesNotMatchException;
 import org.social.oop.exception.PasswordFieldNotFilledException;
 import org.social.oop.exception.PhoneFieldNotFilledException;
 import org.social.oop.model.User;
@@ -110,7 +111,7 @@ public class FormRegister extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			try {
 				UserDAO.getInstance().
-				createUser(new User(0,textFieldName.getText(),textFieldEmail.getText(),textFieldPhone.getText(),textFieldPassword.getText()));
+				createUser(new User(0,textFieldName.getText(),textFieldEmail.getText(),textFieldPhone.getText(),textFieldPassword.getText(),textFieldConfirmPassword.getText()));
 				JOptionPane.showMessageDialog(null, "Usuário criado com sucesso!!!");
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
@@ -119,7 +120,7 @@ public class FormRegister extends JFrame{
 						new Home();
 					}
 				});	
-			}catch(NameFieldNotFilledException | EmailFieldNotFilledException | PhoneFieldNotFilledException| PasswordFieldNotFilledException exception){
+			}catch(NameFieldNotFilledException | EmailFieldNotFilledException | PhoneFieldNotFilledException| PasswordFieldNotFilledException | PasswordConfirmationDoesNotMatchException exception){
 				JOptionPane.showMessageDialog(null, exception.getMessage());
 			}
 		}
