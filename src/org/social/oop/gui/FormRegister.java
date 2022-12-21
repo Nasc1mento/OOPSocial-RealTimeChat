@@ -15,6 +15,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import org.social.oop.exception.EmailFieldNotFilledException;
+import org.social.oop.exception.NameFieldNotFilledException;
+import org.social.oop.exception.PasswordFieldNotFilledException;
+import org.social.oop.exception.PhoneFieldNotFilledException;
 import org.social.oop.model.User;
 import org.social.oop.persistence.UserDAO;
 
@@ -114,10 +118,9 @@ public class FormRegister extends JFrame{
 						dispose();
 						new Home();
 					}
-				});
-				
-			}catch(Exception exception){
-				JOptionPane.showMessageDialog(null, "Usuário não foi cadastrado :(");
+				});	
+			}catch(NameFieldNotFilledException | EmailFieldNotFilledException | PhoneFieldNotFilledException| PasswordFieldNotFilledException exception){
+				JOptionPane.showMessageDialog(null, exception.getMessage());
 			}
 		}
 		

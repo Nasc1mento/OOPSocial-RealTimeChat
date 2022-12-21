@@ -4,6 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.social.oop.exception.EmailFieldNotFilledException;
+import org.social.oop.exception.NameFieldNotFilledException;
+import org.social.oop.exception.PasswordFieldNotFilledException;
+import org.social.oop.exception.PhoneFieldNotFilledException;
 import org.social.oop.model.User;
 
 
@@ -22,8 +26,17 @@ public class UserDAO implements IUserPersistence{
 			return instance;
 	}
 	@Override
-	public void createUser(User user) {
-		try {
+	public void createUser(User user) throws NameFieldNotFilledException,EmailFieldNotFilledException, PhoneFieldNotFilledException,PasswordFieldNotFilledException{
+		if (user.getName() == null || user.getName().equalsIgnoreCase("") || user.getName().equalsIgnoreCase("\n")) 
+			throw new NameFieldNotFilledException("O nome é obrigatório");
+		else if (user.getEmail() == null || user.getEmail().equalsIgnoreCase("") || user.getEmail().equalsIgnoreCase("\n"))
+			throw new EmailFieldNotFilledException("O email é obrigatório");
+		else if (user.getPhone() == null || user.getPhone().equalsIgnoreCase("") || user.getPhone().equalsIgnoreCase("\n"))
+			throw new PhoneFieldNotFilledException("O telefone é obrigatório");
+		else if (user.getPassword() == null || user.getPassword().equalsIgnoreCase("") || user.getPassword().equalsIgnoreCase("\n"))
+			throw new PasswordFieldNotFilledException("A senha é obrigatória");
+		else {
+			try {
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().prepareStatement("INSERT INTO OS_USERS VALUES (?, ?, ?, ?, ?);");
 			preparedStatement.setInt(1, user.getId());
 			preparedStatement.setString(2, user.getName());
@@ -32,10 +45,12 @@ public class UserDAO implements IUserPersistence{
 			preparedStatement.setString(5, user.getPassword());
 			preparedStatement.execute();
 			
-		}catch(SQLException exception){
+			}catch(SQLException exception){
 			exception.printStackTrace();
+			}
 		}
 	}
+		
 	@Override
 	public void removeUser(User user) {
 		
@@ -56,11 +71,7 @@ public class UserDAO implements IUserPersistence{
 			preparedStatement.setString(1, user.getEmail());
 			preparedStatement.setString(2, user.getPassword());
 			ResultSet resultset = preparedStatement.executeQuery();
-			
-			if (resultset.next())
-				return true;
-			else
-				return false;
+			return resultset.next();
 		}catch(SQLException exception) {
 			exception.printStackTrace();
 		}
