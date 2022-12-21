@@ -1,9 +1,11 @@
 package org.social.oop.persistence;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.social.oop.model.User;
+
 
 public class UserDAO implements IUserPersistence{
 	
@@ -43,8 +45,29 @@ public class UserDAO implements IUserPersistence{
 		
 	}
 	@Override
-	public User searchUser(User user) {
+	public User locateUser(User user) {
 		return user;
 	}
+	@Override
+	public boolean authUser(User user) {
+		try {
+			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
+					prepareStatement("SELECT * FROM OS_USERS WHERE USR_EMAIL = ? AND USR_PASSWORD = ?;");
+			preparedStatement.setString(1, user.getEmail());
+			preparedStatement.setString(2, user.getPassword());
+			ResultSet resultset = preparedStatement.executeQuery();
+			
+			if (resultset.next())
+				return true;
+			else
+				return false;
+		}catch(SQLException exception) {
+			exception.printStackTrace();
+		}
+		return false;
+	}
+	
+	
+	
 	
 }
