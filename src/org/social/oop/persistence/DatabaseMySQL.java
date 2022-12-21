@@ -7,8 +7,8 @@ import java.sql.SQLException;
 public class DatabaseMySQL implements IConnectionDB{
 	
 	final String HOST_NAME = "127.0.0.1";
-	final String DATABASE = "OOPSOCIAL_USER";
-	final String USER_NAME = "OOPSOCIAL_DB";
+	final String DATABASE = "OOPSOCIAL_DB";
+	final String USER_NAME = "OOPSOCIAL_USER";
 	final String PASSWORD = "OOPSOCIAL_PW";
 	final String PORT_NUMBER = "3306";
  

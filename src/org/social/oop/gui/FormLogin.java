@@ -27,11 +27,11 @@ public class FormLogin extends JFrame{
 	
 	public FormLogin() {
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-		this.setSize(900, 500);
 		this.setLayout(new BorderLayout());
+		this.setResizable(false);
 		this.setTitle("OOPSocial/Login");
 		this.setBounds(250,250,0,0);
-		this.setResizable(false);
+		this.setSize(900,500);
 		this.setVisible(true);
 		this.createForm();
 		this.createButtonsForm();

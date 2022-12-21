@@ -4,22 +4,22 @@ import java.util.Objects;
 
 public class User {
 	
-	private String id;
+	private int id;
 	private String name;
 	private String email;
 	private String password;
-	private String telefone;
+	private String phone;
 	
 	
 	
 	
-	public User(String id, String name, String email, String password, String telefone) {
+	public User(int id, String name, String email, String password, String telefone) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.telefone = telefone;
+		this.phone = telefone;
 	}
 
 
@@ -32,14 +32,14 @@ public class User {
 
 
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
 
 
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -88,15 +88,15 @@ public class User {
 
 
 
-	public String getTelefone() {
-		return telefone;
+	public String getPhone() {
+		return phone;
 	}
 
 
 
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setPhone(String telefone) {
+		this.phone = telefone;
 	}
 
 
@@ -128,7 +128,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", telefone="
-				+ telefone + "]";
+				+ phone + "]";
 	}
 	
 }
