@@ -21,17 +21,35 @@ public class PBKDF2Salt
 	
 	
 	public static String getSalt() {
+		
+		
+		
 		SecureRandom random = new SecureRandom();
 		byte[] salt = new byte[16];
 		random.nextBytes(salt);
-		String s = new String(salt);
-		return s;
+		
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < salt.length; i++ ) {
+			sb.append(Integer.toString((salt[i] & 0xff) + 0x100, 16 ).substring(1));
+		}
+		
+		return sb.toString();
 	}
 	
 	
     private static String getSecurePassword(String password, String salt) {
     	
-    	KeySpec spec = new PBEKeySpec(password.toCharArray(), salt.getBytes(), 65536, 128);
+    	byte[] ans = new byte[salt.length()/2];
+		
+		for(int i = 0; i < ans.length; i++) {
+			int index = i*2;
+			int val = Integer.parseInt(salt.substring(index,index+2),16);
+			ans[i] = (byte)val;
+		}
+    	
+    	
+    	
+    	KeySpec spec = new PBEKeySpec(password.toCharArray(), ans, 65536, 128);
     	SecretKeyFactory factory = null;
 		try {
 			factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
