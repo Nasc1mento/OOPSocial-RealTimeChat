@@ -18,6 +18,7 @@ import org.social.oop.exception.EmailAndOrLoginNotMatchException;
 import org.social.oop.exception.EmailFieldNotFilledException;
 import org.social.oop.model.User;
 import org.social.oop.persistence.UserDAO;
+import org.social.oop.sessao.UserSession;
 
 public class FormLogin extends JFrame{
 	
