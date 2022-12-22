@@ -14,22 +14,24 @@ import javax.crypto.spec.PBEKeySpec;
 public class PBKDF2Salt 
 {
 	
-	public String hash(String password) {
-    	String securePassword = getSecurePassword(password,getSalt()) ;
+	public String hash(String password, String salt) {
+    	String securePassword = getSecurePassword(password,salt) ;
     	return securePassword;
     }
 	
 	
-	private static byte[] getSalt() {
+	public static String getSalt() {
 		SecureRandom random = new SecureRandom();
 		byte[] salt = new byte[16];
 		random.nextBytes(salt);
-		return salt;
+		String s = new String(salt);
+		return s;
 	}
 	
 	
-    private static String getSecurePassword(String password, byte[] salt) {
-    	KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
+    private static String getSecurePassword(String password, String salt) {
+    	
+    	KeySpec spec = new PBEKeySpec(password.toCharArray(), salt.getBytes(), 65536, 128);
     	SecretKeyFactory factory = null;
 		try {
 			factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");

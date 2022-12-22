@@ -18,5 +18,5 @@ public interface IUserPersistence {
 		
 		public void updateUser(User user);
 		
-		public boolean authUser(User user) throws EmailAndOrLoginNotMatchException;
+		public boolean authUser(User user) throws EmailAndOrLoginNotMatchException, EmailFieldNotFilledException;
 }
