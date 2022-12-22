@@ -13,6 +13,7 @@ import org.social.oop.exception.PasswordFieldNotFilledException;
 import org.social.oop.exception.PhoneFieldNotFilledException;
 import org.social.oop.hashing.PBKDF2Salt;
 import org.social.oop.model.User;
+import org.social.oop.sessao.UserSession;
 
 
 public class UserDAO implements IUserPersistence{
@@ -77,12 +78,20 @@ public class UserDAO implements IUserPersistence{
 	@Override
 	public boolean authUser(User user) throws EmailAndOrLoginNotMatchException, EmailFieldNotFilledException{
 		try {
+			String password;
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
-					prepareStatement("SELECT * FROM OS_USERS WHERE USR_EMAIL = ? AND USR_PASSWORD = ?;");
+					prepareStatement("SELECT * FROM OS_USERS WHERE USR_EMAIL = ? ;");
 			preparedStatement.setString(1, user.getEmail());
-			preparedStatement.setString(2, new PBKDF2Salt().hash(user.getPassword(),getUserSalt(user)));
 			ResultSet resultset = preparedStatement.executeQuery();
-			if (! resultset.next()) throw new EmailAndOrLoginNotMatchException("Email or Password do not match:(");
+			if (! resultset.next()) 
+				throw new EmailAndOrLoginNotMatchException("Email or Password do not match:(");
+			else
+				password  = resultset.getString("USR_PASSWORD");
+			if (new PBKDF2Salt().hash(user.getPassword(), resultset.getString("USR_SALT")).equals(password))
+				UserSession.login(user);
+			else
+				throw new EmailAndOrLoginNotMatchException("Senha não confere");
+			
 		}catch(SQLException exception) {
 			exception.printStackTrace();
 		}
