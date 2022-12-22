@@ -12,14 +12,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import org.social.oop.sessao.UserSession;
+import org.social.oop.session.UserSession;
 
 public class Dashboard extends JFrame{
 	
 	public JLabel labelDashboard;
 	public JPanel panelButton;
 	public JButton buttonHome;
-	public UserSession userSession;
 	public JPanel panelUser;
 	public JLabel labelUser;
 	

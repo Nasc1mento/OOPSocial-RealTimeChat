@@ -1,4 +1,4 @@
-package org.social.oop.sessao;
+package org.social.oop.session;
 
 import org.social.oop.model.User;
 

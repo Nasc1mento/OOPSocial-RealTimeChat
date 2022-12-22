@@ -13,7 +13,7 @@ import org.social.oop.exception.PasswordFieldNotFilledException;
 import org.social.oop.exception.PhoneFieldNotFilledException;
 import org.social.oop.hashing.PBKDF2Salt;
 import org.social.oop.model.User;
-import org.social.oop.sessao.UserSession;
+import org.social.oop.session.UserSession;
 
 
 public class UserDAO implements IUserPersistence{
