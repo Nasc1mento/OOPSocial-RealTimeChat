@@ -5,9 +5,10 @@ import org.social.oop.model.User;
 public class UserSession {
 	
 	
-	
-	public static String nome;
+	public static int id;
+	public static String name;
 	public static String email;
+	public static String phone;
 	public static boolean isLogged;
 	
 	
@@ -16,15 +17,18 @@ public class UserSession {
 	}
 	
 	public static void logout() {
-		nome = null;
+		id = 0;
+		name = null;
 		email = null;
-		isLogged = false;	
+		phone = null;
+		isLogged = false;
 	}
 	
 	public static void login(User user) {
-		
-		nome = user.getName();
+		id = user.getId();
+		name = user.getName();
 		email = user.getEmail();
+		phone = user.getPhone();
 		isLogged = true;
 	}
 	

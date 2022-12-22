@@ -48,15 +48,14 @@ public class UserDAO implements IUserPersistence{
 			throw new PasswordConfirmationDoesNotMatchException("Password and confirm password do not match");
 		else {
 			try {
-			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().prepareStatement("INSERT INTO OS_USERS VALUES (?, ?, ?, ?, ?, ?);");
-			preparedStatement.setInt(1, user.getId());
-			preparedStatement.setString(2, user.getName());
-			preparedStatement.setString(3, user.getEmail());
-			preparedStatement.setString(4, user.getPhone());
-			preparedStatement.setString(5, new PBKDF2Salt().hash(user.getPassword(),salt));
-			preparedStatement.setString(6,salt);
-			preparedStatement.execute();
-			
+				PreparedStatement preparedStatement = this.databaseMySQL.getConnection().prepareStatement("INSERT INTO OS_USERS VALUES (?, ?, ?, ?, ?, ?);");
+				preparedStatement.setInt(1, user.getId());
+				preparedStatement.setString(2, user.getName());
+				preparedStatement.setString(3, user.getEmail());
+				preparedStatement.setString(4, user.getPhone());
+				preparedStatement.setString(5, new PBKDF2Salt().hash(user.getPassword(),salt));
+				preparedStatement.setString(6,salt);
+				preparedStatement.execute();
 			}catch(SQLException exception){
 				exception.printStackTrace();
 			}
@@ -87,9 +86,12 @@ public class UserDAO implements IUserPersistence{
 				throw new EmailAndOrLoginNotMatchException("Email or Password do not match:(");
 			else
 				password  = resultset.getString("USR_PASSWORD");
-			if (new PBKDF2Salt().hash(user.getPassword(), resultset.getString("USR_SALT")).equals(password))
+			if (new PBKDF2Salt().hash(user.getPassword(), resultset.getString("USR_SALT")).equals(password)) {
+				user.setId(resultset.getInt("USR_ID"));
+				user.setName(resultset.getString("USR_NAME"));
+				user.setPhone(resultset.getString("USR_PHONE"));
 				UserSession.login(user);
-			else
+			}else
 				throw new EmailAndOrLoginNotMatchException("Senha não confere");
 			
 		}catch(SQLException exception) {

@@ -57,7 +57,7 @@ public class Dashboard extends JFrame{
 		this.panelUser = new JPanel();
 		this.panelUser.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
-		this.labelUser = new JLabel(UserSession.email);
+		this.labelUser = new JLabel(UserSession.name);
 		labelUser.setFont(new Font("Serif", Font.BOLD, 20));
 		this.panelUser.add(labelUser);
 		

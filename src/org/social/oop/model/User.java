@@ -10,7 +10,7 @@ public class User {
 	private String phone;
 	private String password;
 	private String confirmPassword;
-	private byte[] salt; 	
+	
 	
 	
 	
@@ -117,21 +117,6 @@ public class User {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
-
-	
-
-
-	public byte[] getSalt() {
-		return salt;
-	}
-
-
-
-
-	public void setSalt(byte[] salt) {
-		this.salt = salt;
-	}
-
 
 
 
