@@ -11,6 +11,7 @@ import org.social.oop.exception.NameFieldNotFilledException;
 import org.social.oop.exception.PasswordConfirmationDoesNotMatchException;
 import org.social.oop.exception.PasswordFieldNotFilledException;
 import org.social.oop.exception.PhoneFieldNotFilledException;
+import org.social.oop.hashing.SaltedMD5;
 import org.social.oop.model.User;
 
 
@@ -47,7 +48,8 @@ public class UserDAO implements IUserPersistence{
 			preparedStatement.setString(2, user.getName());
 			preparedStatement.setString(3, user.getEmail());
 			preparedStatement.setString(4, user.getPhone());
-			preparedStatement.setString(5, user.getPassword());
+			preparedStatement.setString(5, new SaltedMD5().hash(user.getPassword()));
+			System.out.println(user.getId());
 			preparedStatement.execute();
 			
 			}catch(SQLException exception){
@@ -74,7 +76,7 @@ public class UserDAO implements IUserPersistence{
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
 					prepareStatement("SELECT * FROM OS_USERS WHERE USR_EMAIL = ? AND USR_PASSWORD = ?;");
 			preparedStatement.setString(1, user.getEmail());
-			preparedStatement.setString(2, user.getPassword());
+			preparedStatement.setString(2, new SaltedMD5().hash(user.getPassword()));
 			ResultSet resultset = preparedStatement.executeQuery();
 			if (! resultset.next()) throw new EmailAndOrLoginNotMatchException("Email or Password do not match:(");
 		}catch(SQLException exception) {
