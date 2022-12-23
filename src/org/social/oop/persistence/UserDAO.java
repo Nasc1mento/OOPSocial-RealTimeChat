@@ -13,6 +13,7 @@ import org.social.oop.exception.NameFieldNotFilledException;
 import org.social.oop.exception.PasswordConfirmationDoesNotMatchException;
 import org.social.oop.exception.PasswordDoNotMatchException;
 import org.social.oop.exception.PasswordFieldNotFilledException;
+import org.social.oop.exception.PasswordInvalidException;
 import org.social.oop.exception.PhoneFieldNotFilledException;
 import org.social.oop.hashing.PBKDF2Salt;
 import org.social.oop.model.User;
@@ -24,7 +25,7 @@ public class UserDAO implements IUserPersistence{
 	private IConnectionDB databaseMySQL;
 	private static UserDAO instance;
 	private Pattern patternEmail = Pattern.compile("^[\\w!#$%&amp;'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&amp;'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$");
-	
+	private Pattern patternPassword = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
 	
 	private UserDAO() {
 		this.databaseMySQL = new DatabaseMySQL();
@@ -36,24 +37,26 @@ public class UserDAO implements IUserPersistence{
 			return instance;
 	}
 	@Override
-	public void createUser(User user) throws NameFieldNotFilledException,EmailFieldNotFilledException, PhoneFieldNotFilledException,PasswordFieldNotFilledException, PasswordConfirmationDoesNotMatchException, EmailNotValidException {
+	public void createUser(User user) throws NameFieldNotFilledException,EmailFieldNotFilledException, PhoneFieldNotFilledException,PasswordFieldNotFilledException, PasswordConfirmationDoesNotMatchException, EmailNotValidException, PasswordInvalidException {
 		
 		String userSalt = PBKDF2Salt.getSalt();
 		Matcher matcherEmail = patternEmail.matcher(user.getEmail());
-		
+		Matcher matcherPassword = patternPassword.matcher(user.getPassword());
 		
 		if (user.getName() == null || user.getName().equalsIgnoreCase("") || user.getName().equalsIgnoreCase("\n")) 
 			throw new NameFieldNotFilledException("Name is required");
 		else if (user.getEmail() == null || user.getEmail().equalsIgnoreCase("") || user.getEmail().equalsIgnoreCase("\n"))
 			throw new EmailFieldNotFilledException("Email is required");
 		else if (user.getPhone() == null || user.getPhone().equalsIgnoreCase("") || user.getPhone().equalsIgnoreCase("\n"))
-			throw new PhoneFieldNotFilledException("Phhone is required");
+			throw new PhoneFieldNotFilledException("Phone is required");
 		else if (user.getPassword() == null || user.getPassword().equalsIgnoreCase("") || user.getPassword().equalsIgnoreCase("\n"))
 			throw new PasswordFieldNotFilledException("Password is required");
 		else if (! user.getConfirmPassword().equals(user.getPassword()))
 			throw new PasswordConfirmationDoesNotMatchException("Password and confirm password do not match");
-		else if (!matcherEmail.matches())
+		else if (! matcherEmail.matches())
 			throw new EmailNotValidException("Email format invalid. Example valid: user@domain.com");
+		else if (! matcherPassword.matches())
+			throw new PasswordInvalidException("Invalid password");
 		else {
 			try {
 				PreparedStatement preparedStatement = this.databaseMySQL.getConnection().prepareStatement("INSERT INTO OS_USERS VALUES (?, ?, ?, ?, ?, ?);");
@@ -87,8 +90,8 @@ public class UserDAO implements IUserPersistence{
 		try {
 
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
-					prepareStatement("SELECT * FROM OS_USERS WHERE USR_EMAIL = ? ;");
-			preparedStatement.setString(1, user.getEmail());
+					prepareStatement("SELECT * FROM OS_USERS WHERE USR_NAME = ? ;");
+			preparedStatement.setString(1, user.getName());
 			ResultSet resultset = preparedStatement.executeQuery();
 			
 			if (! resultset.next()) 

@@ -40,8 +40,8 @@ public class Home extends JFrame{
 		
 		this.panelRouteButtons = new JPanel();
 		this.panelRouteButtons.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-		this.buttonLoginPage = new JButton("Login");
-		this.buttonRegisterPage = new JButton("Register");
+		this.buttonLoginPage = new JButton("Sign in");
+		this.buttonRegisterPage = new JButton("Sign up");
 		
 		this.buttonLoginPage.addActionListener(new EnterFormLogin());
 		this.buttonRegisterPage.addActionListener(new EnterRegister());

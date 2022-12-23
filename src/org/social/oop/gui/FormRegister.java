@@ -1,11 +1,9 @@
 package org.social.oop.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,6 +18,7 @@ import org.social.oop.exception.EmailNotValidException;
 import org.social.oop.exception.NameFieldNotFilledException;
 import org.social.oop.exception.PasswordConfirmationDoesNotMatchException;
 import org.social.oop.exception.PasswordFieldNotFilledException;
+import org.social.oop.exception.PasswordInvalidException;
 import org.social.oop.exception.PhoneFieldNotFilledException;
 import org.social.oop.model.User;
 import org.social.oop.persistence.UserDAO;
@@ -30,7 +29,7 @@ public class FormRegister extends JFrame{
 	
 	private JButton buttonRegister;
 	private JButton buttonReturnHome;
-	private JTextField textFieldName;
+	private JTextField textFieldUsername;
 	private JTextField textFieldEmail;
 	private JTextField textFieldPhone;
 	private JTextField textFieldPassword;
@@ -40,7 +39,7 @@ public class FormRegister extends JFrame{
 	private JLabel labelEmail;
 	private JLabel labelPhone;
 	private JLabel labelPassword;
-	private JLabel labelName;
+	private JLabel labelUsername;
 	private JLabel labelConfirmPassword;
 	
 	public FormRegister() {
@@ -58,12 +57,12 @@ public class FormRegister extends JFrame{
 	public void createForm() {
 		
 		this.panelForm = new JPanel();
-		this.textFieldName = new JTextField(80);
+		this.textFieldUsername = new JTextField(80);
 		this.textFieldEmail = new JTextField(80);
 		this.textFieldPhone = new JTextField(80);
 		this.textFieldPassword = new JTextField(80);
 		this.textFieldConfirmPassword = new JTextField(80);
-		this.labelName = new JLabel("Name: ");
+		this.labelUsername = new JLabel("Username: ");
 		this.labelEmail = new JLabel("Email: ");
 		this.labelPhone = new JLabel("Phone: ");
 		this.labelPassword = new JLabel("Password: " );
@@ -73,8 +72,8 @@ public class FormRegister extends JFrame{
 		
 		this.setLayout(new FlowLayout(FlowLayout.CENTER,10,10));
 		
-		this.add(this.labelName);
-		this.add(this.textFieldName);
+		this.add(this.labelUsername);
+		this.add(this.textFieldUsername);
 		this.add(this.labelEmail);
 		this.add(this.textFieldEmail);
 		this.add(this.labelPhone);
@@ -112,7 +111,7 @@ public class FormRegister extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			try {
 				UserDAO.getInstance().
-				createUser(new User(0,textFieldName.getText(),textFieldEmail.getText(),textFieldPhone.getText(),textFieldPassword.getText(),textFieldConfirmPassword.getText()));
+				createUser(new User(0,textFieldUsername.getText(),textFieldEmail.getText(),textFieldPhone.getText(),textFieldPassword.getText(),textFieldConfirmPassword.getText()));
 				JOptionPane.showMessageDialog(null, "Usuário criado com sucesso!!!");
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
@@ -121,7 +120,7 @@ public class FormRegister extends JFrame{
 						new Home();
 					}
 				});	
-			}catch(NameFieldNotFilledException | EmailFieldNotFilledException | PhoneFieldNotFilledException| PasswordFieldNotFilledException | PasswordConfirmationDoesNotMatchException | EmailNotValidException exception){
+			}catch(NameFieldNotFilledException | EmailFieldNotFilledException | PhoneFieldNotFilledException| PasswordFieldNotFilledException | PasswordConfirmationDoesNotMatchException | EmailNotValidException | PasswordInvalidException exception){
 				JOptionPane.showMessageDialog(null, exception.getMessage());
 			}
 		}

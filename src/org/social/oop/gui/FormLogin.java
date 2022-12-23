@@ -25,11 +25,11 @@ public class FormLogin extends JFrame{
 	
 	private JButton buttonLogin;
 	private JButton buttonReturnHome;
-	private JTextField textFieldEmail;
+	private JTextField textFieldUsername;
 	private JTextField textFieldPassword;
 	private JPanel panelButtonForm;
 	private JPanel panelForm;
-	private JLabel labelEmail;
+	private JLabel labelUsername;
 	private JLabel labelPassword;
 	
 	
@@ -51,15 +51,15 @@ public class FormLogin extends JFrame{
 	public void createForm() {
 		
 		this.panelForm = new JPanel();
-		this.textFieldEmail = new JTextField(80);
+		this.textFieldUsername = new JTextField(80);
 		this.textFieldPassword = new JTextField(80);
-		this.labelEmail = new JLabel("Email");
+		this.labelUsername = new JLabel("Username");
 		this.labelPassword = new JLabel("Password");
 		
 		this.setLayout(new FlowLayout(FlowLayout.CENTER,10,10));
 		
-		this.add(this.labelEmail);
-		this.add(this.textFieldEmail);
+		this.add(this.labelUsername);
+		this.add(this.textFieldUsername);
 		this.add(this.labelPassword);
 		this.add(this.textFieldPassword);
 		
@@ -92,7 +92,7 @@ public class FormLogin extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				UserDAO.getInstance().authUser(new User(textFieldEmail.getText(),textFieldPassword.getText()));
+				UserDAO.getInstance().authUser(new User(textFieldUsername.getText(),textFieldPassword.getText()));
 					SwingUtilities.invokeLater(new Runnable() {
 						@Override
 						public void run() {

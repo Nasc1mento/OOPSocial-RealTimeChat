@@ -7,12 +7,13 @@ import org.social.oop.exception.NameFieldNotFilledException;
 import org.social.oop.exception.PasswordConfirmationDoesNotMatchException;
 import org.social.oop.exception.PasswordDoNotMatchException;
 import org.social.oop.exception.PasswordFieldNotFilledException;
+import org.social.oop.exception.PasswordInvalidException;
 import org.social.oop.exception.PhoneFieldNotFilledException;
 import org.social.oop.model.User;
 
 public interface IUserPersistence {
 	
-		public void createUser(User user) throws EmailFieldNotFilledException, NameFieldNotFilledException, PhoneFieldNotFilledException, PasswordFieldNotFilledException, PasswordConfirmationDoesNotMatchException, EmailNotValidException;
+		public void createUser(User user) throws EmailFieldNotFilledException, NameFieldNotFilledException, PhoneFieldNotFilledException, PasswordFieldNotFilledException, PasswordConfirmationDoesNotMatchException, EmailNotValidException, PasswordInvalidException;
 		
 		public User locateUser(User user);
 		
