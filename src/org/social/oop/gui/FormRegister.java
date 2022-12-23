@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import org.social.oop.exception.EmailFieldNotFilledException;
+import org.social.oop.exception.EmailNotValidException;
 import org.social.oop.exception.NameFieldNotFilledException;
 import org.social.oop.exception.PasswordConfirmationDoesNotMatchException;
 import org.social.oop.exception.PasswordFieldNotFilledException;
@@ -120,7 +121,7 @@ public class FormRegister extends JFrame{
 						new Home();
 					}
 				});	
-			}catch(NameFieldNotFilledException | EmailFieldNotFilledException | PhoneFieldNotFilledException| PasswordFieldNotFilledException | PasswordConfirmationDoesNotMatchException exception){
+			}catch(NameFieldNotFilledException | EmailFieldNotFilledException | PhoneFieldNotFilledException| PasswordFieldNotFilledException | PasswordConfirmationDoesNotMatchException | EmailNotValidException exception){
 				JOptionPane.showMessageDialog(null, exception.getMessage());
 			}
 		}

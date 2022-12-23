@@ -14,7 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import org.social.oop.exception.EmailAndOrLoginNotMatchException;
+import org.social.oop.exception.EmailNotRegisteredException;
+import org.social.oop.exception.PasswordDoNotMatchException;
 import org.social.oop.exception.EmailFieldNotFilledException;
 import org.social.oop.model.User;
 import org.social.oop.persistence.UserDAO;
@@ -99,7 +100,7 @@ public class FormLogin extends JFrame{
 							new Dashboard();
 						}
 					});
-			}catch(EmailAndOrLoginNotMatchException | EmailFieldNotFilledException exception) {
+			}catch(EmailNotRegisteredException | EmailFieldNotFilledException | PasswordDoNotMatchException exception) {
 				JOptionPane.showMessageDialog(null, exception.getMessage());
 			}
 		}

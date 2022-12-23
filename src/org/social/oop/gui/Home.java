@@ -59,7 +59,7 @@ public class Home extends JFrame{
 		this.panelWelcome = new JPanel();
 		this.panelWelcome.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
-		this.labelWelcome = new JLabel("Welcome!!!");
+		this.labelWelcome = new JLabel("Welcome to OOPSOCIAL");
 		labelWelcome.setFont(new Font("Serif", Font.BOLD, 20));
 		this.panelWelcome.add(labelWelcome);
 		
