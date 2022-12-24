@@ -1,26 +1,32 @@
 package org.social.oop.persistence;
 
-import org.social.oop.exception.EmailNotRegisteredException;
-import org.social.oop.exception.EmailNotValidException;
+import org.social.oop.exception.EmailAlreadyRegisteredException;
 import org.social.oop.exception.EmailFieldNotFilledException;
+import org.social.oop.exception.EmailNotValidException;
 import org.social.oop.exception.NameFieldNotFilledException;
-import org.social.oop.exception.PasswordConfirmationDoesNotMatchException;
-import org.social.oop.exception.PasswordDoNotMatchException;
+import org.social.oop.exception.PasswordConfirmationNotMatchException;
+import org.social.oop.exception.PasswordNotMatchException;
 import org.social.oop.exception.PasswordFieldNotFilledException;
 import org.social.oop.exception.PasswordInvalidException;
 import org.social.oop.exception.PhoneFieldNotFilledException;
+import org.social.oop.exception.UserAlreadyRegisteredException;
+import org.social.oop.exception.UserNotRegisteredException;
 import org.social.oop.model.User;
 
 public interface IUserPersistence {
 	
-		public void createUser(User user) throws EmailFieldNotFilledException, NameFieldNotFilledException, PhoneFieldNotFilledException, PasswordFieldNotFilledException, PasswordConfirmationDoesNotMatchException, EmailNotValidException, PasswordInvalidException;
+		public void createUser(User user) throws  NameFieldNotFilledException,EmailFieldNotFilledException, PhoneFieldNotFilledException,
+		PasswordFieldNotFilledException, PasswordConfirmationNotMatchException, EmailNotValidException, PasswordInvalidException, 
+		UserAlreadyRegisteredException, EmailAlreadyRegisteredException;
 		
 		public User locateUser(User user);
 		
 		public void removeUser(User user);
 		
-		public void updateUser(User user);
+		public void updateUser(User user) throws NameFieldNotFilledException, EmailFieldNotFilledException, PhoneFieldNotFilledException,
+		PasswordFieldNotFilledException, EmailNotValidException, PasswordInvalidException, UserAlreadyRegisteredException, 
+		EmailAlreadyRegisteredException;
 		
-		public boolean authUser(User user) throws EmailNotRegisteredException, EmailFieldNotFilledException, PasswordDoNotMatchException;
+		public boolean authUser(User user) throws UserNotRegisteredException, EmailFieldNotFilledException, PasswordNotMatchException;
 		
 }

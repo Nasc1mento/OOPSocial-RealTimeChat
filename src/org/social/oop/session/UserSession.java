@@ -9,6 +9,7 @@ public class UserSession {
 	public static String name;
 	public static String email;
 	public static String phone;
+	public static String password;
 	public static boolean isLogged;
 	
 	
@@ -17,10 +18,11 @@ public class UserSession {
 	}
 	
 	public static void logout() {
-		id = 0;
+		id = -1;
 		name = null;
 		email = null;
 		phone = null;
+		password = null;
 		isLogged = false;
 	}
 	
@@ -29,11 +31,17 @@ public class UserSession {
 		name = user.getName();
 		email = user.getEmail();
 		phone = user.getPhone();
+		password = user.getPassword();
 		isLogged = true;
 	}
 	
 	
-	
+	public static void update(User user) {
+		name = user.getName();
+		email = user.getEmail();
+		phone = user.getPhone();
+		password = user.getPassword();		
+	}
 	
 	
 }

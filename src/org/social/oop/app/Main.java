@@ -10,7 +10,7 @@ public class Main {
 			
 			@Override
 			public void run() {
-				Home home = new Home();
+				new Home();
 			}
 		});
 	}

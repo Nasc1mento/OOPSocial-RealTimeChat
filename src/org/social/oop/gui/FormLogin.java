@@ -11,11 +11,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import org.social.oop.exception.EmailNotRegisteredException;
-import org.social.oop.exception.PasswordDoNotMatchException;
+import org.social.oop.exception.UserNotRegisteredException;
+import org.social.oop.exception.PasswordNotMatchException;
 import org.social.oop.exception.EmailFieldNotFilledException;
 import org.social.oop.model.User;
 import org.social.oop.persistence.UserDAO;
@@ -26,7 +27,7 @@ public class FormLogin extends JFrame{
 	private JButton buttonLogin;
 	private JButton buttonReturnHome;
 	private JTextField textFieldUsername;
-	private JTextField textFieldPassword;
+	private JPasswordField textFieldPassword;
 	private JPanel panelButtonForm;
 	private JPanel panelForm;
 	private JLabel labelUsername;
@@ -52,16 +53,19 @@ public class FormLogin extends JFrame{
 		
 		this.panelForm = new JPanel();
 		this.textFieldUsername = new JTextField(80);
-		this.textFieldPassword = new JTextField(80);
+		this.textFieldPassword = new JPasswordField(80);
 		this.labelUsername = new JLabel("Username");
 		this.labelPassword = new JLabel("Password");
 		
 		this.setLayout(new FlowLayout(FlowLayout.CENTER,10,10));
 		
+		
+		
 		this.add(this.labelUsername);
 		this.add(this.textFieldUsername);
 		this.add(this.labelPassword);
 		this.add(this.textFieldPassword);
+		
 		
 		this.getContentPane().add(this.panelForm, BorderLayout.CENTER);
 	
@@ -100,7 +104,7 @@ public class FormLogin extends JFrame{
 							new Dashboard();
 						}
 					});
-			}catch(EmailNotRegisteredException | EmailFieldNotFilledException | PasswordDoNotMatchException exception) {
+			}catch(UserNotRegisteredException | EmailFieldNotFilledException | PasswordNotMatchException exception) {
 				JOptionPane.showMessageDialog(null, exception.getMessage());
 			}
 		}

@@ -18,38 +18,36 @@ import org.social.oop.exception.EmailAlreadyRegisteredException;
 import org.social.oop.exception.EmailFieldNotFilledException;
 import org.social.oop.exception.EmailNotValidException;
 import org.social.oop.exception.NameFieldNotFilledException;
-import org.social.oop.exception.PasswordConfirmationNotMatchException;
 import org.social.oop.exception.PasswordFieldNotFilledException;
 import org.social.oop.exception.PasswordInvalidException;
 import org.social.oop.exception.PhoneFieldNotFilledException;
 import org.social.oop.exception.UserAlreadyRegisteredException;
 import org.social.oop.model.User;
 import org.social.oop.persistence.UserDAO;
+import org.social.oop.session.UserSession;
 
+public class EditProfile extends JFrame{
 
-
-public class FormRegister extends JFrame{
 	
-	private JButton buttonRegister;
-	private JButton buttonReturnHome;
+	private JPanel panelForm;
 	private JTextField textFieldUsername;
 	private JTextField textFieldEmail;
 	private JTextField textFieldPhone;
-	private JTextField passwordFieldPassword;
-	private JTextField passwordFieldConfirmPassword;
-	private JPanel panelButtonForm;
-	private JPanel panelForm;
+	private JPasswordField passwordFieldPassword;
+	private JLabel labelUsername;
 	private JLabel labelEmail;
 	private JLabel labelPhone;
 	private JLabel labelPassword;
-	private JLabel labelUsername;
-	private JLabel labelConfirmPassword;
+	private JPanel panelButtonForm;
 	
-	public FormRegister() {
+	private JButton buttonSubmitEditProfile;
+
+
+	public EditProfile() {
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		this.setResizable(false);
-		this.setTitle("OOPSocial/Register");
+		this.setTitle("OOPSocial/EditProfile");
 		this.setBounds(250,250,0,0);
 		this.setSize(900,500);
 		this.setVisible(true);
@@ -57,19 +55,19 @@ public class FormRegister extends JFrame{
 		this.createButtonsForm();
 	}
 	
+	
 	public void createForm() {
-		
 		this.panelForm = new JPanel();
-		this.textFieldUsername = new JTextField(80);
-		this.textFieldEmail = new JTextField(80);
-		this.textFieldPhone = new JTextField(80);
-		this.passwordFieldPassword = new JPasswordField(80);
-		this.passwordFieldConfirmPassword = new JPasswordField(80);
+		this.textFieldUsername = new JTextField(UserSession.name,80);
+		this.textFieldEmail = new JTextField(UserSession.email,80);
+		this.textFieldPhone = new JTextField(UserSession.phone,80);
+		this.passwordFieldPassword = new JPasswordField(UserSession.password,80);
+		
 		this.labelUsername = new JLabel("Username: ");
 		this.labelEmail = new JLabel("Email: ");
 		this.labelPhone = new JLabel("Phone: ");
 		this.labelPassword = new JLabel("Password: " );
-		this.labelConfirmPassword = new JLabel("Confirm Password:");
+		
 		
 		
 		
@@ -83,69 +81,55 @@ public class FormRegister extends JFrame{
 		this.add(this.textFieldPhone);
 		this.add(this.labelPassword);
 		this.add(this.passwordFieldPassword);
-		this.add(this.labelConfirmPassword);
-		this.add(this.passwordFieldConfirmPassword);
+		
+		
 		
 		this.getContentPane().add(this.panelForm, BorderLayout.CENTER);
-		
 	}
 	
+	
+
 	public void createButtonsForm() {
 		this.panelButtonForm = new JPanel();
-		this.buttonReturnHome = new JButton("Back to Home");
-		this.buttonRegister = new JButton("Register");
-		
+		this.buttonSubmitEditProfile = new JButton("Submit");
+			
 		this.panelButtonForm.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-		
-		this.buttonRegister.addActionListener(new RegisterUserAndReturnHome());
-		this.buttonReturnHome.addActionListener(new EnterHome());
-		
-		this.panelButtonForm.add(buttonRegister);
-		this.panelButtonForm.add(buttonReturnHome);
-		
+			
+		this.buttonSubmitEditProfile.addActionListener(new EnterDashBoard());
+			
+		this.panelButtonForm.add(buttonSubmitEditProfile);
+			
 		getContentPane().add(this.panelButtonForm, 
 				BorderLayout.SOUTH);
 		
+	
 	}
 	
-	public class RegisterUserAndReturnHome implements ActionListener{
+	public class EnterDashBoard implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			try {
-				UserDAO.getInstance().
-				createUser(new User(0,textFieldUsername.getText(),textFieldEmail.getText(),textFieldPhone.getText(),
-						passwordFieldPassword.getText(),passwordFieldConfirmPassword.getText()));
-				JOptionPane.showMessageDialog(null, "Usuário criado com sucesso!!!");
-				SwingUtilities.invokeLater(new Runnable() {
-					@Override
-					public void run() {
-						dispose();
-						new Home();
-					}
-				});	
-			}catch(NameFieldNotFilledException | EmailFieldNotFilledException | PhoneFieldNotFilledException| PasswordFieldNotFilledException | 
-					PasswordConfirmationNotMatchException | EmailNotValidException | PasswordInvalidException | UserAlreadyRegisteredException
-					| EmailAlreadyRegisteredException  exception){
-				JOptionPane.showMessageDialog(null, exception.getMessage());
-			}
-		}
-		
-	}
-	
-	public class EnterHome implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			SwingUtilities.invokeLater(new Runnable() {			
+			// TODO Auto-generated method stub
+			SwingUtilities.invokeLater(new Runnable() {
+				
 				@Override
 				public void run() {
+					// TODO Auto-generated method stub
+					try {
+						UserDAO.getInstance().updateUser(new User(textFieldUsername.getText(),textFieldEmail.getText(),textFieldPhone.getText(),
+								passwordFieldPassword.getText()));
+					}catch(NameFieldNotFilledException | EmailFieldNotFilledException | PhoneFieldNotFilledException |
+							PasswordFieldNotFilledException | EmailNotValidException | PasswordInvalidException |UserAlreadyRegisteredException | 
+							EmailAlreadyRegisteredException exception) {
+						JOptionPane.showMessageDialog(null, exception.getMessage());
+					}
+					
 					dispose();
-					new Home();
+					new Dashboard();
 				}
 			});
-		}
+			
+		}	
 		
 	}
-	
 }

@@ -21,6 +21,9 @@ public class Dashboard extends JFrame{
 	public JButton buttonHome;
 	public JPanel panelUser;
 	public JLabel labelUser;
+	private JPanel panelUserOptions;
+	private JButton buttonEditProfile;
+	private JButton buttonLogout;
 	
 	public Dashboard() {
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
@@ -32,6 +35,7 @@ public class Dashboard extends JFrame{
 		this.setVisible(true);
 		this.createButton();
 		this.showUser();
+		this.showUserOptions();
 
 	}
 	
@@ -67,6 +71,24 @@ public class Dashboard extends JFrame{
 		
 	}
 	
+	
+	public void showUserOptions() {
+		this.panelUserOptions = new JPanel();
+		this.panelUserOptions.setLayout(new FlowLayout(FlowLayout.CENTER));
+		
+		this.buttonEditProfile = new JButton("Edit profile");
+		this.buttonLogout = new JButton("Logout");
+		
+		this.buttonLogout.addActionListener(new Logout());
+		this.buttonEditProfile.addActionListener(new EnterEditProfile());
+		
+		this.panelUserOptions.add(this.buttonEditProfile);
+		this.panelUserOptions.add(this.buttonLogout);
+		
+		
+		this.getContentPane().add(this.panelUserOptions, BorderLayout.SOUTH);
+	}
+	
 	public class ReturnHome implements ActionListener{
 
 		@Override
@@ -86,6 +108,45 @@ public class Dashboard extends JFrame{
 	}
 	
 	
+	public class Logout implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			
+			SwingUtilities.invokeLater(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					UserSession.logout();
+					dispose();
+					new Home();
+				}
+			});
+			
+		}
+		
+	}
+	
+	public class EnterEditProfile implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			SwingUtilities.invokeLater(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					dispose();
+					new EditProfile();
+				}
+			});
+			
+		}
+		
+	}
 	
 	
 }
