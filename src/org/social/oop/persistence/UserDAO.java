@@ -115,8 +115,6 @@ public class UserDAO implements IUserPersistence{
 			e.printStackTrace();
 		}
 		
-		
-		
 		if (user.getName() == null || user.getName().equalsIgnoreCase("") || user.getName().equalsIgnoreCase("\n")) 
 			throw new NameFieldNotFilledException("Name is required");
 		else if (user.getEmail() == null || user.getEmail().equalsIgnoreCase("") || user.getEmail().equalsIgnoreCase("\n"))
@@ -145,18 +143,13 @@ public class UserDAO implements IUserPersistence{
 				exception.printStackTrace();
 			}
 		}
-		
-		
-		
-		
-		
 	}
 	@Override
 	public User locateUser(User user) {
 		return user;
 	}
 	@Override
-	public boolean authUser(User user) throws UserNotRegisteredException, EmailFieldNotFilledException, PasswordNotMatchException{
+	public void authUser(User user) throws UserNotRegisteredException, EmailFieldNotFilledException, PasswordNotMatchException{
 		try {
 
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
@@ -180,6 +173,5 @@ public class UserDAO implements IUserPersistence{
 		}catch(SQLException exception) {
 			exception.printStackTrace();
 		}
-		return true;
 	}
 }
