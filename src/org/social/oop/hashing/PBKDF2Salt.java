@@ -11,7 +11,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
 
-public class PBKDF2Salt 
+public abstract class PBKDF2Salt
 {
 	
 	public static String hashing(String password, String salt) {

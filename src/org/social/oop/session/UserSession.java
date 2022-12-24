@@ -2,7 +2,7 @@ package org.social.oop.session;
 
 import org.social.oop.model.User;
 
-public class UserSession {
+public abstract class UserSession {
 	
 	
 	public static int id;
