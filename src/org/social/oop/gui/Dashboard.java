@@ -33,7 +33,7 @@ public class Dashboard extends JFrame{
 		this.setResizable(false);
 		this.setTitle("OOPSocial/Dashboard");
 		this.setBounds(250,250,0,0);
-		this.setSize(900,500);
+		this.setSize(500,400);
 		this.setVisible(true);
 		this.createButton();
 		this.showUser();
@@ -64,7 +64,7 @@ public class Dashboard extends JFrame{
 		this.panelUser = new JPanel();
 		this.panelUser.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
-		this.labelUser = new JLabel("Welcome "+UserSession.name);
+		this.labelUser = new JLabel("Hello "+UserSession.name+" !!!");
 		this.labelUser.setFont(new Font("Serif", Font.BOLD, 20));
 		this.panelUser.add(labelUser);
 		

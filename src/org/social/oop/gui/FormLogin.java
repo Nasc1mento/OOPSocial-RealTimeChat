@@ -40,7 +40,7 @@ public class FormLogin extends JFrame{
 		this.setResizable(false);
 		this.setTitle("OOPSocial/Login");
 		this.setBounds(250,250,0,0);
-		this.setSize(900,500);
+		this.setSize(500,400);
 		this.setVisible(true);
 		this.createForm();
 		this.createButtonsForm();
@@ -52,8 +52,8 @@ public class FormLogin extends JFrame{
 	public void createForm() {
 		
 		this.panelForm = new JPanel();
-		this.textFieldUsername = new JTextField(80);
-		this.textFieldPassword = new JPasswordField(80);
+		this.textFieldUsername = new JTextField(43);
+		this.textFieldPassword = new JPasswordField(43);
 		this.labelUsername = new JLabel("Username");
 		this.labelPassword = new JLabel("Password");
 		

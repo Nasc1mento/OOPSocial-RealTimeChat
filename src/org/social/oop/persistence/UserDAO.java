@@ -176,8 +176,8 @@ public class UserDAO implements IUserPersistence{
 		}
 	}
 	@Override
-	public ArrayList<User> listUser() {
-		ArrayList<User> users = new ArrayList<User>();
+	public ArrayList<String> listUser() {
+		ArrayList<String> users = new ArrayList<String>();
 		ResultSet resultSet = null;
 		try {
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
@@ -186,7 +186,7 @@ public class UserDAO implements IUserPersistence{
 			resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
-				users.add(new User(resultSet.getString("USR_NAME"),resultSet.getString("USR_EMAIL"),resultSet.getString("USR_PHONE"),null));
+				users.add(resultSet.getString("USR_NAME"));
 			}
 		} catch (SQLException e) {
 			// TODO: handle exception
@@ -194,9 +194,4 @@ public class UserDAO implements IUserPersistence{
 		}	
 		return users;
 	}
-	
-//	public static void main(String[] args) {
-//		System.out.println(new UserDAO().listUser());
-//	}
-//	
 }

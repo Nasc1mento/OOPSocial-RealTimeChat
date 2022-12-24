@@ -46,10 +46,10 @@ public class EditProfile extends JFrame{
 	public EditProfile() {
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
-//		this.setResizable(false);
+		this.setResizable(false);
 		this.setTitle("OOPSocial/EditProfile");
 		this.setBounds(250,250,0,0);
-		this.setSize(900,500);
+		this.setSize(500,400);
 		this.setVisible(true);
 		this.createForm();
 		this.createButtonsForm();
@@ -58,10 +58,10 @@ public class EditProfile extends JFrame{
 	
 	public void createForm() {
 		this.panelForm = new JPanel();
-		this.textFieldUsername = new JTextField(UserSession.name,80);
-		this.textFieldEmail = new JTextField(UserSession.email,80);
-		this.textFieldPhone = new JTextField(UserSession.phone,80);
-		this.passwordFieldPassword = new JPasswordField(UserSession.password,80);
+		this.textFieldUsername = new JTextField(UserSession.name,43);
+		this.textFieldEmail = new JTextField(UserSession.email,43);
+		this.textFieldPhone = new JTextField(UserSession.phone,43);
+		this.passwordFieldPassword = new JPasswordField(UserSession.password,43);
 		
 		this.labelUsername = new JLabel("Username: ");
 		this.labelEmail = new JLabel("Email: ");
@@ -95,7 +95,7 @@ public class EditProfile extends JFrame{
 			
 		this.panelButtonForm.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 			
-		this.buttonSubmitEditProfile.addActionListener(new EnterDashBoard());
+		this.buttonSubmitEditProfile.addActionListener(new EnterDashboard());
 			
 		this.panelButtonForm.add(buttonSubmitEditProfile);
 			
@@ -105,7 +105,7 @@ public class EditProfile extends JFrame{
 	
 	}
 	
-	public class EnterDashBoard implements ActionListener {
+	public class EnterDashboard implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {

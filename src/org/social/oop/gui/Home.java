@@ -28,7 +28,7 @@ public class Home extends JFrame{
 		this.setResizable(false);
 		this.setTitle("OOPSocial/Home");
 		this.setBounds(250,250,0,0);
-		this.setSize(900,500);
+		this.setSize(500,400);
 		
 		this.setVisible(true);
 		
