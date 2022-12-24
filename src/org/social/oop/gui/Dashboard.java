@@ -24,6 +24,8 @@ public class Dashboard extends JFrame{
 	private JPanel panelUserOptions;
 	private JButton buttonEditProfile;
 	private JButton buttonLogout;
+	private JPanel generalOptionPanel;
+	private JButton listUsersButton;
 	
 	public Dashboard() {
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
@@ -36,6 +38,7 @@ public class Dashboard extends JFrame{
 		this.createButton();
 		this.showUser();
 		this.showUserOptions();
+		this.showGeneralOptions();
 
 	}
 	
@@ -66,7 +69,7 @@ public class Dashboard extends JFrame{
 		this.panelUser.add(labelUser);
 		
 		
-		this.getContentPane().add(this.panelUser, BorderLayout.CENTER);
+		this.getContentPane().add(this.panelUser, BorderLayout.NORTH);
 		
 		
 	}
@@ -89,8 +92,23 @@ public class Dashboard extends JFrame{
 		this.getContentPane().add(this.panelUserOptions, BorderLayout.SOUTH);
 	}
 	
+	
+	
+	public void showGeneralOptions() {
+		this.generalOptionPanel = new JPanel();
+		this.generalOptionPanel.setLayout(new FlowLayout(FlowLayout.CENTER,20,20));
+	
+		
+		
+		this.listUsersButton = new JButton("List users");
+		this.generalOptionPanel.add(listUsersButton);
+		this.listUsersButton.addActionListener(new ShowUserList());
+		
+		this.getContentPane().add(this.generalOptionPanel,BorderLayout.CENTER);
+	}
+	
+	
 	public class ReturnHome implements ActionListener{
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
@@ -101,8 +119,7 @@ public class Dashboard extends JFrame{
 					dispose();
 					new Home();
 				}
-			});
-			
+			});	
 		}
 		
 	}
@@ -144,6 +161,25 @@ public class Dashboard extends JFrame{
 				}
 			});
 			
+		}
+		
+	}
+	
+	public class ShowUserList implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			SwingUtilities.invokeLater(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					dispose();
+					new ShowUsers();
+					
+				}
+			});
 		}
 		
 	}

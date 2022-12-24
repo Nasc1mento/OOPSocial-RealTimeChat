@@ -3,6 +3,7 @@ package org.social.oop.persistence;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,9 +12,9 @@ import org.social.oop.exception.EmailFieldNotFilledException;
 import org.social.oop.exception.EmailNotValidException;
 import org.social.oop.exception.NameFieldNotFilledException;
 import org.social.oop.exception.PasswordConfirmationNotMatchException;
-import org.social.oop.exception.PasswordNotMatchException;
 import org.social.oop.exception.PasswordFieldNotFilledException;
 import org.social.oop.exception.PasswordInvalidException;
+import org.social.oop.exception.PasswordNotMatchException;
 import org.social.oop.exception.PhoneFieldNotFilledException;
 import org.social.oop.exception.UserAlreadyRegisteredException;
 import org.social.oop.exception.UserNotRegisteredException;
@@ -174,4 +175,28 @@ public class UserDAO implements IUserPersistence{
 			exception.printStackTrace();
 		}
 	}
+	@Override
+	public ArrayList<User> listUser() {
+		ArrayList<User> users = new ArrayList<User>();
+		ResultSet resultSet = null;
+		try {
+			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
+					prepareStatement("SELECT USR_NAME,USR_EMAIL,USR_PHONE FROM OS_USERS WHERE USR_ID !=?;");
+			preparedStatement.setInt(1, UserSession.id);
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				users.add(new User(resultSet.getString("USR_NAME"),resultSet.getString("USR_EMAIL"),resultSet.getString("USR_PHONE"),null));
+			}
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}	
+		return users;
+	}
+	
+//	public static void main(String[] args) {
+//		System.out.println(new UserDAO().listUser());
+//	}
+//	
 }

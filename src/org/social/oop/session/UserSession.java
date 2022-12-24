@@ -12,11 +12,6 @@ public abstract class UserSession {
 	public static String password;
 	public static boolean isLogged;
 	
-	
-	public UserSession() {
-		
-	}
-	
 	public static void logout() {
 		id = -1;
 		name = null;
