@@ -14,7 +14,7 @@ import javax.swing.SwingUtilities;
 
 import org.social.oop.session.UserSession;
 
-public class Dashboard extends JFrame{
+public class Dashboard extends JFrame {
 	
 	public JLabel labelDashboard;
 	public JPanel panelButton;
@@ -51,7 +51,7 @@ public class Dashboard extends JFrame{
 		this.panelButton.setLayout(new FlowLayout(FlowLayout.CENTER));
 		this.panelButton.add(buttonHome);
 		
-		this.buttonHome.addActionListener(new ReturnHome());
+		this.buttonHome.addActionListener(new HomeListener());
 		
 		getContentPane().add(this.panelButton,BorderLayout.SOUTH);
 	}
@@ -82,8 +82,8 @@ public class Dashboard extends JFrame{
 		this.buttonEditProfile = new JButton("Edit profile");
 		this.buttonLogout = new JButton("Logout");
 		
-		this.buttonLogout.addActionListener(new Logout());
-		this.buttonEditProfile.addActionListener(new EnterEditProfile());
+		this.buttonLogout.addActionListener(new LogoutListener());
+		this.buttonEditProfile.addActionListener(new EditProfileListener ());
 		
 		this.panelUserOptions.add(this.buttonEditProfile);
 		this.panelUserOptions.add(this.buttonLogout);
@@ -102,13 +102,13 @@ public class Dashboard extends JFrame{
 		
 		this.listUsersButton = new JButton("List users");
 		this.generalOptionPanel.add(listUsersButton);
-		this.listUsersButton.addActionListener(new ShowUserList());
+		this.listUsersButton.addActionListener(new UserListListener());
 		
 		this.getContentPane().add(this.generalOptionPanel,BorderLayout.CENTER);
 	}
 	
 	
-	public class ReturnHome implements ActionListener{
+	public class HomeListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
@@ -125,7 +125,7 @@ public class Dashboard extends JFrame{
 	}
 	
 	
-	public class Logout implements ActionListener{
+	public class LogoutListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -146,7 +146,7 @@ public class Dashboard extends JFrame{
 		
 	}
 	
-	public class EnterEditProfile implements ActionListener{
+	public class EditProfileListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -165,7 +165,7 @@ public class Dashboard extends JFrame{
 		
 	}
 	
-	public class ShowUserList implements ActionListener{
+	public class UserListListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -183,6 +183,4 @@ public class Dashboard extends JFrame{
 		}
 		
 	}
-	
-	
 }

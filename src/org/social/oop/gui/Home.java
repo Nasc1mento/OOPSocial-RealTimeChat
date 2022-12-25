@@ -43,8 +43,8 @@ public class Home extends JFrame{
 		this.buttonLoginPage = new JButton("Sign in");
 		this.buttonRegisterPage = new JButton("Sign up");
 		
-		this.buttonLoginPage.addActionListener(new EnterFormLogin());
-		this.buttonRegisterPage.addActionListener(new EnterRegister());
+		this.buttonLoginPage.addActionListener(new LoginListener());
+		this.buttonRegisterPage.addActionListener(new RegisterListener());
 		
 		
 		this.panelRouteButtons.add(buttonLoginPage);
@@ -67,14 +67,14 @@ public class Home extends JFrame{
 		this.getContentPane().add(this.panelWelcome, BorderLayout.CENTER);
 	}
 	
-	public class EnterFormLogin implements ActionListener{
+	public class LoginListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					new FormLogin();
+					new Login();
 				}
 			});
 			
@@ -82,7 +82,7 @@ public class Home extends JFrame{
 		
 	}
 	
-	public class EnterRegister implements ActionListener{
+	public class RegisterListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -91,7 +91,7 @@ public class Home extends JFrame{
 				
 				@Override
 				public void run() {
-					new FormRegister();
+					new Register();
 				}
 			});
 		}

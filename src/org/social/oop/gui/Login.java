@@ -22,7 +22,7 @@ import org.social.oop.model.User;
 import org.social.oop.persistence.UserDAO;
 import org.social.oop.session.UserSession;
 
-public class FormLogin extends JFrame{
+public class Login extends JFrame{
 	
 	private JButton buttonLogin;
 	private JButton buttonReturnHome;
@@ -34,7 +34,7 @@ public class FormLogin extends JFrame{
 	private JLabel labelPassword;
 	
 	
-	public FormLogin() {
+	public Login() {
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		this.setResizable(false);
@@ -79,8 +79,8 @@ public class FormLogin extends JFrame{
 		
 		this.panelButtonForm.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		
-		this.buttonLogin.addActionListener(new EnterDashboard());
-		this.buttonReturnHome.addActionListener(new EnterHome());
+		this.buttonLogin.addActionListener(new DashboardListener());
+		this.buttonReturnHome.addActionListener(new HomeListener());
 		
 		this.panelButtonForm.add(buttonLogin);
 		this.panelButtonForm.add(buttonReturnHome);
@@ -91,7 +91,7 @@ public class FormLogin extends JFrame{
 	}
 	
 	
-	public class EnterDashboard implements ActionListener {
+	public class DashboardListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -110,7 +110,7 @@ public class FormLogin extends JFrame{
 		}
 	}
 	
-	public class EnterHome implements ActionListener {
+	public class HomeListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {

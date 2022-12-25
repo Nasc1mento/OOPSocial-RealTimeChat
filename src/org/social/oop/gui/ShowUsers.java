@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -16,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 import org.social.oop.persistence.UserDAO;
+import org.social.oop.session.UserChat;
 
 public class ShowUsers extends JFrame{
 	
@@ -44,13 +46,7 @@ public class ShowUsers extends JFrame{
 		this.userList= new JList<>(users.toArray(new String[0]));
 		this.scrollPaneUsers = new JScrollPane(userList);
         
-        this.userList.addMouseListener(new MouseAdapter(){
-        	public void mouseClicked(MouseEvent event){
-        	    if (event.getClickCount() == 2){
-        	    	System.out.println("desgraça funcionou");  
-        	    }
-        	}
-        });
+        this.userList.addMouseListener(new ChatListener());
         
         getContentPane().add(this.scrollPaneUsers,BorderLayout.CENTER);
     }
@@ -62,7 +58,7 @@ public class ShowUsers extends JFrame{
 			
 		this.panelButtonForm.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 			
-		this.buttonBack.addActionListener(new EnterDashboard());
+		this.buttonBack.addActionListener(new DashBoardListener());
 			
 		this.panelButtonForm.add(buttonBack);
 			
@@ -70,7 +66,7 @@ public class ShowUsers extends JFrame{
 				BorderLayout.SOUTH);
 	}
 	
-	public class EnterDashboard implements ActionListener{
+	public class DashBoardListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -82,10 +78,37 @@ public class ShowUsers extends JFrame{
 					// TODO Auto-generated method stub
 					dispose();
 					new Dashboard();
+					
 				}
 			});
 		}
 		
 	}
 	
+	public class ChatListener extends MouseAdapter {
+		public void mouseClicked(MouseEvent event) {
+    	    if (event.getClickCount() == 2){
+    	    	SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						dispose();
+	        	        UserChat.setUserChat(userList.getSelectedValue());
+	        	        new Chat();
+					}
+				});
+    	    }
+    	}
+	}
+	
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				new ShowUsers();
+			}
+		});
+	}
 }

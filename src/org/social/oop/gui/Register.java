@@ -28,7 +28,7 @@ import org.social.oop.persistence.UserDAO;
 
 
 
-public class FormRegister extends JFrame{
+public class Register extends JFrame{
 	
 	private JButton buttonRegister;
 	private JButton buttonReturnHome;
@@ -45,7 +45,7 @@ public class FormRegister extends JFrame{
 	private JLabel labelUsername;
 	private JLabel labelConfirmPassword;
 	
-	public FormRegister() {
+	public Register() {
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		this.setResizable(false);
@@ -97,8 +97,8 @@ public class FormRegister extends JFrame{
 		
 		this.panelButtonForm.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		
-		this.buttonRegister.addActionListener(new RegisterUserAndReturnHome());
-		this.buttonReturnHome.addActionListener(new EnterHome());
+		this.buttonRegister.addActionListener(new RegisterListener());
+		this.buttonReturnHome.addActionListener(new HomeListener());
 		
 		this.panelButtonForm.add(buttonRegister);
 		this.panelButtonForm.add(buttonReturnHome);
@@ -108,7 +108,7 @@ public class FormRegister extends JFrame{
 		
 	}
 	
-	public class RegisterUserAndReturnHome implements ActionListener{
+	public class RegisterListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -133,7 +133,7 @@ public class FormRegister extends JFrame{
 		
 	}
 	
-	public class EnterHome implements ActionListener{
+	public class HomeListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {

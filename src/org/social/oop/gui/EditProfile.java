@@ -41,6 +41,7 @@ public class EditProfile extends JFrame{
 	private JPanel panelButtonForm;
 	
 	private JButton buttonSubmitEditProfile;
+	private JButton buttonBack;
 
 
 	public EditProfile() {
@@ -92,20 +93,22 @@ public class EditProfile extends JFrame{
 	public void createButtonsForm() {
 		this.panelButtonForm = new JPanel();
 		this.buttonSubmitEditProfile = new JButton("Update");
+		this.buttonBack = new JButton("Back");
 			
 		this.panelButtonForm.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 			
-		this.buttonSubmitEditProfile.addActionListener(new EnterDashboard());
-			
+		this.buttonSubmitEditProfile.addActionListener(new DashBoardListener());
+		this.buttonBack.addActionListener(new HomeListener());
+		
 		this.panelButtonForm.add(buttonSubmitEditProfile);
-			
+		this.panelButtonForm.add(buttonBack);
 		getContentPane().add(this.panelButtonForm, 
 				BorderLayout.SOUTH);
 		
 	
 	}
 	
-	public class EnterDashboard implements ActionListener {
+	public class DashBoardListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -130,6 +133,25 @@ public class EditProfile extends JFrame{
 			});
 			
 		}	
+		
+	}
+	
+	
+	public class HomeListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			SwingUtilities.invokeLater(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					dispose();
+					new Home();
+				}
+			});
+		}
 		
 	}
 }

@@ -50,7 +50,7 @@ public class UserDAO implements IUserPersistence{
 		
 		try {
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
-					prepareStatement("SELECT USR_NAME,USR_EMAIL,USR_PHONE FROM OS_USERS");
+					prepareStatement("SELECT USR_NAME,USR_EMAIL FROM OS_USERS");
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if (resultSet.next() && resultSet.getString("USR_NAME").equals(user.getName()))
 				throw new UserAlreadyRegisteredException("User already registered");
