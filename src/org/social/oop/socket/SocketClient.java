@@ -1,4 +1,4 @@
-package org.social.gui.socket;
+package org.social.oop.socket;
 
 import java.net.URISyntaxException;
 
@@ -14,7 +14,7 @@ public class SocketClient {
 	
 	public static void init() {
 		try {
-			socket = IO.socket("http://localhost:3000");
+			SocketClient.socket = IO.socket("http://localhost:3000");
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -22,7 +22,7 @@ public class SocketClient {
 	}
 	
 	public static void open() {
-		socket.open();
+		SocketClient.socket.open();
 	}
 	
 

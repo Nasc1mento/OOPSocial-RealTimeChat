@@ -15,9 +15,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
-import org.social.gui.socket.SocketClient;
 import org.social.oop.persistence.UserDAO;
 import org.social.oop.session.UserChat;
+import org.social.oop.socket.SocketClient;
 
 public class ShowUsers extends JFrame{
 	
