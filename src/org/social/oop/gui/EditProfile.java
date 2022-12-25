@@ -102,7 +102,7 @@ public class EditProfile extends JFrame{
 		this.panelButtonForm.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 			
 		this.buttonSubmitEditProfile.addActionListener(new DashBoardListener());
-		this.buttonBack.addActionListener(new HomeListener());
+		this.buttonBack.addActionListener(new BackDashboardListener());
 		this.deleteAccountButton.addActionListener(new DeleteAccountListener());
 		
 		this.panelButtonForm.add(this.buttonSubmitEditProfile);
@@ -143,7 +143,7 @@ public class EditProfile extends JFrame{
 	}
 	
 	
-	public class HomeListener implements ActionListener{
+	public class BackDashboardListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -154,7 +154,7 @@ public class EditProfile extends JFrame{
 				public void run() {
 					// TODO Auto-generated method stub
 					dispose();
-					new Home();
+					new Dashboard();
 				}
 			});
 		}

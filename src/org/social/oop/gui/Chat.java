@@ -17,8 +17,12 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import org.social.gui.socket.SocketClient;
 import org.social.oop.session.UserChat;
 import org.social.oop.session.UserSession;
+
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter.Listener;
 
 public class Chat extends JFrame{
 	
@@ -31,6 +35,7 @@ public class Chat extends JFrame{
 	private GridBagConstraints left;
 	private GridBagConstraints right;
 	
+	private Socket socket;
 	
 	public Chat() {
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
@@ -41,6 +46,7 @@ public class Chat extends JFrame{
 		this.setSize(500,400);
 		this.setVisible(true);
 		this.chat();
+		this.ActionPerformed();
 		System.out.println(UserChat.name);
 	}
 	
@@ -94,10 +100,21 @@ public class Chat extends JFrame{
 	}
 	
 	class SendMessageListener implements ActionListener {
+		
+		
+		
         public void actionPerformed(ActionEvent event) {
+        	
+        	
+        	
+        	
+        	
+        	
             if (messageBox.getText().length() > 1) {
-            	 chatBox.append("<" + UserSession.name + ">:  " + messageBox.getText() + "\n");
-                 messageBox.setText("");      
+            	SocketClient.socket.emit("message", "<"+UserSession.name+">: "+ messageBox.getText().trim());
+            	messageBox.setText("");
+            	messageBox.grabFocus();
+            	
            } 
         }
     }
@@ -118,5 +135,16 @@ public class Chat extends JFrame{
 			});
 		}
 		
+	}
+	
+	
+	public void ActionPerformed() {
+		SocketClient.socket.on("message", new Listener() {
+			@Override
+			public void call(Object... args) {
+				// TODO Auto-generated method stub
+				chatBox.append(args[0].toString()+"\n");
+			}
+		});
 	}
 }

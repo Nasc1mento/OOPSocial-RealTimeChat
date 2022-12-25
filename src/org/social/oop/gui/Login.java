@@ -27,7 +27,7 @@ public class Login extends JFrame{
 	private JButton buttonLogin;
 	private JButton buttonReturnHome;
 	private JTextField textFieldUsername;
-	private JPasswordField textFieldPassword;
+	private JPasswordField passwordFieldPassword;
 	private JPanel panelButtonForm;
 	private JPanel panelForm;
 	private JLabel labelUsername;
@@ -53,7 +53,7 @@ public class Login extends JFrame{
 		
 		this.panelForm = new JPanel();
 		this.textFieldUsername = new JTextField(43);
-		this.textFieldPassword = new JPasswordField(43);
+		this.passwordFieldPassword = new JPasswordField(43);
 		this.labelUsername = new JLabel("Username");
 		this.labelPassword = new JLabel("Password");
 		
@@ -64,7 +64,7 @@ public class Login extends JFrame{
 		this.add(this.labelUsername);
 		this.add(this.textFieldUsername);
 		this.add(this.labelPassword);
-		this.add(this.textFieldPassword);
+		this.add(this.passwordFieldPassword);
 		
 		
 		this.getContentPane().add(this.panelForm, BorderLayout.CENTER);
@@ -96,7 +96,7 @@ public class Login extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				UserDAO.getInstance().authUser(new User(textFieldUsername.getText(),textFieldPassword.getText()));
+				UserDAO.getInstance().authUser(new User(textFieldUsername.getText(),passwordFieldPassword.getText()));
 					SwingUtilities.invokeLater(new Runnable() {
 						@Override
 						public void run() {

@@ -8,7 +8,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -16,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
+import org.social.gui.socket.SocketClient;
 import org.social.oop.persistence.UserDAO;
 import org.social.oop.session.UserChat;
 
@@ -86,14 +86,24 @@ public class ShowUsers extends JFrame{
 	}
 	
 	public class ChatListener extends MouseAdapter {
+		
+
+		
 		public void mouseClicked(MouseEvent event) {
+			
+			
     	    if (event.getClickCount() == 2){
+    	    	
+    	    	
+    	    	
     	    	SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
 						dispose();
 	        	        UserChat.setUserChat(userList.getSelectedValue());
+	        	        SocketClient.init();
+	        	        SocketClient.open();
 	        	        new Chat();
 					}
 				});
