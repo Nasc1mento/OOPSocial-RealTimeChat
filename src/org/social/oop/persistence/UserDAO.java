@@ -16,6 +16,7 @@ import org.social.oop.exception.PasswordFieldNotFilledException;
 import org.social.oop.exception.PasswordInvalidException;
 import org.social.oop.exception.PasswordNotMatchException;
 import org.social.oop.exception.PhoneFieldNotFilledException;
+import org.social.oop.exception.PhoneNotValidException;
 import org.social.oop.exception.UserAlreadyRegisteredException;
 import org.social.oop.exception.UserNotRegisteredException;
 import org.social.oop.hashing.PBKDF2Salt;
@@ -29,6 +30,8 @@ public class UserDAO implements IUserPersistence{
 	private static UserDAO instance;
 	private Pattern patternEmail = Pattern.compile("^[\\w!#$%&amp;'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&amp;'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$");
 	private Pattern patternPassword = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
+	private Pattern patternPhone = Pattern.compile("\\([0-9]{2}\\) (?:9[0-9]{1}|[1-5]{1})[0-9]{3}-[0-9]{4}");
+	
 	
 	private UserDAO() {
 		this.databaseMySQL = new DatabaseMySQL();
@@ -42,11 +45,12 @@ public class UserDAO implements IUserPersistence{
 	@Override
 	public void createUser(User user) throws NameFieldNotFilledException,EmailFieldNotFilledException, PhoneFieldNotFilledException,
 	PasswordFieldNotFilledException, PasswordConfirmationNotMatchException, EmailNotValidException, PasswordInvalidException, 
-	UserAlreadyRegisteredException, EmailAlreadyRegisteredException{
+	UserAlreadyRegisteredException, EmailAlreadyRegisteredException, PhoneNotValidException{
 		
 		String userSalt = PBKDF2Salt.getSalt();
-		Matcher matcherEmail = patternEmail.matcher(user.getEmail());
-		Matcher matcherPassword = patternPassword.matcher(user.getPassword());
+		Matcher matcherEmail = this.patternEmail.matcher(user.getEmail());
+		Matcher matcherPassword = this.patternPassword.matcher(user.getPassword());
+		Matcher matcherPhone = this.patternPhone.matcher(user.getPhone());
 		
 		try {
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
@@ -74,6 +78,8 @@ public class UserDAO implements IUserPersistence{
 			throw new EmailNotValidException("Email format invalid. Example valid: user@domain.com");
 		else if (! matcherPassword.matches())
 			throw new PasswordInvalidException("Invalid password");
+		else if (! matcherPhone.matches())
+			throw new PhoneNotValidException("Invalid phone number. Try (XX) [X]XXXX-XXXX");
 		else {
 			try {
 				PreparedStatement preparedStatement = this.databaseMySQL.getConnection().prepareStatement("INSERT INTO OS_USERS VALUES (?, ?, ?, ?, ?, ?);");
@@ -91,8 +97,19 @@ public class UserDAO implements IUserPersistence{
 	}
 		
 	@Override
-	public void removeUser(User user) {
-		
+	public void removeUser() {
+		try {
+			
+			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
+					prepareStatement("DELETE FROM OS_USERS WHERE USR_NAME = ? ;");
+			preparedStatement.setString(1, UserSession.name);
+			preparedStatement.executeUpdate();
+			
+			
+		}catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 	@Override
 	public void updateUser(User user) throws NameFieldNotFilledException,EmailFieldNotFilledException, PhoneFieldNotFilledException,
@@ -145,10 +162,7 @@ public class UserDAO implements IUserPersistence{
 			}
 		}
 	}
-	@Override
-	public User locateUser(User user) {
-		return user;
-	}
+
 	@Override
 	public void authUser(User user) throws UserNotRegisteredException, EmailFieldNotFilledException, PasswordNotMatchException{
 		try {

@@ -22,6 +22,7 @@ import org.social.oop.exception.PasswordConfirmationNotMatchException;
 import org.social.oop.exception.PasswordFieldNotFilledException;
 import org.social.oop.exception.PasswordInvalidException;
 import org.social.oop.exception.PhoneFieldNotFilledException;
+import org.social.oop.exception.PhoneNotValidException;
 import org.social.oop.exception.UserAlreadyRegisteredException;
 import org.social.oop.model.User;
 import org.social.oop.persistence.UserDAO;
@@ -126,7 +127,7 @@ public class Register extends JFrame{
 				});	
 			}catch(NameFieldNotFilledException | EmailFieldNotFilledException | PhoneFieldNotFilledException| PasswordFieldNotFilledException | 
 					PasswordConfirmationNotMatchException | EmailNotValidException | PasswordInvalidException | UserAlreadyRegisteredException
-					| EmailAlreadyRegisteredException  exception){
+					| EmailAlreadyRegisteredException | PhoneNotValidException  exception){
 				JOptionPane.showMessageDialog(null, exception.getMessage());
 			}
 		}

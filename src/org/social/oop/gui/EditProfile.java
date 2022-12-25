@@ -42,6 +42,7 @@ public class EditProfile extends JFrame{
 	
 	private JButton buttonSubmitEditProfile;
 	private JButton buttonBack;
+	private JButton deleteAccountButton;
 
 
 	public EditProfile() {
@@ -91,18 +92,22 @@ public class EditProfile extends JFrame{
 	
 
 	public void createButtonsForm() {
+		
 		this.panelButtonForm = new JPanel();
 		this.buttonSubmitEditProfile = new JButton("Update");
 		this.buttonBack = new JButton("Back");
+		this.deleteAccountButton = new JButton("Delete Account");
 			
 		this.panelButtonForm.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 			
 		this.buttonSubmitEditProfile.addActionListener(new DashBoardListener());
 		this.buttonBack.addActionListener(new HomeListener());
+		this.deleteAccountButton.addActionListener(new DeleteAccountListener());
 		
-		this.panelButtonForm.add(buttonSubmitEditProfile);
-		this.panelButtonForm.add(buttonBack);
-		getContentPane().add(this.panelButtonForm, 
+		this.panelButtonForm.add(this.buttonSubmitEditProfile);
+		this.panelButtonForm.add(this.buttonBack);
+		this.panelButtonForm.add(this.deleteAccountButton);
+		getContentPane().add(this.panelButtonForm,
 				BorderLayout.SOUTH);
 		
 	
@@ -142,6 +147,29 @@ public class EditProfile extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			SwingUtilities.invokeLater(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					dispose();
+					new Home();
+				}
+			});
+		}
+		
+	}
+	
+	public class DeleteAccountListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+			
+			UserDAO.getInstance().removeUser();
+			
+			
 			SwingUtilities.invokeLater(new Runnable() {
 				
 				@Override

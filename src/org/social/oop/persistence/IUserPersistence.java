@@ -11,6 +11,7 @@ import org.social.oop.exception.PasswordNotMatchException;
 import org.social.oop.exception.PasswordFieldNotFilledException;
 import org.social.oop.exception.PasswordInvalidException;
 import org.social.oop.exception.PhoneFieldNotFilledException;
+import org.social.oop.exception.PhoneNotValidException;
 import org.social.oop.exception.UserAlreadyRegisteredException;
 import org.social.oop.exception.UserNotRegisteredException;
 import org.social.oop.model.User;
@@ -19,11 +20,10 @@ public interface IUserPersistence {
 	
 		public void createUser(User user) throws  NameFieldNotFilledException,EmailFieldNotFilledException, PhoneFieldNotFilledException,
 		PasswordFieldNotFilledException, PasswordConfirmationNotMatchException, EmailNotValidException, PasswordInvalidException, 
-		UserAlreadyRegisteredException, EmailAlreadyRegisteredException;
+		UserAlreadyRegisteredException, EmailAlreadyRegisteredException, PhoneNotValidException;
+
 		
-		public User locateUser(User user);
-		
-		public void removeUser(User user);
+		public void removeUser();
 		
 		public void updateUser(User user) throws NameFieldNotFilledException, EmailFieldNotFilledException, PhoneFieldNotFilledException,
 		PasswordFieldNotFilledException, EmailNotValidException, PasswordInvalidException, UserAlreadyRegisteredException, 
@@ -31,5 +31,5 @@ public interface IUserPersistence {
 		
 		public void authUser(User user) throws UserNotRegisteredException, EmailFieldNotFilledException, PasswordNotMatchException;
 		
-		public  ArrayList<String> listUser();
+		public ArrayList<String> listUser();
 }
