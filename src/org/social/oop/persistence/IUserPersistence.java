@@ -27,7 +27,7 @@ public interface IUserPersistence {
 		
 		public void updateUser(User user) throws NameFieldNotFilledException, EmailFieldNotFilledException, PhoneFieldNotFilledException,
 		PasswordFieldNotFilledException, EmailNotValidException, PasswordInvalidException, UserAlreadyRegisteredException, 
-		EmailAlreadyRegisteredException;
+		EmailAlreadyRegisteredException, PhoneNotValidException;
 		
 		public void authUser(User user) throws UserNotRegisteredException, EmailFieldNotFilledException, PasswordNotMatchException;
 		

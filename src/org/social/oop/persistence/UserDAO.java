@@ -52,6 +52,7 @@ public class UserDAO implements IUserPersistence{
 		Matcher matcherPassword = this.patternPassword.matcher(user.getPassword());
 		Matcher matcherPhone = this.patternPhone.matcher(user.getPhone());
 		
+		
 		try {
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
 					prepareStatement("SELECT USR_NAME,USR_EMAIL FROM OS_USERS");
@@ -79,7 +80,7 @@ public class UserDAO implements IUserPersistence{
 		else if (! matcherPassword.matches())
 			throw new PasswordInvalidException("Invalid password");
 		else if (! matcherPhone.matches())
-			throw new PhoneNotValidException("Invalid phone number. Try (XX) [X]XXXX-XXXX");
+			throw new PhoneNotValidException("Invalid phone number. Try (XX) XXXX-XXXX or XXXXX-XXXX");
 		else {
 			try {
 				PreparedStatement preparedStatement = this.databaseMySQL.getConnection().prepareStatement("INSERT INTO OS_USERS VALUES (?, ?, ?, ?, ?, ?);");
@@ -114,10 +115,11 @@ public class UserDAO implements IUserPersistence{
 	@Override
 	public void updateUser(User user) throws NameFieldNotFilledException,EmailFieldNotFilledException, PhoneFieldNotFilledException,
 	PasswordFieldNotFilledException, EmailNotValidException, PasswordInvalidException, UserAlreadyRegisteredException, 
-	EmailAlreadyRegisteredException {
+	EmailAlreadyRegisteredException, PhoneNotValidException {
 		String userSalt = PBKDF2Salt.getSalt();
-		Matcher matcherEmail = patternEmail.matcher(user.getEmail());
-		Matcher matcherPassword = patternPassword.matcher(user.getPassword());
+		Matcher matcherEmail = this.patternEmail.matcher(user.getEmail());
+		Matcher matcherPassword = this.patternPassword.matcher(user.getPassword());
+		Matcher matcherPhone = this.patternPhone.matcher(user.getPhone());
 		
 		
 		try {
@@ -145,6 +147,8 @@ public class UserDAO implements IUserPersistence{
 			throw new EmailNotValidException("Email format invalid. Example valid: user@domain.com");
 		else if (! matcherPassword.matches())
 			throw new PasswordInvalidException("Invalid password");
+		else if (! matcherPhone.matches())
+			throw new PhoneNotValidException("Invalid phone number. Try (XX) XXXX-XXXX or XXXXX-XXXX");
 		else {
 			try {
 				PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
