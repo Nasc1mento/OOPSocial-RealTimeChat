@@ -1,5 +1,6 @@
 package org.social.oop.model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
 
@@ -9,13 +10,13 @@ public class Message {
 	private String content;
 	private int senderId;
 	private int receptorId;
-	private Date date;
+	private Timestamp date;
 	
 	
 	
 	
 	
-	public Message(int id, String content, int senderId, int receptorId, Date date) {
+	public Message(int id, String content, int senderId, int receptorId, Timestamp date) {
 		super();
 		this.id = id;
 		this.content = content;
@@ -56,11 +57,11 @@ public class Message {
 		this.receptorId = receptorId;
 	}
 	
-	public Date getDate() {
+	public Timestamp getDate() {
 		return date;
 	}
 	
-	public void setDate(Date date) {
+	public void setDate(Timestamp date) {
 		this.date = date;
 	}
 	@Override

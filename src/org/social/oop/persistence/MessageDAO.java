@@ -3,6 +3,7 @@ package org.social.oop.persistence;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import org.social.oop.model.Message;
 
@@ -37,7 +38,7 @@ public class MessageDAO implements IMessagePersistence{
 			preparedStatement.setString(2, message.getContent());
 			preparedStatement.setInt(3, message.getSenderId());
 			preparedStatement.setInt(4, message.getReceptorId());
-			preparedStatement.setDate(5, new Date(0));
+			preparedStatement.setTimestamp(5, message.getDate());
 			preparedStatement.execute();
 		} catch (SQLException e) {
 			// TODO: handle exception

@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -120,8 +121,9 @@ public class Chat extends JFrame{
             	SocketClient.socket.emit("message", "<"+UserSession.name+" "+ new Date()+">: "+ messageBox.getText().trim());
             	
 					MessageDAO.getInstance().
-						createMessage(new Message(0,messageBox.getText() , UserSession.id , UserChat.id, new Date()));
-				
+						createMessage(new Message(0,messageBox.getText() , UserSession.id , 
+								UserChat.id, Timestamp.valueOf(java.time.LocalDateTime.now())));
+					
             	messageBox.setText("");
             	messageBox.grabFocus();	
             	
