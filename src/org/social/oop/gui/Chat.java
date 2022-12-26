@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -113,7 +114,7 @@ public class Chat extends JFrame{
 		public void actionPerformed(ActionEvent event) {
 			
             if (messageBox.getText().length() > 1) {
-            	SocketClient.socket.emit("message", "<"+UserSession.name+">: "+ messageBox.getText().trim());
+            	SocketClient.socket.emit("message", "<"+UserSession.name+" "+ new Date()+">: "+ messageBox.getText().trim());
             	messageBox.setText("");
             	messageBox.grabFocus();	
            } 

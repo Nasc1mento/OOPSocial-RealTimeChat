@@ -102,6 +102,7 @@ public class ShowUsers extends JFrame{
 						// TODO Auto-generated method stub
 						dispose();
 	        	        UserChat.setUserChat(userList.getSelectedValue());
+//	        	        UserChat.id = ;
 	        	        SocketClient.init();
 	        	        SocketClient.open();
 	        	        new Chat();
