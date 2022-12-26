@@ -14,7 +14,9 @@ public class User {
 	
 	
 	
-	
+	public User() {
+		
+	}
 	public User(Integer id, String name, String email, String phone, String password, String confirmPassword) {
 		super();
 		this.id = id;
@@ -39,7 +41,7 @@ public class User {
 		this.password = password;
 	}
 
-
+	
 
 
 	public int getId() {

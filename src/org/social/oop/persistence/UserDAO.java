@@ -194,22 +194,29 @@ public class UserDAO implements IUserPersistence{
 		}
 	}
 	@Override
-	public ArrayList<String> listUser() {
-		ArrayList<String> users = new ArrayList<String>();
+	public ArrayList<User> listUser() {
+		ArrayList<User> users = new ArrayList<User>();
 		ResultSet resultSet = null;
 		try {
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
-					prepareStatement("SELECT USR_NAME,USR_EMAIL,USR_PHONE FROM OS_USERS WHERE USR_ID !=?;");
+					prepareStatement("SELECT * FROM OS_USERS WHERE USR_ID !=?;");
 			preparedStatement.setInt(1, UserSession.id);
 			resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
-				users.add(resultSet.getString("USR_NAME"));
+				User user = new User();
+				user.setId(resultSet.getInt("USR_ID"));
+				user.setName(resultSet.getString("USR_NAME"));
+				users.add(user);
 			}
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}	
 		return users;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(UserDAO.getInstance().listUser().get(1).getId());
 	}
 }

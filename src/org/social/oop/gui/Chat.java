@@ -18,6 +18,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import org.social.oop.model.Message;
+import org.social.oop.persistence.MessageDAO;
+import org.social.oop.persistence.UserDAO;
 import org.social.oop.session.UserChat;
 import org.social.oop.session.UserSession;
 import org.social.oop.socket.SocketClient;
@@ -113,10 +116,15 @@ public class Chat extends JFrame{
 		
 		public void actionPerformed(ActionEvent event) {
 			
-            if (messageBox.getText().length() > 1) {
+            if (messageBox.getText().length() >= 1) {
             	SocketClient.socket.emit("message", "<"+UserSession.name+" "+ new Date()+">: "+ messageBox.getText().trim());
+            	
+					MessageDAO.getInstance().
+						createMessage(new Message(0,messageBox.getText() , UserSession.id , UserChat.id, new Date()));
+				
             	messageBox.setText("");
             	messageBox.grabFocus();	
+            	
            } 
         }
     }

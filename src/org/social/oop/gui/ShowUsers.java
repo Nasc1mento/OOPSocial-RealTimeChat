@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
+import org.social.oop.model.User;
 import org.social.oop.persistence.UserDAO;
 import org.social.oop.session.UserChat;
 import org.social.oop.socket.SocketClient;
@@ -22,11 +23,14 @@ import org.social.oop.socket.SocketClient;
 public class ShowUsers extends JFrame{
 	
 
-	private ArrayList<String> users = UserDAO.getInstance().listUser();
+	private ArrayList<User> users = UserDAO.getInstance().listUser();
 	private JScrollPane scrollPaneUsers;
 	private JList<String> userList;
 	private JPanel panelButtonForm;
 	private JButton buttonBack;
+	
+	
+
 	
 	public ShowUsers() {
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
@@ -43,7 +47,12 @@ public class ShowUsers extends JFrame{
 	
 	public void showUsersList() {
 		
-		this.userList= new JList<>(users.toArray(new String[0]));
+		ArrayList<String> usersName = new ArrayList<>();
+		for (User user:users) {
+			usersName.add(user.getName());
+		}
+		
+		this.userList= new JList<>(usersName.toArray(new String[0]));
 		this.scrollPaneUsers = new JScrollPane(userList);
         
         this.userList.addMouseListener(new ChatListener());
@@ -100,9 +109,11 @@ public class ShowUsers extends JFrame{
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
+						int userChatId = users.get(userList.getSelectedIndex()).getId();
+						String userChatName = userList.getSelectedValue();
+						
 						dispose();
-	        	        UserChat.setUserChat(userList.getSelectedValue());
-//	        	        UserChat.id = ;
+	        	        UserChat.setUserChat(userChatId,userChatName);
 	        	        SocketClient.init();
 	        	        SocketClient.open();
 	        	        new Chat();

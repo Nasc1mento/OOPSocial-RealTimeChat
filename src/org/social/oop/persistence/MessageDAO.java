@@ -37,7 +37,7 @@ public class MessageDAO implements IMessagePersistence{
 			preparedStatement.setString(2, message.getContent());
 			preparedStatement.setInt(3, message.getSenderId());
 			preparedStatement.setInt(4, message.getReceptorId());
-			preparedStatement.setDate(5, (Date) message.getDate());
+			preparedStatement.setDate(5, new Date(0));
 			preparedStatement.execute();
 		} catch (SQLException e) {
 			// TODO: handle exception
