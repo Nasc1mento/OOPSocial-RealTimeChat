@@ -1,4 +1,4 @@
-# SocialJavaSwing-RealTimeChat
+# OOPSocial-RealTimeChat
 
 
 ## OOP Final Project
