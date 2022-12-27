@@ -9,6 +9,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -21,7 +22,6 @@ import javax.swing.SwingUtilities;
 
 import org.social.oop.model.Message;
 import org.social.oop.persistence.MessageDAO;
-import org.social.oop.persistence.UserDAO;
 import org.social.oop.session.UserChat;
 import org.social.oop.session.UserSession;
 import org.social.oop.socket.SocketClient;
@@ -38,6 +38,9 @@ public class Chat extends JFrame{
 	private JButton back;
 	private GridBagConstraints left;
 	private GridBagConstraints right;
+	
+	private ArrayList<Message> messages;
+	
 	
 	public Chat() {
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
@@ -102,6 +105,14 @@ public class Chat extends JFrame{
 	}
 	
 	public void addMessageToChatBox() {
+		
+		
+		// Add history to chat box
+		this.messages = MessageDAO.getInstance().listMessage(UserSession.id, UserChat.id);
+		for (Message message: messages) {
+			chatBox.append("<"+UserSession.name+" "+message.getDate()+">: "+ message.getContent()+"\n");
+		}
+		
 		SocketClient.socket.on("message", new Listener() {
 			@Override
 			public void call(Object... args) {

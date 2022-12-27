@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -116,7 +117,7 @@ public class Register extends JFrame{
 			try {
 				UserDAO.getInstance().
 				createUser(new User(0,textFieldUsername.getText(),textFieldEmail.getText(),textFieldPhone.getText(),
-						passwordFieldPassword.getText(),passwordFieldConfirmPassword.getText()));
+						passwordFieldPassword.getText(),passwordFieldConfirmPassword.getText(),Timestamp.valueOf(java.time.LocalDateTime.now())));
 				JOptionPane.showMessageDialog(null, "Usuário criado com sucesso!!!");
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override

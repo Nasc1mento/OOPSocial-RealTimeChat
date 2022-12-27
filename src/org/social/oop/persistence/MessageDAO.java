@@ -2,8 +2,10 @@ package org.social.oop.persistence;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import org.social.oop.model.Message;
 
@@ -45,4 +47,35 @@ public class MessageDAO implements IMessagePersistence{
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public ArrayList<Message> listMessage(int user1Id, int user2Id) {
+		// TODO Auto-generated method stub
+		ArrayList<Message> messages = new ArrayList<>();
+		
+		try {
+			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
+					prepareStatement("SELECT * FROM OS_MESSAGES WHERE MSG_USR_ID_SOURCE = ? AND MSG_USR_ID_DESTINY = ? OR MSG_USR_ID_SOURCE = ? AND MSG_USR_ID_DESTINY = ?");
+				preparedStatement.setInt(1, user1Id);
+				preparedStatement.setInt(2, user2Id);
+				preparedStatement.setInt(3, user2Id);
+				preparedStatement.setInt(4, user1Id);
+							
+				ResultSet resultSet = preparedStatement.executeQuery();
+				
+				while (resultSet.next()) {
+					messages.add(new Message(resultSet.
+							getInt("MSG_ID"),resultSet.getString("MSG_CONTENT"), resultSet.
+							getInt("MSG_USR_ID_SOURCE"), resultSet.getInt("MSG_USR_ID_DESTINY"), resultSet.getTimestamp("MSG_DATE")));
+				}
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return messages;
+	}
+	
+	
 }

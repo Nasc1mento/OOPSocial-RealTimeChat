@@ -57,10 +57,13 @@ public class UserDAO implements IUserPersistence{
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
 					prepareStatement("SELECT USR_NAME,USR_EMAIL FROM OS_USERS");
 			ResultSet resultSet = preparedStatement.executeQuery();
-			if (resultSet.next() && resultSet.getString("USR_NAME").equals(user.getName()))
-				throw new UserAlreadyRegisteredException("User already registered");
-			else if (resultSet.getString("USR_EMAIL").equals(user.getEmail()))
-				throw new EmailAlreadyRegisteredException("Email already registered");
+			if (resultSet.next()) {
+				if (resultSet.getString("USR_NAME").equals(user.getName()))
+					throw new UserAlreadyRegisteredException("User already registered");
+				else if (resultSet.getString("USR_EMAIL").equals(user.getEmail()))
+					throw new EmailAlreadyRegisteredException("Email already registered");
+			}
+			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -83,13 +86,14 @@ public class UserDAO implements IUserPersistence{
 			throw new PhoneNotValidException("Invalid phone number. Try (XX) XXXX-XXXX or XXXXX-XXXX");
 		else {
 			try {
-				PreparedStatement preparedStatement = this.databaseMySQL.getConnection().prepareStatement("INSERT INTO OS_USERS VALUES (?, ?, ?, ?, ?, ?);");
+				PreparedStatement preparedStatement = this.databaseMySQL.getConnection().prepareStatement("INSERT INTO OS_USERS VALUES (?, ?, ?, ?, ?, ?, ?);");
 				preparedStatement.setInt(1, user.getId());
 				preparedStatement.setString(2, user.getName());
 				preparedStatement.setString(3, user.getEmail());
 				preparedStatement.setString(4, user.getPhone());
 				preparedStatement.setString(5, PBKDF2Salt.hashing(user.getPassword(),userSalt));
 				preparedStatement.setString(6,userSalt);
+				preparedStatement.setTimestamp(7, user.getDateCreation());
 				preparedStatement.execute();
 			}catch(SQLException exception){
 				exception.printStackTrace();
@@ -196,12 +200,12 @@ public class UserDAO implements IUserPersistence{
 	@Override
 	public ArrayList<User> listUser() {
 		ArrayList<User> users = new ArrayList<User>();
-		ResultSet resultSet = null;
+		
 		try {
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
 					prepareStatement("SELECT * FROM OS_USERS WHERE USR_ID !=?;");
 			preparedStatement.setInt(1, UserSession.id);
-			resultSet = preparedStatement.executeQuery();
+			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
 				User user = new User();

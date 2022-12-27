@@ -114,7 +114,6 @@ public class ShowUsers extends JFrame{
 						
 						dispose();
 	        	        UserChat.setUserChat(userChatId,userChatName);
-	        	        SocketClient.init();
 	        	        SocketClient.open();
 	        	        new Chat();
 					}

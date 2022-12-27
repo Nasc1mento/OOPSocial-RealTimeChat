@@ -1,5 +1,6 @@
 package org.social.oop.model;
 
+import java.sql.Timestamp;
 import java.util.Objects;
 
 public class User {
@@ -10,6 +11,7 @@ public class User {
 	private String phone;
 	private String password;
 	private String confirmPassword;
+	private Timestamp dateCreation;
 	
 	
 	
@@ -17,7 +19,7 @@ public class User {
 	public User() {
 		
 	}
-	public User(Integer id, String name, String email, String phone, String password, String confirmPassword) {
+	public User(Integer id, String name, String email, String phone, String password, String confirmPassword, Timestamp dateCreation) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -25,6 +27,7 @@ public class User {
 		this.password = password;
 		this.phone = phone;
 		this.confirmPassword = confirmPassword;
+		this.dateCreation = dateCreation;
 	}
 
 	public User(String name, String email, String phone, String password) {
@@ -125,8 +128,12 @@ public class User {
 		this.confirmPassword = confirmPassword;
 	}
 
-
-
+	public Timestamp getDateCreation() {
+		return dateCreation;
+	}
+	public void setDateCreation(Timestamp dateCreation) {
+		this.dateCreation = dateCreation;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

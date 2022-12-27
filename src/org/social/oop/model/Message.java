@@ -8,8 +8,8 @@ public class Message {
 	
 	private int id;
 	private String content;
-	private int senderId;
-	private int receptorId;
+	private int user1SenderId;
+	private int user2SenderId;
 	private Timestamp date;
 	
 	
@@ -20,8 +20,8 @@ public class Message {
 		super();
 		this.id = id;
 		this.content = content;
-		this.senderId = senderId;
-		this.receptorId = receptorId;
+		this.user1SenderId = senderId;
+		this.user2SenderId = receptorId;
 		this.date = date;
 	}
 	
@@ -42,19 +42,19 @@ public class Message {
 	}
 	
 	public int getSenderId() {
-		return senderId;
+		return user1SenderId;
 	}
 	
 	public void setSenderId(int senderId) {
-		this.senderId = senderId;
+		this.user1SenderId = senderId;
 	}
 	
 	public int getReceptorId() {
-		return receptorId;
+		return user2SenderId;
 	}
 	
 	public void setReceptorId(int receptorId) {
-		this.receptorId = receptorId;
+		this.user2SenderId = receptorId;
 	}
 	
 	public Timestamp getDate() {
@@ -66,7 +66,7 @@ public class Message {
 	}
 	@Override
 	public String toString() {
-		return "Message [id=" + id + ", content=" + content + ", senderId=" + senderId + ", receptorId=" + receptorId
+		return "Message [id=" + id + ", content=" + content + ", senderId=" + user1SenderId + ", receptorId=" + user2SenderId
 				+ ", date=" + date + "]";
 	}
 	
