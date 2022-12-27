@@ -16,4 +16,4 @@ cd /path/to/project/
 cd server/
 node index.js
 ```
-- Execute Main class
+- Select the Main class and run.
