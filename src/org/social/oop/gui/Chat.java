@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.text.DefaultCaret;
 
 import org.social.oop.model.Message;
 import org.social.oop.persistence.MessageDAO;
@@ -38,6 +39,7 @@ public class Chat extends JFrame{
 	private JButton back;
 	private GridBagConstraints left;
 	private GridBagConstraints right;
+	private DefaultCaret caret;
 	
 	private ArrayList<Message> messages;
 	
@@ -51,17 +53,22 @@ public class Chat extends JFrame{
 		this.setSize(500,400);
 		this.setVisible(true);
 		this.chat();
+		this.loadHistory();
 		this.addMessageToChatBox();
-		System.out.println(UserChat.name);
 	}
 	
 	
 	public void chat() {
+		
+		
 		this.messageBox = new JTextField(30);
 		this.chatBox = new JTextArea();
 		this.mainPanelChat = new JPanel();
 		this.mainPanelChat.setLayout(new BorderLayout());
-
+		
+		this.caret = (DefaultCaret) chatBox.getCaret();
+		this.caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+		
         this.southPanelChat = new JPanel();
         this.southPanelChat.setBackground(Color.GRAY);
         this.southPanelChat.setLayout(new GridBagLayout());
@@ -106,13 +113,6 @@ public class Chat extends JFrame{
 	
 	public void addMessageToChatBox() {
 		
-		
-		// Add history to chat box
-		this.messages = MessageDAO.getInstance().listMessage(UserSession.id, UserChat.id);
-		for (Message message: messages) {
-			chatBox.append("<"+UserSession.name+" "+message.getDate()+">: "+ message.getContent()+"\n");
-		}
-		
 		SocketClient.socket.on("message", new Listener() {
 			@Override
 			public void call(Object... args) {
@@ -122,7 +122,13 @@ public class Chat extends JFrame{
 		});
 	}
 	
-	
+	public void loadHistory() {
+		
+		this.messages = MessageDAO.getInstance().listMessage(UserSession.id, UserChat.id);
+			for (Message message: messages) {
+				chatBox.append("<"+UserSession.name+" "+message.getDate()+">: "+ message.getContent()+"\n");
+			}
+	}
 	
 	public class SendMessageListener implements ActionListener {
 		
