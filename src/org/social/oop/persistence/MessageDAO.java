@@ -40,7 +40,7 @@ public class MessageDAO implements IMessagePersistence{
 			preparedStatement.setString(2, message.getContent());
 			preparedStatement.setInt(3, message.getSenderId());
 			preparedStatement.setInt(4, message.getReceptorId());
-			preparedStatement.setTimestamp(5, message.getDate());
+			preparedStatement.setDate(5,  java.sql.Date.valueOf(java.time.LocalDate.now()));
 			preparedStatement.execute();
 		} catch (SQLException e) {
 			// TODO: handle exception
@@ -66,7 +66,7 @@ public class MessageDAO implements IMessagePersistence{
 				while (resultSet.next()) {
 					messages.add(new Message(resultSet.
 							getInt("MSG_ID"),resultSet.getString("MSG_CONTENT"), resultSet.
-							getInt("MSG_USR_ID_SOURCE"), resultSet.getInt("MSG_USR_ID_DESTINY"), resultSet.getTimestamp("MSG_DATE")));
+							getInt("MSG_USR_ID_SOURCE"), resultSet.getInt("MSG_USR_ID_DESTINY"), resultSet.getDate("MSG_DATE")));
 				}
 			
 		} catch (SQLException e) {

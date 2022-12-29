@@ -9,6 +9,9 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -137,9 +140,9 @@ public class Chat extends JFrame{
             if (messageBox.getText().length() >= 1) {
             	SocketClient.socket.emit("message", "<"+UserSession.name+" "+ new Date()+">: "+ messageBox.getText().trim());
             	
-					MessageDAO.getInstance().
-						createMessage(new Message(0,messageBox.getText() , UserSession.id , 
-								UserChat.id, Timestamp.valueOf(java.time.LocalDateTime.now())));
+				MessageDAO.getInstance().
+					createMessage(new Message(0,messageBox.getText() , UserSession.id , 
+						UserChat.id,  java.sql.Date.valueOf(java.time.LocalDate.now())));
 					
             	messageBox.setText("");
             	messageBox.grabFocus();	

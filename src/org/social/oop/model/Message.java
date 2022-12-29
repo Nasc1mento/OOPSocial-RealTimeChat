@@ -10,13 +10,13 @@ public class Message {
 	private String content;
 	private int user1SenderId;
 	private int user2SenderId;
-	private Timestamp date;
+	private Date date;
 	
 	
 	
 	
 	
-	public Message(int id, String content, int senderId, int receptorId, Timestamp date) {
+	public Message(int id, String content, int senderId, int receptorId, Date date) {
 		super();
 		this.id = id;
 		this.content = content;
@@ -57,11 +57,11 @@ public class Message {
 		this.user2SenderId = receptorId;
 	}
 	
-	public Timestamp getDate() {
+	public Date getDate() {
 		return date;
 	}
 	
-	public void setDate(Timestamp date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	@Override
