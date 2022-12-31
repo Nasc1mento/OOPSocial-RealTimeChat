@@ -9,21 +9,22 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
+import org.social.oop.gui.components.ButtonComponent;
+import org.social.oop.gui.components.FrameComponent;
 import org.social.oop.model.User;
 import org.social.oop.persistence.UserDAO;
 import org.social.oop.session.UserChat;
 import org.social.oop.socket.SocketClient;
 
-public class ShowUsers extends JFrame{
+public class ShowUsers extends FrameComponent{
 	
 
-	private ArrayList<User> users = UserDAO.getInstance().listUser();
+	private ArrayList<User> users = UserDAO.getInstance().getAllUsers();
 	private JScrollPane scrollPaneUsers;
 	private JList<String> userList;
 	private JPanel panelButtonForm;
@@ -33,13 +34,9 @@ public class ShowUsers extends JFrame{
 
 	
 	public ShowUsers() {
-		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-		this.setLayout(new BorderLayout());
-		this.setResizable(false);
+		
 		this.setTitle("OOPSocial/Users");
-		this.setBounds(250,250,0,0);
-		this.setSize(500,400);
-		this.setVisible(true);
+		
 		this.showUsersList();
 		this.createButtons();
 	}
@@ -63,7 +60,7 @@ public class ShowUsers extends JFrame{
 	
 	public void createButtons() {
 		this.panelButtonForm = new JPanel();
-		this.buttonBack = new JButton("Back");
+		this.buttonBack = new ButtonComponent("Back");
 			
 		this.panelButtonForm.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 			

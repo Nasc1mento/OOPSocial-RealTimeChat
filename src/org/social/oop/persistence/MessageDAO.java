@@ -49,7 +49,7 @@ public class MessageDAO implements IMessagePersistence{
 	}
 
 	@Override
-	public ArrayList<Message> listMessage(int user1Id, int user2Id) {
+	public ArrayList<Message> getAllMessage(int user1Id, int user2Id) {
 		// TODO Auto-generated method stub
 		ArrayList<Message> messages = new ArrayList<>();
 		

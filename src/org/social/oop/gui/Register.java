@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.sql.Timestamp;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -25,12 +24,14 @@ import org.social.oop.exception.PasswordInvalidException;
 import org.social.oop.exception.PhoneFieldNotFilledException;
 import org.social.oop.exception.PhoneNotValidException;
 import org.social.oop.exception.UserAlreadyRegisteredException;
+import org.social.oop.gui.components.ButtonComponent;
+import org.social.oop.gui.components.FrameComponent;
 import org.social.oop.model.User;
 import org.social.oop.persistence.UserDAO;
 
 
 
-public class Register extends JFrame{
+public class Register extends FrameComponent{
 	
 	private JButton buttonRegister;
 	private JButton buttonReturnHome;
@@ -48,13 +49,9 @@ public class Register extends JFrame{
 	private JLabel labelConfirmPassword;
 	
 	public Register() {
-		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-		this.setLayout(new BorderLayout());
-		this.setResizable(false);
+		
 		this.setTitle("OOPSocial/Register");
-		this.setBounds(250,250,0,0);
-		this.setSize(500,400);
-		this.setVisible(true);
+		
 		this.createForm();
 		this.createButtonsForm();
 	}
@@ -94,8 +91,8 @@ public class Register extends JFrame{
 	
 	public void createButtonsForm() {
 		this.panelButtonForm = new JPanel();
-		this.buttonReturnHome = new JButton("Back to Home");
-		this.buttonRegister = new JButton("Register");
+		this.buttonReturnHome = new ButtonComponent("Back to Home");
+		this.buttonRegister = new ButtonComponent("Register");
 		
 		this.panelButtonForm.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		

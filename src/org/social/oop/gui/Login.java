@@ -2,12 +2,13 @@ package org.social.oop.gui;
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -15,14 +16,15 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import org.social.oop.exception.UserNotRegisteredException;
-import org.social.oop.exception.PasswordNotMatchException;
 import org.social.oop.exception.EmailFieldNotFilledException;
+import org.social.oop.exception.PasswordNotMatchException;
+import org.social.oop.exception.UserNotRegisteredException;
+import org.social.oop.gui.components.ButtonComponent;
+import org.social.oop.gui.components.FrameComponent;
 import org.social.oop.model.User;
 import org.social.oop.persistence.UserDAO;
-import org.social.oop.session.UserSession;
 
-public class Login extends JFrame{
+public class Login extends FrameComponent{
 	
 	private JButton buttonLogin;
 	private JButton buttonReturnHome;
@@ -35,15 +37,12 @@ public class Login extends JFrame{
 	
 	
 	public Login() {
-		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-		this.setLayout(new BorderLayout());
-		this.setResizable(false);
+		
 		this.setTitle("OOPSocial/Login");
-		this.setBounds(250,250,0,0);
-		this.setSize(500,400);
-		this.setVisible(true);
+		
 		this.createForm();
 		this.createButtonsForm();
+		
 	}
 	
 	
@@ -74,8 +73,8 @@ public class Login extends JFrame{
 	
 	public void createButtonsForm() {
 		this.panelButtonForm = new JPanel();
-		this.buttonReturnHome = new JButton("Back to Home");
-		this.buttonLogin = new JButton("Login");
+		this.buttonReturnHome = new ButtonComponent("Back to Home");
+		this.buttonLogin = new ButtonComponent("Login");
 		
 		this.panelButtonForm.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		

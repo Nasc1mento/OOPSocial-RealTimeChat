@@ -13,6 +13,7 @@ public abstract class UserChat {
 	
 	
 	public static void unsetUserChat() {
+		UserChat.id = -1;
 		UserChat.name = null;
 	}
 }

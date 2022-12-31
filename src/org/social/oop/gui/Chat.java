@@ -8,15 +8,10 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -24,6 +19,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.text.DefaultCaret;
 
+import org.social.oop.gui.components.ButtonComponent;
+import org.social.oop.gui.components.FrameComponent;
 import org.social.oop.model.Message;
 import org.social.oop.persistence.MessageDAO;
 import org.social.oop.session.UserChat;
@@ -32,7 +29,7 @@ import org.social.oop.socket.SocketClient;
 
 import io.socket.emitter.Emitter.Listener;
 
-public class Chat extends JFrame{
+public class Chat extends FrameComponent{
 	
 	private JTextField messageBox; 
 	private JTextArea chatBox;
@@ -48,13 +45,9 @@ public class Chat extends JFrame{
 	
 	
 	public Chat() {
-		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-		this.setLayout(new BorderLayout());
-		this.setResizable(false);
+		
 		this.setTitle("OOPSocial/Chat/"+UserChat.name);
-		this.setBounds(250,250,0,0);
-		this.setSize(500,400);
-		this.setVisible(true);
+		
 		this.chat();
 		this.loadHistory();
 		this.addMessageToChatBox();
@@ -73,14 +66,14 @@ public class Chat extends JFrame{
 		this.caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		
         this.southPanelChat = new JPanel();
-        this.southPanelChat.setBackground(Color.GRAY);
+        this.southPanelChat.setBackground(Color.LIGHT_GRAY);
         this.southPanelChat.setLayout(new GridBagLayout());
 
         
         this.messageBox.requestFocusInWindow();
 
-        this.sendMessage = new JButton("Send Message");
-        this.back = new JButton("Back");
+        this.sendMessage = new ButtonComponent("Send Message");
+        this.back = new ButtonComponent("Back");
         
         this.sendMessage.addActionListener(new SendMessageListener());
         this.back.addActionListener(new DashboardListener());
@@ -127,7 +120,7 @@ public class Chat extends JFrame{
 	
 	public void loadHistory() {
 		
-		this.messages = MessageDAO.getInstance().listMessage(UserSession.id, UserChat.id);
+		this.messages = MessageDAO.getInstance().getAllMessage(UserSession.id, UserChat.id);
 			for (Message message: messages) {
 				chatBox.append("<"+UserSession.name+" "+message.getDate()+">: "+ message.getContent()+"\n");
 			}
@@ -138,7 +131,7 @@ public class Chat extends JFrame{
 		public void actionPerformed(ActionEvent event) {
 			
             if (messageBox.getText().length() >= 1) {
-            	SocketClient.socket.emit("message", "<"+UserSession.name+" "+ new Date()+">: "+ messageBox.getText().trim());
+            	SocketClient.socket.emit("message", "<"+UserSession.name+" "+java.sql.Date.valueOf(java.time.LocalDate.now())+">: "+ messageBox.getText().trim());
             	
 				MessageDAO.getInstance().
 					createMessage(new Message(0,messageBox.getText() , UserSession.id , 

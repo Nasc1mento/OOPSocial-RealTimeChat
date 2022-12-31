@@ -1,19 +1,20 @@
 package org.social.oop.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class Home extends JFrame{
+import org.social.oop.gui.components.ButtonComponent;
+import org.social.oop.gui.components.FrameComponent;
+
+public class Home extends FrameComponent{
 	
 	private JButton buttonLoginPage;
 	private JButton buttonRegisterPage;
@@ -23,25 +24,22 @@ public class Home extends JFrame{
 	
 	
 	public Home() {
-		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-		this.setLayout(new BorderLayout());
-		this.setResizable(false);
 		this.setTitle("OOPSocial/Home");
-		this.setBounds(250,250,0,0);
-		this.setSize(500,400);
-		
-		this.setVisible(true);
 		
 		this.createRouteButtons();
 		this.createWelcome();
 	}
 	
 	public void createRouteButtons() {
+
 		
 		this.panelRouteButtons = new JPanel();
 		this.panelRouteButtons.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-		this.buttonLoginPage = new JButton("Sign in");
-		this.buttonRegisterPage = new JButton("Sign up");
+		
+		this.buttonLoginPage = new ButtonComponent("Sign up");
+		this.buttonRegisterPage = new ButtonComponent("Sign in");
+		
+		
 		
 		this.buttonLoginPage.addActionListener(new LoginListener());
 		this.buttonRegisterPage.addActionListener(new RegisterListener());

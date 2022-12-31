@@ -31,5 +31,5 @@ public interface IUserPersistence {
 		
 		public void authUser(User user) throws UserNotRegisteredException, EmailFieldNotFilledException, PasswordNotMatchException;
 		
-		public ArrayList<User> listUser();
+		public ArrayList<User> getAllUsers();
 }

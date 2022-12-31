@@ -7,14 +7,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import org.social.oop.gui.components.ButtonComponent;
+import org.social.oop.gui.components.FrameComponent;
 import org.social.oop.session.UserSession;
 
-public class Dashboard extends JFrame {
+public class Dashboard extends FrameComponent {
 	
 	public JLabel labelDashboard;
 	public JPanel panelButton;
@@ -28,13 +29,9 @@ public class Dashboard extends JFrame {
 	private JButton listUsersButton;
 	
 	public Dashboard() {
-		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-		this.setLayout(new BorderLayout());
-		this.setResizable(false);
+		
 		this.setTitle("OOPSocial/Dashboard");
-		this.setBounds(250,250,0,0);
-		this.setSize(500,400);
-		this.setVisible(true);
+		
 		this.createButton();
 		this.showUser();
 		this.showUserOptions();
@@ -79,8 +76,8 @@ public class Dashboard extends JFrame {
 		this.panelUserOptions = new JPanel();
 		this.panelUserOptions.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
-		this.buttonEditProfile = new JButton("Edit profile");
-		this.buttonLogout = new JButton("Logout");
+		this.buttonEditProfile = new ButtonComponent("Edit profile");
+		this.buttonLogout = new ButtonComponent("Logout");
 		
 		this.buttonLogout.addActionListener(new LogoutListener());
 		this.buttonEditProfile.addActionListener(new EditProfileListener ());
@@ -100,7 +97,7 @@ public class Dashboard extends JFrame {
 	
 		
 		
-		this.listUsersButton = new JButton("List users");
+		this.listUsersButton = new ButtonComponent("List users");
 		this.generalOptionPanel.add(listUsersButton);
 		this.listUsersButton.addActionListener(new UserListListener());
 		
