@@ -6,10 +6,10 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -46,14 +46,15 @@ public class Chat extends FrameComponent{
 	
 	public Chat() {
 		
-		this.setTitle("OOPSocial/Chat/"+UserChat.name);
 		
+		this.setTitle("OOPSocial/Chat/"+UserChat.name);
 		this.chat();
 		this.loadHistory();
 		this.addMessageToChatBox();
+		
+		
 	}
-	
-	
+
 	public void chat() {
 		
 		
@@ -104,7 +105,7 @@ public class Chat extends FrameComponent{
 
         this.mainPanelChat.add(BorderLayout.SOUTH, this.southPanelChat);
 
-        this.add(mainPanelChat);
+        this.add(new Panel().add(mainPanelChat));
 	}
 	
 	public void addMessageToChatBox() {
@@ -121,8 +122,8 @@ public class Chat extends FrameComponent{
 	public void loadHistory() {
 		
 		this.messages = MessageDAO.getInstance().getAllMessage(UserSession.id, UserChat.id);
-			for (Message message: messages) {
-				chatBox.append("<"+UserSession.name+" "+message.getDate()+">: "+ message.getContent()+"\n");
+			for (Message message: this.messages) {
+				this.chatBox.append("<"+UserSession.name+" "+message.getDate()+">: "+ message.getContent()+"\n");
 			}
 	}
 	

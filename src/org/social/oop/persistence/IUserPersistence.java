@@ -1,6 +1,7 @@
 package org.social.oop.persistence;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.social.oop.exception.EmailAlreadyRegisteredException;
 import org.social.oop.exception.EmailFieldNotFilledException;
@@ -31,5 +32,10 @@ public interface IUserPersistence {
 		
 		public void authUser(User user) throws UserNotRegisteredException, EmailFieldNotFilledException, PasswordNotMatchException;
 		
-		public ArrayList<User> getAllUsers();
+		public ArrayList<User> listUsers();
+		
+		
+		public List<String> listUsersName();
+		
+		
 }

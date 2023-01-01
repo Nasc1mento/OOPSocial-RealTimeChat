@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -152,7 +153,7 @@ public class UserDAO implements IUserPersistence{
 		else if (! matcherPassword.matches())
 			throw new PasswordInvalidException("Invalid password");
 		else if (! matcherPhone.matches())
-			throw new PhoneNotValidException("Invalid phone number. Try (XX) XXXX-XXXX or XXXXX-XXXX");
+			throw new PhoneNotValidException("Invalid phone number. Try (XX) XXXXX-XXXX");
 		else {
 			try {
 				PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
@@ -198,7 +199,7 @@ public class UserDAO implements IUserPersistence{
 		}
 	}
 	@Override
-	public ArrayList<User> getAllUsers() {
+	public ArrayList<User> listUsers() {
 		ArrayList<User> users = new ArrayList<User>();
 		
 		try {
@@ -220,7 +221,25 @@ public class UserDAO implements IUserPersistence{
 		return users;
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(UserDAO.getInstance().getAllUsers().get(1).getId());
+	@Override
+	public List<String> listUsersName() {
+		// TODO Auto-generated method stub
+		ArrayList<String> users = new ArrayList<String>();
+		
+		try {
+			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
+					prepareStatement("SELECT * FROM OS_USERS WHERE USR_ID != ?;");
+			preparedStatement.setInt(1, UserSession.id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				String name = resultSet.getString("USR_NAME");
+				users.add(name);
+			}
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}	
+		return users;
 	}
 }

@@ -8,7 +8,6 @@ public abstract class UserChat {
 	public static void setUserChat(int id, String name) {
 		UserChat.id = id;
 		UserChat.name = name;
-		
 	}
 	
 	
