@@ -19,12 +19,13 @@ import javax.swing.SwingUtilities;
 import org.social.oop.exception.EmailFieldNotFilledException;
 import org.social.oop.exception.PasswordNotMatchException;
 import org.social.oop.exception.UserNotRegisteredException;
-import org.social.oop.gui.components.ButtonComponent;
-import org.social.oop.gui.components.FrameComponent;
+import org.social.oop.gui.shared.SharedButton;
+import org.social.oop.gui.shared.SharedFrame;
 import org.social.oop.model.User;
 import org.social.oop.persistence.UserDAO;
+import org.social.oop.socket.SocketClient;
 
-public class Login extends FrameComponent{
+public class Login extends SharedFrame{
 	
 	private JButton buttonLogin;
 	private JButton buttonReturnHome;
@@ -73,8 +74,8 @@ public class Login extends FrameComponent{
 	
 	public void createButtonsForm() {
 		this.panelButtonForm = new JPanel();
-		this.buttonReturnHome = new ButtonComponent("Back to Home");
-		this.buttonLogin = new ButtonComponent("Login");
+		this.buttonReturnHome = new SharedButton("Back to Home");
+		this.buttonLogin = new SharedButton("Login");
 		
 		this.panelButtonForm.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		
@@ -101,6 +102,7 @@ public class Login extends FrameComponent{
 						public void run() {
 							dispose();
 							new Dashboard();
+							 SocketClient.open();
 						}
 					});
 			}catch(UserNotRegisteredException | EmailFieldNotFilledException | PasswordNotMatchException exception) {

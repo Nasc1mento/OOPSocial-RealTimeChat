@@ -11,11 +11,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import org.social.oop.gui.components.ButtonComponent;
-import org.social.oop.gui.components.FrameComponent;
+import org.social.oop.gui.shared.SharedButton;
+import org.social.oop.gui.shared.SharedFrame;
 import org.social.oop.session.UserSession;
 
-public class Dashboard extends FrameComponent {
+public class Dashboard extends SharedFrame {
 	
 	public JLabel labelDashboard;
 	public JPanel panelButton;
@@ -27,6 +27,7 @@ public class Dashboard extends FrameComponent {
 	private JButton buttonLogout;
 	private JPanel generalOptionPanel;
 	private JButton listUsersButton;
+	private JButton listRooms;
 	
 	public Dashboard() {
 		
@@ -76,8 +77,8 @@ public class Dashboard extends FrameComponent {
 		this.panelUserOptions = new JPanel();
 		this.panelUserOptions.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
-		this.buttonEditProfile = new ButtonComponent("Edit profile");
-		this.buttonLogout = new ButtonComponent("Logout");
+		this.buttonEditProfile = new SharedButton("Edit profile");
+		this.buttonLogout = new SharedButton("Logout");
 		
 		this.buttonLogout.addActionListener(new LogoutListener());
 		this.buttonEditProfile.addActionListener(new EditProfileListener ());
@@ -97,9 +98,15 @@ public class Dashboard extends FrameComponent {
 	
 		
 		
-		this.listUsersButton = new ButtonComponent("List users");
+		this.listUsersButton = new SharedButton("List users");
+		this.listRooms = new SharedButton("List rooms");
+		
+		
 		this.generalOptionPanel.add(listUsersButton);
+		this.generalOptionPanel.add(listRooms);		
+				
 		this.listUsersButton.addActionListener(new UserListListener());
+		this.listRooms.addActionListener(new RoomListListener());
 		
 		this.getContentPane().add(this.generalOptionPanel,BorderLayout.CENTER);
 	}
@@ -162,7 +169,7 @@ public class Dashboard extends FrameComponent {
 		
 	}
 	
-	public class UserListListener implements ActionListener{
+	public class UserListListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -173,10 +180,20 @@ public class Dashboard extends FrameComponent {
 				public void run() {
 					// TODO Auto-generated method stub
 					dispose();
-					new ShowUsers();
-					
+					new ShowUsers();					
 				}
 			});
+		}
+		
+	}
+	
+	public class RoomListListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			dispose();
+			new ShowRooms();
 		}
 		
 	}

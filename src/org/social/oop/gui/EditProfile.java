@@ -1,6 +1,7 @@
 package org.social.oop.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,13 +23,13 @@ import org.social.oop.exception.PasswordInvalidException;
 import org.social.oop.exception.PhoneFieldNotFilledException;
 import org.social.oop.exception.PhoneNotValidException;
 import org.social.oop.exception.UserAlreadyRegisteredException;
-import org.social.oop.gui.components.ButtonComponent;
-import org.social.oop.gui.components.FrameComponent;
+import org.social.oop.gui.shared.SharedButton;
+import org.social.oop.gui.shared.SharedFrame;
 import org.social.oop.model.User;
 import org.social.oop.persistence.UserDAO;
 import org.social.oop.session.UserSession;
 
-public class EditProfile extends FrameComponent{
+public class EditProfile extends SharedFrame{
 
 	
 	private JPanel panelForm;
@@ -66,7 +67,7 @@ public class EditProfile extends FrameComponent{
 		this.labelUsername = new JLabel("Username: ");
 		this.labelEmail = new JLabel("Email: ");
 		this.labelPhone = new JLabel("Phone: ");
-		this.labelPassword = new JLabel("Password: " );
+		this.labelPassword = new JLabel("Password: ");
 		
 		
 		
@@ -92,9 +93,11 @@ public class EditProfile extends FrameComponent{
 	public void createButtonsForm() {
 		
 		this.panelButtonForm = new JPanel();
-		this.buttonSubmitEditProfile = new ButtonComponent("Update");
-		this.buttonBack = new ButtonComponent("Back");
-		this.deleteAccountButton = new ButtonComponent("Delete Account");
+		this.buttonSubmitEditProfile = new SharedButton("Update");
+		this.buttonBack = new SharedButton("Back");
+		this.deleteAccountButton = new SharedButton("Delete Account");
+		
+		this.deleteAccountButton.setBackground(Color.red);
 			
 		this.panelButtonForm.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 			

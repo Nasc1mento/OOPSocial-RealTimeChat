@@ -11,10 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import org.social.oop.gui.components.ButtonComponent;
-import org.social.oop.gui.components.FrameComponent;
+import org.social.oop.gui.shared.SharedButton;
+import org.social.oop.gui.shared.SharedFrame;
 
-public class Home extends FrameComponent{
+public class Home extends SharedFrame{
 	
 	private JButton buttonLoginPage;
 	private JButton buttonRegisterPage;
@@ -36,8 +36,8 @@ public class Home extends FrameComponent{
 		this.panelRouteButtons = new JPanel();
 		this.panelRouteButtons.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		
-		this.buttonLoginPage = new ButtonComponent("Sign up");
-		this.buttonRegisterPage = new ButtonComponent("Sign in");
+		this.buttonLoginPage = new SharedButton("Sign up");
+		this.buttonRegisterPage = new SharedButton("Sign in");
 		
 		
 		

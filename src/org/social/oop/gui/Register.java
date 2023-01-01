@@ -24,14 +24,14 @@ import org.social.oop.exception.PasswordInvalidException;
 import org.social.oop.exception.PhoneFieldNotFilledException;
 import org.social.oop.exception.PhoneNotValidException;
 import org.social.oop.exception.UserAlreadyRegisteredException;
-import org.social.oop.gui.components.ButtonComponent;
-import org.social.oop.gui.components.FrameComponent;
+import org.social.oop.gui.shared.SharedButton;
+import org.social.oop.gui.shared.SharedFrame;
 import org.social.oop.model.User;
 import org.social.oop.persistence.UserDAO;
 
 
 
-public class Register extends FrameComponent{
+public class Register extends SharedFrame{
 	
 	private JButton buttonRegister;
 	private JButton buttonReturnHome;
@@ -91,8 +91,8 @@ public class Register extends FrameComponent{
 	
 	public void createButtonsForm() {
 		this.panelButtonForm = new JPanel();
-		this.buttonReturnHome = new ButtonComponent("Back to Home");
-		this.buttonRegister = new ButtonComponent("Register");
+		this.buttonReturnHome = new SharedButton("Back to Home");
+		this.buttonRegister = new SharedButton("Register");
 		
 		this.panelButtonForm.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		

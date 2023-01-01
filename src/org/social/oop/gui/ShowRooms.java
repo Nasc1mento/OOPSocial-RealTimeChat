@@ -24,31 +24,33 @@ import javax.swing.event.DocumentListener;
 
 import org.social.oop.gui.shared.SharedButton;
 import org.social.oop.gui.shared.SharedFrame;
-import org.social.oop.model.User;
-import org.social.oop.persistence.UserDAO;
-import org.social.oop.session.UserChat;
-import org.social.oop.socket.SocketClient;
+import org.social.oop.model.Room;
+import org.social.oop.persistence.RoomDAO;
+import org.social.oop.session.RoomChatSession;
+import org.social.oop.session.UserSession;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 
-public class ShowUsers extends SharedFrame{
-	
-	private List<String> usersName;
-	private ArrayList<User> users;
-	private JScrollPane scrollPaneUsers;
-	private JList<String> userList;
+public class ShowRooms extends SharedFrame{
+	private List<String> roomsTitle;
+	private ArrayList<Room> rooms;
+	private JScrollPane scrollPaneRooms;
+	private JList<String> userJList;
 	private JPanel panelButtonForm;
 	private JButton buttonBack;
 	private JTextField textfieldFilter;
-	private DefaultListModel <String> listModelName = new DefaultListModel<String>();
+	private DefaultListModel <String> listModelTitle = new DefaultListModel<String>();
 	private JLabel labelFilter;
+	private JButton buttonCreate;
+	private JLabel labelCreate;
+	private JTextField textfieldCreate;
 	
 
 	
-	public ShowUsers() {
+	public ShowRooms() {
 		
-		this.setTitle("OOPSocial/Users");
+		this.setTitle("OOPSocial/Rooms");
 		this.bottom();
 		this.showUsersList();
 		
@@ -59,26 +61,31 @@ public class ShowUsers extends SharedFrame{
 		
 		
 		
-		this.userList= new JList(getFilteredList());
-		this.scrollPaneUsers = new JScrollPane(userList);
+		this.userJList= new JList(getFilteredList());
+		this.scrollPaneRooms = new JScrollPane(userJList);
         
-		this.userList.setFont(new Font("Serif", Font.BOLD, 15));
+		this.userJList.setFont(new Font("Serif", Font.BOLD, 15));
 		
-		this.userList.setSelectionBackground(Color.LIGHT_GRAY);
-        this.userList.addMouseListener(new ChatListener());
+		this.userJList.setSelectionBackground(Color.LIGHT_GRAY);
+        this.userJList.addMouseListener(new ChatListener());
         
         
         
-        getContentPane().add(this.scrollPaneUsers,BorderLayout.CENTER);
+        getContentPane().add(this.scrollPaneRooms,BorderLayout.CENTER);
     }
         
 	
 	public void bottom() {
 		this.panelButtonForm = new JPanel();
 		this.buttonBack = new SharedButton("Back");
+		this.buttonCreate = new SharedButton("Create");
+		this.labelCreate = new JLabel("Title: ");
 		this.labelFilter = new JLabel("Filter: ");
 		
-		this.textfieldFilter = new JTextField(10);
+		
+		this.textfieldFilter = new JTextField(7);
+		this.textfieldCreate = new JTextField(7);
+		
 		this.textfieldFilter.getDocument().addDocumentListener(new DocumentListener() {
 			
 			@Override
@@ -95,10 +102,14 @@ public class ShowUsers extends SharedFrame{
 		this.panelButtonForm.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 			
 		this.buttonBack.addActionListener(new DashBoardListener());
+		this.buttonCreate.addActionListener(new CreateRoomListener());
 			
 		this.panelButtonForm.add(buttonBack);
 		this.panelButtonForm.add(labelFilter);
 		this.panelButtonForm.add(textfieldFilter);
+		this.panelButtonForm.add(labelCreate);
+		this.panelButtonForm.add(textfieldCreate);
+		this.panelButtonForm.add(buttonCreate);
 		
 		
 		getContentPane().add(this.panelButtonForm, 
@@ -108,8 +119,8 @@ public class ShowUsers extends SharedFrame{
 	
 	
 	public DefaultListModel<String> getFilteredList() {
-		this.usersName = UserDAO.getInstance().listUsersName();
-		List<String> filteredList = FluentIterable.from(usersName)
+		this.roomsTitle = RoomDAO.getInstance().listRoomsTitle();
+		List<String> filteredList = FluentIterable.from(roomsTitle)
 		        .filter(new Predicate<String>() {
 		            @Override
 		            public boolean apply(String s) {
@@ -117,12 +128,12 @@ public class ShowUsers extends SharedFrame{
 		            }
 		        }).toList();
 		
-		this.listModelName.removeAllElements();
+		this.listModelTitle.removeAllElements();
 		for (String name:filteredList) {
-			this.listModelName.addElement(name);	
+			this.listModelTitle.addElement(name);	
 		}
 		
-		return this.listModelName;
+		return this.listModelTitle;
 	}
 	
 	public class DashBoardListener implements ActionListener{
@@ -154,17 +165,33 @@ public class ShowUsers extends SharedFrame{
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						users = UserDAO.getInstance().listUsers();
-						int userChatId = users.get(userList.getSelectedIndex()).getId();
-						String userChatName = userList.getSelectedValue();
-						UserChat.setUserChat(userChatId,userChatName);
+						rooms = RoomDAO.getInstance().listRooms();
+						int roomChatId = rooms.get(userJList.getSelectedIndex()).getId();
+						int roomAdminId = rooms.get(userJList.getSelectedIndex()).getAdminId();
+						String roomChatTitle = userJList.getSelectedValue();
 						
+						RoomChatSession.setRoomChat(roomChatId, roomAdminId, roomChatTitle);						
 						dispose();
-	        	        new Chat();
+	        	        new RoomChat();
 					}
 				});
     	    }
     	}
+	}
+	
+	public class CreateRoomListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			int adminId = UserSession.id;
+			String title = textfieldCreate.getText();
+			Room room = new Room(adminId, title);
+			RoomDAO.getInstance().createRoom(room);
+			getFilteredList();
+			textfieldCreate.setText("");
+		}
+		
 	}
 	
 	public static void main(String[] args) {

@@ -7,10 +7,13 @@ import java.util.Objects;
 public class Message {
 	
 	private int id;
-	private String content;
 	private int user1SenderId;
 	private int user2SenderId;
+	private int groupId;
+	private String content;
+	
 	private Date date;
+	
 	
 	
 	
@@ -23,6 +26,15 @@ public class Message {
 		this.user1SenderId = senderId;
 		this.user2SenderId = receptorId;
 		this.date = date;
+	}
+	
+	public Message(int id, int senderId, String content, Date date,  int groupId) {
+		super();
+		this.id = id;
+		this.user1SenderId = senderId;
+		this.content = content;
+		this.date = date;
+		this.groupId = groupId;
 	}
 	
 	public int getId() {
@@ -64,6 +76,17 @@ public class Message {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
+	
+	
+	public int getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(int groupId) {
+		this.groupId = groupId;
+	}
+
 	@Override
 	public String toString() {
 		return "Message [id=" + id + ", content=" + content + ", senderId=" + user1SenderId + ", receptorId=" + user2SenderId

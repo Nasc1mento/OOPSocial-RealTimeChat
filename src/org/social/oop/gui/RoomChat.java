@@ -22,21 +22,22 @@ import javax.swing.text.DefaultCaret;
 import org.social.oop.gui.shared.SharedButton;
 import org.social.oop.gui.shared.SharedFrame;
 import org.social.oop.model.Message;
-import org.social.oop.persistence.MessageDAO;
+import org.social.oop.persistence.MessageRoomDAO;
+import org.social.oop.session.RoomChatSession;
 import org.social.oop.session.UserChat;
 import org.social.oop.session.UserSession;
 import org.social.oop.socket.SocketClient;
 
 import io.socket.emitter.Emitter.Listener;
 
-public class Chat extends SharedFrame{
-	
+public class RoomChat extends SharedFrame{
 	private JTextField messageBox; 
 	private JTextArea chatBox;
 	private JPanel mainPanelChat;
 	private JPanel southPanelChat;
 	private JButton sendMessage;
 	private JButton back;
+	private JButton deleteRoom;
 	private GridBagConstraints left;
 	private GridBagConstraints right;
 	private DefaultCaret caret;
@@ -44,10 +45,10 @@ public class Chat extends SharedFrame{
 	private ArrayList<Message> messages;
 	
 	
-	public Chat() {
+	public RoomChat() {
 		
 		
-		this.setTitle("OOPSocial/Chat/"+UserChat.name);
+		this.setTitle("OOPSocial/Room/"+RoomChatSession.title);
 		this.chat();
 		this.loadHistory();
 		this.addMessageToChatBox();
@@ -66,6 +67,7 @@ public class Chat extends SharedFrame{
 		
 		this.sendMessage = new SharedButton("Send");
         this.back = new SharedButton("Back");
+        
 		
         this.left = new GridBagConstraints();
         this.right = new GridBagConstraints();
@@ -82,9 +84,14 @@ public class Chat extends SharedFrame{
 
         
         this.messageBox.requestFocusInWindow();
+        
+        
 
         this.sendMessage.addActionListener(new SendMessageListener());
-        this.back.addActionListener(new DashboardListener());
+        this.back.addActionListener(new ShowRoomsListener());
+        
+        
+        
 
         this.chatBox.setEditable(false);
         this.chatBox.setFont(new Font("Serif", Font.PLAIN, 15));
@@ -107,7 +114,14 @@ public class Chat extends SharedFrame{
         this.southPanelChat.add(this.messageBox, this.left);
         this.southPanelChat.add(this.sendMessage, this.right);
         this.southPanelChat.add(this.back, this.right);
-
+        
+        if (RoomChatSession.adminId == UserSession.id) {
+        	
+        	this.deleteRoom = new SharedButton("Delete Room");
+        	this.deleteRoom.setBackground(Color.RED);
+        	this.southPanelChat.add(this.deleteRoom, this.right);
+        }
+        
         this.mainPanelChat.add(BorderLayout.SOUTH, this.southPanelChat);
 
         this.add(new Panel().add(mainPanelChat));
@@ -127,7 +141,7 @@ public class Chat extends SharedFrame{
 	
 	public void loadHistory() {
 		
-		this.messages = MessageDAO.getInstance().getAllMessage(UserSession.id, UserChat.id);
+		this.messages = MessageRoomDAO.getInstance().getAllMessage(RoomChatSession.id);
 			for (Message message: this.messages) {
 				this.chatBox.append("<"+UserSession.name+" "+message.getDate()+">: "+ message.getContent()+"\n");
 			}
@@ -140,9 +154,11 @@ public class Chat extends SharedFrame{
             if (messageBox.getText().length() >= 1) {
             	SocketClient.socket.emit("message", "<"+UserSession.name+" "+java.sql.Date.valueOf(java.time.LocalDate.now())+">: "+ messageBox.getText().trim());
             	
-				MessageDAO.getInstance().
-					createMessage(new Message(0,messageBox.getText() , UserSession.id , 
-						UserChat.id,  java.sql.Date.valueOf(java.time.LocalDate.now())));
+            	
+	
+				MessageRoomDAO.getInstance().
+					createMessage(new Message(0, UserSession.id , messageBox.getText(), 
+						java.sql.Date.valueOf(java.time.LocalDate.now()), RoomChatSession.id));
 					
             	messageBox.setText("");
             	messageBox.grabFocus();	
@@ -151,7 +167,7 @@ public class Chat extends SharedFrame{
         }
     }
 	
-	public class DashboardListener implements ActionListener{
+	public class ShowRoomsListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -163,7 +179,7 @@ public class Chat extends SharedFrame{
 					// TODO Auto-generated method stub
 					dispose();
 					UserChat.unsetUserChat();
-					new ShowUsers();
+					new ShowRooms();
 				}
 			});
 		}	

@@ -1,4 +1,4 @@
-package org.social.oop.gui.components;
+package org.social.oop.gui.shared;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -9,16 +9,16 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-public class ButtonComponent extends JButton{
+public class SharedButton extends JButton{
 	
 	private Border line;
 	private Border margin;
 	private Border compound;
 	
-	public ButtonComponent(String text) {
+	public SharedButton(String text) {
 		super(text);
 		
-//		this.line = new LineBorder(Color.BLACK);
+		this.line = new LineBorder(null);
 		this.margin = new EmptyBorder(5, 15, 5, 15);
 		this.compound = new CompoundBorder(line, margin);
 		

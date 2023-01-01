@@ -1,12 +1,12 @@
-package org.social.oop.gui.components;
+package org.social.oop.gui.shared;
 
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
-public class FrameComponent extends JFrame{
+public class SharedFrame extends JFrame{
 	
-	public FrameComponent() {
+	public SharedFrame() {
 		super();
 		
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
