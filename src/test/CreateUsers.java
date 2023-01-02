@@ -57,8 +57,8 @@ public class CreateUsers {
 		email3 = "user3@email.com";
 		
 		phone1 = "(99) 99999-9999";
-		phone2 = "(88) 88888-8888";
-		phone3 = "(77) 77777-7777";
+		phone2 = "(88) 99999-9999";
+		phone3 = "(77) 99999-9999";
 		
 		password1 = "User@2022";
 		password2 = "User@2022";

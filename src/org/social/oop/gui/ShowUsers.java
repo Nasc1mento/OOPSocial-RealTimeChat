@@ -27,7 +27,6 @@ import org.social.oop.gui.shared.SharedFrame;
 import org.social.oop.model.User;
 import org.social.oop.persistence.UserDAO;
 import org.social.oop.session.UserChat;
-import org.social.oop.socket.SocketClient;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;

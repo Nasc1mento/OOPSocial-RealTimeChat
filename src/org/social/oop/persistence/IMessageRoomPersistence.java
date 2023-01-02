@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.social.oop.model.Message;
 
-public interface IMessageGroupPersistence {
+public interface IMessageRoomPersistence {
 	
 	public void createMessage(Message message);
 	

@@ -166,11 +166,16 @@ public class RoomChat extends SharedFrame{
 	public void loadHistory() {
 		
 		this.messages = MessageRoomDAO.getInstance().getAllMessage(RoomChatSession.id);
-//		this.users = UserDAO.getInstance().listUsers();
+		this.users = UserDAO.getInstance().listUsers();
 		
 			
 			for (Message message: this.messages) {
-				this.chatBox.append("<"+UserSession.name+" "+message.getDate()+">: "+ message.getContent()+"\n");
+				String sender = new String();				
+				User user = new User();
+				user.setId(message.getSenderId());				
+				int id = users.indexOf(user);	
+				sender = users.get(id).getName();				
+				this.chatBox.append("<"+sender+" "+message.getDate()+">: "+ message.getContent()+"\n");
 			}
 			
 	}
@@ -206,8 +211,8 @@ public class RoomChat extends SharedFrame{
 				public void run() {
 					// TODO Auto-generated method stub
 					dispose();
-					UserChat.unsetUserChat();
 					new ShowRooms();
+					UserChat.unsetUserChat();
 				}
 			});
 		}	

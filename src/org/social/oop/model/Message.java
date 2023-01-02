@@ -53,11 +53,11 @@ public class Message {
 		this.content = content;
 	}
 	
-	public int getSenderId() {
+	public Integer getSenderId() {
 		return user1SenderId;
 	}
 	
-	public void setSenderId(int senderId) {
+	public void setSenderId(Integer senderId) {
 		this.user1SenderId = senderId;
 	}
 	

@@ -8,7 +8,7 @@ import java.util.Date;
 
 import org.social.oop.model.Message;
 
-public class MessageRoomDAO implements IMessageGroupPersistence {
+public class MessageRoomDAO implements IMessageRoomPersistence {
 
 	
 	

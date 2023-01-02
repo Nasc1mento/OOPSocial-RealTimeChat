@@ -204,8 +204,7 @@ public class UserDAO implements IUserPersistence{
 		
 		try {
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
-					prepareStatement("SELECT * FROM OS_USERS WHERE USR_ID != ?;");
-			preparedStatement.setInt(1, UserSession.id);
+					prepareStatement("SELECT * FROM OS_USERS;");
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
