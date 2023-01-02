@@ -42,6 +42,8 @@ public class MessageDAO implements IMessagePersistence{
 			preparedStatement.setInt(4, message.getReceptorId());
 			preparedStatement.setDate(5,  java.sql.Date.valueOf(java.time.LocalDate.now()));
 			preparedStatement.execute();
+			System.out.println(message.getSenderId());
+			System.out.println(message.getReceptorId());
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -55,7 +57,7 @@ public class MessageDAO implements IMessagePersistence{
 		
 		try {
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
-					prepareStatement("SELECT * FROM OS_MESSAGES WHERE MSG_USR_ID_SOURCE = ? AND MSG_USR_ID_DESTINY = ? OR MSG_USR_ID_SOURCE = ? AND MSG_USR_ID_DESTINY = ?");
+					prepareStatement("SELECT * FROM OS_MESSAGES WHERE MSG_USR_ID_SOURCE = ? AND MSG_USR_ID_DESTINY = ? OR MSG_USR_ID_SOURCE = ? AND MSG_USR_ID_DESTINY = ?;");
 				preparedStatement.setInt(1, user1Id);
 				preparedStatement.setInt(2, user2Id);
 				preparedStatement.setInt(3, user2Id);

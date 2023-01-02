@@ -155,8 +155,10 @@ public class RoomChat extends SharedFrame{
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						dispose();
-						new ShowRooms();
+						
+							dispose();
+							new ShowRooms();
+												
 					}
 				});
 			}
@@ -223,8 +225,18 @@ public class RoomChat extends SharedFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			RoomDAO.getInstance().deleteRoom();
-			SocketClient.socket.emit("deleteroom");
+			
+//			
+			SwingUtilities.invokeLater(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					
+						RoomDAO.getInstance().deleteRoom();
+						SocketClient.socket.emit("deleteroom");
+				}
+			});
 		}
 		
 	}

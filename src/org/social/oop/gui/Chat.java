@@ -22,7 +22,9 @@ import javax.swing.text.DefaultCaret;
 import org.social.oop.gui.shared.SharedButton;
 import org.social.oop.gui.shared.SharedFrame;
 import org.social.oop.model.Message;
+import org.social.oop.model.User;
 import org.social.oop.persistence.MessageDAO;
+import org.social.oop.persistence.UserDAO;
 import org.social.oop.session.UserChat;
 import org.social.oop.session.UserSession;
 import org.social.oop.socket.SocketClient;
@@ -42,7 +44,7 @@ public class Chat extends SharedFrame{
 	private DefaultCaret caret;
 	
 	private ArrayList<Message> messages;
-	
+	private ArrayList<User> users;
 	
 	public Chat() {
 		
@@ -127,9 +129,19 @@ public class Chat extends SharedFrame{
 	
 	public void loadHistory() {
 		
+		
+		
 		this.messages = MessageDAO.getInstance().getAllMessage(UserSession.id, UserChat.id);
+		this.users = UserDAO.getInstance().listUsers();
 			for (Message message: this.messages) {
-				this.chatBox.append("<"+UserSession.name+" "+message.getDate()+">: "+ message.getContent()+"\n");
+				
+				String sender;
+				User user = new User();
+				user.setId(message.getSenderId());
+				int id = users.indexOf(user);
+				sender = users.get(id).getName();
+				
+				this.chatBox.append("<"+sender+" "+message.getDate()+">: "+ message.getContent()+"\n");
 			}
 	}
 	
@@ -138,8 +150,7 @@ public class Chat extends SharedFrame{
 		public void actionPerformed(ActionEvent event) {
 			
             if (messageBox.getText().length() >= 1) {
-            	SocketClient.socket.emit("message", "<"+UserSession.name+" "+java.sql.Date.valueOf(java.time.LocalDate.now())+">: "+ messageBox.getText().trim());
-            	
+            	SocketClient.socket.emit("message", "<"+UserSession.name+" "+java.sql.Date.valueOf(java.time.LocalDate.now())+">: "+ messageBox.getText().trim());            	
 				MessageDAO.getInstance().
 					createMessage(new Message(0,messageBox.getText() , UserSession.id , 
 						UserChat.id,  java.sql.Date.valueOf(java.time.LocalDate.now())));

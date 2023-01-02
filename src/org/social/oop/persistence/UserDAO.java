@@ -205,6 +205,7 @@ public class UserDAO implements IUserPersistence{
 		try {
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
 					prepareStatement("SELECT * FROM OS_USERS;");
+//			preparedStatement.setInt(1, UserSession.id);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
@@ -240,5 +241,14 @@ public class UserDAO implements IUserPersistence{
 			e.printStackTrace();
 		}	
 		return users;
+	}
+	
+	
+	public static void main(String[] args) {
+		User user = new User();
+		user.setId(2);
+		ArrayList<User> users = UserDAO.getInstance().listUsers();
+		int id = users.indexOf(user);
+		System.out.println(users.get(id).getName());
 	}
 }

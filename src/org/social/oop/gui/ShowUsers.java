@@ -27,6 +27,7 @@ import org.social.oop.gui.shared.SharedFrame;
 import org.social.oop.model.User;
 import org.social.oop.persistence.UserDAO;
 import org.social.oop.session.UserChat;
+import org.social.oop.session.UserSession;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
@@ -149,14 +150,17 @@ public class ShowUsers extends SharedFrame{
 						
     	    if (event.getClickCount() == 2){
     	    	
+    	    	users = UserDAO.getInstance().listUsers();
+    	    	users.removeIf(n ->(n.getId() == UserSession.id));   	    		
+    	    	
+    	    	int userChatId = users.get(userList.getSelectedIndex()).getId();
+				String userChatName = userList.getSelectedValue();
+				UserChat.setUserChat(userChatId,userChatName);
+				
     	    	SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						users = UserDAO.getInstance().listUsers();
-						int userChatId = users.get(userList.getSelectedIndex()).getId();
-						String userChatName = userList.getSelectedValue();
-						UserChat.setUserChat(userChatId,userChatName);
 						
 						dispose();
 	        	        new Chat();
