@@ -28,9 +28,12 @@ import org.social.oop.model.Room;
 import org.social.oop.persistence.RoomDAO;
 import org.social.oop.session.RoomChatSession;
 import org.social.oop.session.UserSession;
+import org.social.oop.socket.SocketClient;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
+
+import io.socket.emitter.Emitter.Listener;
 
 public class ShowRooms extends SharedFrame{
 	private List<String> roomsTitle;
@@ -53,7 +56,7 @@ public class ShowRooms extends SharedFrame{
 		this.setTitle("OOPSocial/Rooms");
 		this.bottom();
 		this.showUsersList();
-		
+		this.addRoomListener();
 	}
 	
 
@@ -136,6 +139,17 @@ public class ShowRooms extends SharedFrame{
 		return this.listModelTitle;
 	}
 	
+	public void addRoomListener() {
+		SocketClient.socket.on("createroom", new Listener() {
+			
+			@Override
+			public void call(Object... args) {
+				// TODO Auto-generated method stub
+				getFilteredList();
+			}
+		});
+	}
+	
 	public class DashBoardListener implements ActionListener{
 
 		@Override
@@ -188,7 +202,8 @@ public class ShowRooms extends SharedFrame{
 			String title = textfieldCreate.getText();
 			Room room = new Room(adminId, title);
 			RoomDAO.getInstance().createRoom(room);
-			getFilteredList();
+			
+			SocketClient.socket.emit("createroom");
 			textfieldCreate.setText("");
 		}
 		

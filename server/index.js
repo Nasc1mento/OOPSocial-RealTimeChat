@@ -15,6 +15,14 @@ io.on('connection', (socket) => {
   socket.on('message',(ms) => {
     io.emit('message',ms)
   });
+
+  socket.on('deleteroom',(ms) => {
+    io.emit('deleteroom',ms)
+  });
+
+  socket.on('createroom',(ms) => {
+    io.emit('createroom',ms)
+  });
 });
 
 server.listen(3000, () => {

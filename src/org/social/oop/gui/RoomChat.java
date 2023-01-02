@@ -22,7 +22,10 @@ import javax.swing.text.DefaultCaret;
 import org.social.oop.gui.shared.SharedButton;
 import org.social.oop.gui.shared.SharedFrame;
 import org.social.oop.model.Message;
+import org.social.oop.model.User;
 import org.social.oop.persistence.MessageRoomDAO;
+import org.social.oop.persistence.RoomDAO;
+import org.social.oop.persistence.UserDAO;
 import org.social.oop.session.RoomChatSession;
 import org.social.oop.session.UserChat;
 import org.social.oop.session.UserSession;
@@ -43,6 +46,7 @@ public class RoomChat extends SharedFrame{
 	private DefaultCaret caret;
 	
 	private ArrayList<Message> messages;
+	private ArrayList<User> users;
 	
 	
 	public RoomChat() {
@@ -51,7 +55,8 @@ public class RoomChat extends SharedFrame{
 		this.setTitle("OOPSocial/Room/"+RoomChatSession.title);
 		this.chat();
 		this.loadHistory();
-		this.addMessageToChatBox();
+		this.addMessageListener();
+		this.closeRoomListener();
 		
 		
 	}
@@ -115,10 +120,10 @@ public class RoomChat extends SharedFrame{
         this.southPanelChat.add(this.sendMessage, this.right);
         this.southPanelChat.add(this.back, this.right);
         
-        if (RoomChatSession.adminId == UserSession.id) {
-        	
+        if (RoomChatSession.adminId == UserSession.id) {        	
         	this.deleteRoom = new SharedButton("Delete Room");
         	this.deleteRoom.setBackground(Color.RED);
+        	this.deleteRoom.addActionListener(new DeleteRoomListener());
         	this.southPanelChat.add(this.deleteRoom, this.right);
         }
         
@@ -128,7 +133,7 @@ public class RoomChat extends SharedFrame{
 	}
 	
 	
-	public void addMessageToChatBox() {
+	public void addMessageListener() {
 		
 		SocketClient.socket.on("message", new Listener() {
 			@Override
@@ -139,12 +144,35 @@ public class RoomChat extends SharedFrame{
 		});
 	}
 	
+	public void closeRoomListener() {
+		SocketClient.socket.on("deleteroom", new Listener() {
+			
+			@Override
+			public void call(Object... args) {
+				// TODO Auto-generated method stub
+				SwingUtilities.invokeLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						dispose();
+						new ShowRooms();
+					}
+				});
+			}
+		});
+	}
+	
 	public void loadHistory() {
 		
 		this.messages = MessageRoomDAO.getInstance().getAllMessage(RoomChatSession.id);
+//		this.users = UserDAO.getInstance().listUsers();
+		
+			
 			for (Message message: this.messages) {
 				this.chatBox.append("<"+UserSession.name+" "+message.getDate()+">: "+ message.getContent()+"\n");
 			}
+			
 	}
 	
 	public class SendMessageListener implements ActionListener {
@@ -183,5 +211,16 @@ public class RoomChat extends SharedFrame{
 				}
 			});
 		}	
+	}
+	
+	public class DeleteRoomListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			RoomDAO.getInstance().deleteRoom();
+			SocketClient.socket.emit("deleteroom");
+		}
+		
 	}
 }
