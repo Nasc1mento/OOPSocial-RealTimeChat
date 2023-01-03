@@ -5,7 +5,11 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,6 +25,7 @@ public class Home extends SharedFrame{
 	private JPanel panelRouteButtons;
 	private JPanel panelWelcome;
 	private JLabel labelWelcome;
+	public JPanel panelPresentation;
 	
 	
 	public Home() {
@@ -28,6 +33,7 @@ public class Home extends SharedFrame{
 		
 		this.createRouteButtons();
 		this.createWelcome();
+		this.presentation();
 	}
 	
 	public void createRouteButtons() {
@@ -65,13 +71,20 @@ public class Home extends SharedFrame{
 		this.getContentPane().add(this.panelWelcome, BorderLayout.CENTER);
 	}
 	
+	public void presentation()  {
+		this.panelPresentation = new JPanel();
+		
+		
+	}
+	
 	public class LoginListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			dispose();
+			
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
+					dispose();
 					new Login();
 				}
 			});
@@ -84,11 +97,12 @@ public class Home extends SharedFrame{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			dispose();
+					
 			SwingUtilities.invokeLater(new Runnable() {
 				
 				@Override
 				public void run() {
+					dispose();
 					new Register();
 				}
 			});
