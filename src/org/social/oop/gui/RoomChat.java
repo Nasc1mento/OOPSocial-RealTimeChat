@@ -150,15 +150,17 @@ public class RoomChat extends SharedFrame{
 			@Override
 			public void call(Object... args) {
 				// TODO Auto-generated method stub
+				
 				SwingUtilities.invokeLater(new Runnable() {
 					
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
 						
-							dispose();
-							new ShowRooms();
-												
+						sendMessage.setEnabled(false);
+						chatBox.append("\n ROOM DELETED !!!");
+						chatBox.setEnabled(false);
+						messageBox.setEnabled(false);
 					}
 				});
 			}
@@ -189,9 +191,7 @@ public class RoomChat extends SharedFrame{
             if (messageBox.getText().length() >= 1) {
             	SocketClient.socket.emit("message", "<"+UserSession.name+" "+java.sql.Date.valueOf(java.time.LocalDate.now())+">: "+ messageBox.getText().trim());
             	
-            	
-	
-				MessageRoomDAO.getInstance().
+			MessageRoomDAO.getInstance().
 					createMessage(new Message(0, UserSession.id , messageBox.getText(), 
 						java.sql.Date.valueOf(java.time.LocalDate.now()), RoomChatSession.id));
 					
@@ -235,6 +235,8 @@ public class RoomChat extends SharedFrame{
 					
 						RoomDAO.getInstance().deleteRoom();
 						SocketClient.socket.emit("deleteroom");
+						deleteRoom.setEnabled(false);
+//						SocketClient.socket.off("deleteroom");
 				}
 			});
 		}
