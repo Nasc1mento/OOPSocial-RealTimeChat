@@ -8,6 +8,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import org.social.oop.model.Message;
+import org.social.oop.session.UserChat;
+import org.social.oop.session.UserSession;
 
 public class MessageDAO implements IMessagePersistence{
 	
@@ -51,17 +53,17 @@ public class MessageDAO implements IMessagePersistence{
 	}
 
 	@Override
-	public ArrayList<Message> getAllMessage(int user1Id, int user2Id) {
+	public ArrayList<Message> getAllMessage() {
 		// TODO Auto-generated method stub
 		ArrayList<Message> messages = new ArrayList<>();
 		
 		try {
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
 					prepareStatement("SELECT * FROM OS_MESSAGES WHERE MSG_USR_ID_SOURCE = ? AND MSG_USR_ID_DESTINY = ? OR MSG_USR_ID_SOURCE = ? AND MSG_USR_ID_DESTINY = ?;");
-				preparedStatement.setInt(1, user1Id);
-				preparedStatement.setInt(2, user2Id);
-				preparedStatement.setInt(3, user2Id);
-				preparedStatement.setInt(4, user1Id);
+				preparedStatement.setInt(1, UserSession.id);
+				preparedStatement.setInt(2, UserChat.id);
+				preparedStatement.setInt(3, UserChat.id);
+				preparedStatement.setInt(4, UserSession.id);
 							
 				ResultSet resultSet = preparedStatement.executeQuery();
 				

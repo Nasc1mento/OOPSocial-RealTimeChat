@@ -49,9 +49,9 @@ public class RoomDAO implements IRoomPersistence{
 		// TODO Auto-generated method stub
 		try {
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
-					prepareStatement("DELETE OS_ROOMS, OS_ROOM_MESSAGES FROM OS_ROOMS INNER JOIN "
-							+ "OS_ROOM_MESSAGES WHERE OS_ROOMS.ROS_ID = OS_ROOM_MESSAGES.ROM_ROS_ID "
-							+ "AND OS_ROOMS.ROS_ID = ?");
+					prepareStatement("DELETE OS_ROOMS, OS_ROOM_MESSAGES FROM OS_ROOMS "
+							+ "LEFT JOIN OS_ROOM_MESSAGES ON "
+							+ "OS_ROOMS.ROS_ID = OS_ROOM_MESSAGES.ROM_ROS_ID WHERE OS_ROOMS.ROS_ID = ?");
 			preparedStatement.setInt(1, RoomChatSession.id);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {

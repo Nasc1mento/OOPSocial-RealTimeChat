@@ -131,7 +131,7 @@ public class Chat extends SharedFrame{
 		
 		
 		
-		this.messages = MessageDAO.getInstance().getAllMessage(UserSession.id, UserChat.id);
+		this.messages = MessageDAO.getInstance().getAllMessage();
 		this.users = UserDAO.getInstance().listUsers();
 			for (Message message: this.messages) {
 				

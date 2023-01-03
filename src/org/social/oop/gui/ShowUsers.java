@@ -51,6 +51,7 @@ public class ShowUsers extends SharedFrame{
 		this.setTitle("OOPSocial/Users");
 		this.bottom();
 		this.showUsersList();
+		this.filterList();
 		
 	}
 	
@@ -59,16 +60,14 @@ public class ShowUsers extends SharedFrame{
 		
 		
 		
-		this.userList= new JList(getFilteredList());
+		this.userList= new JList(listModelName);
 		this.scrollPaneUsers = new JScrollPane(userList);
         
 		this.userList.setFont(new Font("Serif", Font.BOLD, 15));
 		
 		this.userList.setSelectionBackground(Color.LIGHT_GRAY);
         this.userList.addMouseListener(new ChatListener());
-        
-        
-        
+                
         getContentPane().add(this.scrollPaneUsers,BorderLayout.CENTER);
     }
         
@@ -82,10 +81,10 @@ public class ShowUsers extends SharedFrame{
 		this.textfieldFilter.getDocument().addDocumentListener(new DocumentListener() {
 			
 			@Override
-			public void removeUpdate(DocumentEvent e) {getFilteredList();}
+			public void removeUpdate(DocumentEvent e) {filterList();}
 			
 			@Override
-			public void insertUpdate(DocumentEvent e) {getFilteredList();}
+			public void insertUpdate(DocumentEvent e) {filterList();}
 			
 			@Override
 			public void changedUpdate(DocumentEvent e) {}
@@ -107,7 +106,7 @@ public class ShowUsers extends SharedFrame{
 	
 	
 	
-	public DefaultListModel<String> getFilteredList() {
+	public void filterList() {
 		this.usersName = UserDAO.getInstance().listUsersName();
 		List<String> filteredList = FluentIterable.from(usersName)
 		        .filter(new Predicate<String>() {
@@ -121,8 +120,6 @@ public class ShowUsers extends SharedFrame{
 		for (String name:filteredList) {
 			this.listModelName.addElement(name);	
 		}
-		
-		return this.listModelName;
 	}
 	
 	public class DashBoardListener implements ActionListener{

@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.social.oop.model.Message;
+import org.social.oop.session.RoomChatSession;
 
-public class MessageRoomDAO implements IMessageRoomPersistence {
+public class MessageRoomDAO implements IMessagePersistence {
 
 	
 	
@@ -48,7 +49,7 @@ public class MessageRoomDAO implements IMessageRoomPersistence {
 	}
 
 	@Override
-	public ArrayList<Message> getAllMessage(int roomId) {
+	public ArrayList<Message> getAllMessage() {
 		// TODO Auto-generated method stub
 		ArrayList<Message> messages = new ArrayList<>();
 		
@@ -56,7 +57,7 @@ public class MessageRoomDAO implements IMessageRoomPersistence {
 			
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
 					prepareStatement("SELECT * FROM OS_ROOM_MESSAGES WHERE ROM_ROS_ID = ?");
-			preparedStatement.setInt(1, roomId);			
+			preparedStatement.setInt(1, RoomChatSession.id);			
 			ResultSet resultSet = preparedStatement.executeQuery();
 				
 			while (resultSet.next()) {
@@ -66,7 +67,7 @@ public class MessageRoomDAO implements IMessageRoomPersistence {
 				String content = resultSet.getString("ROM_CONTENT");
 				Date date = resultSet.getDate("ROM_DATE");
 					
-				Message message = new Message(id, sender, content, date, roomId);
+				Message message = new Message(id, sender, content, date, RoomChatSession.id);
 					
 				messages.add(message);
 			}

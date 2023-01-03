@@ -57,23 +57,21 @@ public class ShowRooms extends SharedFrame{
 		this.bottom();
 		this.showUsersList();
 		this.addRoomListener();
+		this.closeRoomListener();
+		this.filterList();
 	}
 	
 
 	public void showUsersList() {
-		
-		
-		
-		this.userJList= new JList(getFilteredList());
+				
+		this.userJList= new JList(listModelTitle);
 		this.scrollPaneRooms = new JScrollPane(userJList);
         
 		this.userJList.setFont(new Font("Serif", Font.BOLD, 15));
 		
 		this.userJList.setSelectionBackground(Color.LIGHT_GRAY);
         this.userJList.addMouseListener(new ChatListener());
-        
-        
-        
+                
         getContentPane().add(this.scrollPaneRooms,BorderLayout.CENTER);
     }
         
@@ -84,24 +82,22 @@ public class ShowRooms extends SharedFrame{
 		this.buttonCreate = new SharedButton("Create");
 		this.labelCreate = new JLabel("Title: ");
 		this.labelFilter = new JLabel("Filter: ");
-		
-		
+				
 		this.textfieldFilter = new JTextField(7);
 		this.textfieldCreate = new JTextField(7);
 		
 		this.textfieldFilter.getDocument().addDocumentListener(new DocumentListener() {
 			
 			@Override
-			public void removeUpdate(DocumentEvent e) {getFilteredList();}
+			public void removeUpdate(DocumentEvent e) {filterList();}
 			
 			@Override
-			public void insertUpdate(DocumentEvent e) {getFilteredList();}
+			public void insertUpdate(DocumentEvent e) {filterList();}
 			
 			@Override
 			public void changedUpdate(DocumentEvent e) {}
 		});
-		
-		
+				
 		this.panelButtonForm.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 			
 		this.buttonBack.addActionListener(new DashBoardListener());
@@ -121,7 +117,7 @@ public class ShowRooms extends SharedFrame{
 	
 	
 	
-	public DefaultListModel<String> getFilteredList() {
+	public void filterList() {
 		this.roomsTitle = RoomDAO.getInstance().listRoomsTitle();
 		List<String> filteredList = FluentIterable.from(roomsTitle)
 		        .filter(new Predicate<String>() {
@@ -132,11 +128,9 @@ public class ShowRooms extends SharedFrame{
 		        }).toList();
 		
 		this.listModelTitle.removeAllElements();
-		for (String name:filteredList) {
-			this.listModelTitle.addElement(name);	
-		}
 		
-		return this.listModelTitle;
+		for (String name:filteredList) 
+			this.listModelTitle.addElement(name);	
 	}
 	
 	public void addRoomListener() {
@@ -145,13 +139,22 @@ public class ShowRooms extends SharedFrame{
 			@Override
 			public void call(Object... args) {
 				// TODO Auto-generated method stub
-				getFilteredList();
+				filterList();
+			}
+		});
+	}
+	
+	public void closeRoomListener() {
+		SocketClient.socket.on("deleteroom", new Listener() {			
+			@Override
+			public void call(Object... args) {
+				// TODO Auto-generated method stub				
+				filterList();
 			}
 		});
 	}
 	
 	public class DashBoardListener implements ActionListener{
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
@@ -161,8 +164,7 @@ public class ShowRooms extends SharedFrame{
 				public void run() {
 					// TODO Auto-generated method stub
 					dispose();
-					new Dashboard();
-					
+					new Dashboard();					
 				}
 			});
 		}

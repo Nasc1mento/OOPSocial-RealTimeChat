@@ -8,7 +8,7 @@ public interface IMessagePersistence {
 		
 	public void createMessage(Message message);
 	
-	public ArrayList<Message> getAllMessage(int user1ID, int user2Id);
+	public ArrayList<Message> getAllMessage();
 	
 	
 

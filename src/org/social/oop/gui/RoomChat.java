@@ -169,7 +169,7 @@ public class RoomChat extends SharedFrame{
 	
 	public void loadHistory() {
 		
-		this.messages = MessageRoomDAO.getInstance().getAllMessage(RoomChatSession.id);
+		this.messages = MessageRoomDAO.getInstance().getAllMessage();
 		this.users = UserDAO.getInstance().listUsers();
 		
 			
