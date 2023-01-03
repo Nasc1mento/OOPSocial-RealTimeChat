@@ -33,29 +33,12 @@ public class Dashboard extends SharedFrame {
 		
 		this.setTitle("OOPSocial/Dashboard");
 		
-		this.createButton();
+		
 		this.showUser();
 		this.showUserOptions();
 		this.showGeneralOptions();
 
 	}
-	
-	public void createButton() {
-		this.panelButton = new JPanel();
-		this.buttonHome = new JButton("Back");
-		
-		
-		
-		this.panelButton.setLayout(new FlowLayout(FlowLayout.CENTER));
-		this.panelButton.add(buttonHome);
-		
-		this.buttonHome.addActionListener(new HomeListener());
-		
-		getContentPane().add(this.panelButton,BorderLayout.SOUTH);
-	}
-	
-	
-	
 	
 	public void showUser() {
 		
@@ -67,12 +50,9 @@ public class Dashboard extends SharedFrame {
 		this.panelUser.add(labelUser);
 		
 		
-		this.getContentPane().add(this.panelUser, BorderLayout.NORTH);
-		
-		
+		this.getContentPane().add(this.panelUser, BorderLayout.NORTH);		
 	}
-	
-	
+		
 	public void showUserOptions() {
 		this.panelUserOptions = new JPanel();
 		this.panelUserOptions.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -105,29 +85,11 @@ public class Dashboard extends SharedFrame {
 		this.generalOptionPanel.add(listUsersButton);
 		this.generalOptionPanel.add(listRooms);		
 				
-		this.listUsersButton.addActionListener(new UserListListener());
+		this.listUsersButton.addActionListener(new ShowUsersListener());
 		this.listRooms.addActionListener(new RoomListListener());
 		
 		this.getContentPane().add(this.generalOptionPanel,BorderLayout.CENTER);
 	}
-	
-	
-	public class HomeListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			SwingUtilities.invokeLater(new Runnable() {
-				
-				@Override
-				public void run() {
-					dispose();
-					new Home();
-				}
-			});	
-		}
-		
-	}
-	
 	
 	public class LogoutListener implements ActionListener {
 
@@ -169,7 +131,7 @@ public class Dashboard extends SharedFrame {
 		
 	}
 	
-	public class UserListListener implements ActionListener {
+	public class ShowUsersListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {

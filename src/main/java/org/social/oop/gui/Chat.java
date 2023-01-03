@@ -85,7 +85,7 @@ public class Chat extends SharedFrame{
         this.messageBox.requestFocusInWindow();
 
         this.sendMessage.addActionListener(new SendMessageListener());
-        this.back.addActionListener(new DashboardListener());
+        this.back.addActionListener(new ShowUsersListener());
 
         this.chatBox.setEditable(false);
         this.chatBox.setFont(new Font("Serif", Font.PLAIN, 15));
@@ -127,9 +127,7 @@ public class Chat extends SharedFrame{
 	}
 	
 	public void loadHistory() {
-		
-		
-		
+				
 		this.messages = MessageDAO.getInstance().getAllMessage();
 		this.users = UserDAO.getInstance().listUsers();
 			for (Message message: this.messages) {
@@ -161,7 +159,7 @@ public class Chat extends SharedFrame{
         }
     }
 	
-	public class DashboardListener implements ActionListener{
+	public class ShowUsersListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {

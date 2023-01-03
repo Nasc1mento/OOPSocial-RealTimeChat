@@ -17,7 +17,7 @@ import main.java.org.social.oop.exception.UserAlreadyRegisteredException;
 import main.java.org.social.oop.model.User;
 import main.java.org.social.oop.persistence.UserDAO;
 
-public class Test {
+public class CreateUsers {
 	
 	User user1;
 	User user2;
