@@ -4,6 +4,12 @@
   <artifactId>org.social.oop</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <build>
+  <resources>
+  	<resource>
+  		<directory>src/main/resources</directory>
+  		<includes><include>*.png</include></includes>
+  	</resource>
+  </resources>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
@@ -15,6 +21,7 @@
       </plugin>
     </plugins>
   </build>
+  
   <dependencies>
 	<dependency>
       <groupId>io.socket</groupId>
