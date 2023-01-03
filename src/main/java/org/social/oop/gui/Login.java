@@ -19,11 +19,11 @@ import javax.swing.SwingUtilities;
 import main.java.org.social.oop.exception.EmailFieldNotFilledException;
 import main.java.org.social.oop.exception.PasswordNotMatchException;
 import main.java.org.social.oop.exception.UserNotRegisteredException;
+import main.java.org.social.oop.gui.shared.SharedButton;
+import main.java.org.social.oop.gui.shared.SharedFrame;
 import main.java.org.social.oop.model.User;
 import main.java.org.social.oop.persistence.UserDAO;
 import main.java.org.social.oop.socket.SocketClient;
-import main.org.social.oop.gui.shared.SharedButton;
-import main.org.social.oop.gui.shared.SharedFrame;
 
 public class Login extends SharedFrame{
 	

@@ -11,9 +11,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import main.java.org.social.oop.gui.shared.SharedButton;
+import main.java.org.social.oop.gui.shared.SharedFrame;
 import main.java.org.social.oop.session.UserSession;
-import main.org.social.oop.gui.shared.SharedButton;
-import main.org.social.oop.gui.shared.SharedFrame;
 
 public class Dashboard extends SharedFrame {
 	

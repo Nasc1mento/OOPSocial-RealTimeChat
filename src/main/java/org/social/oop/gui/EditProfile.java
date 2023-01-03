@@ -23,11 +23,11 @@ import main.java.org.social.oop.exception.PasswordInvalidException;
 import main.java.org.social.oop.exception.PhoneFieldNotFilledException;
 import main.java.org.social.oop.exception.PhoneNotValidException;
 import main.java.org.social.oop.exception.UserAlreadyRegisteredException;
+import main.java.org.social.oop.gui.shared.SharedButton;
+import main.java.org.social.oop.gui.shared.SharedFrame;
 import main.java.org.social.oop.model.User;
 import main.java.org.social.oop.persistence.UserDAO;
 import main.java.org.social.oop.session.UserSession;
-import main.org.social.oop.gui.shared.SharedButton;
-import main.org.social.oop.gui.shared.SharedFrame;
 
 public class EditProfile extends SharedFrame{
 

@@ -1,4 +1,4 @@
-package main.org.social.oop.gui.shared;
+package main.java.org.social.oop.gui.shared;
 
 import java.awt.Color;
 import java.awt.Font;

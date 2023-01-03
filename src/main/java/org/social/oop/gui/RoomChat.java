@@ -20,6 +20,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.text.DefaultCaret;
 
 import io.socket.emitter.Emitter.Listener;
+import main.java.org.social.oop.gui.shared.SharedButton;
+import main.java.org.social.oop.gui.shared.SharedFrame;
 import main.java.org.social.oop.model.Message;
 import main.java.org.social.oop.model.User;
 import main.java.org.social.oop.persistence.MessageRoomDAO;
@@ -29,8 +31,6 @@ import main.java.org.social.oop.session.RoomChatSession;
 import main.java.org.social.oop.session.UserChat;
 import main.java.org.social.oop.session.UserSession;
 import main.java.org.social.oop.socket.SocketClient;
-import main.org.social.oop.gui.shared.SharedButton;
-import main.org.social.oop.gui.shared.SharedFrame;
 
 public class RoomChat extends SharedFrame{
 	private JTextField messageBox; 

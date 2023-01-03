@@ -25,12 +25,12 @@ import javax.swing.event.DocumentListener;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 
+import main.java.org.social.oop.gui.shared.SharedButton;
+import main.java.org.social.oop.gui.shared.SharedFrame;
 import main.java.org.social.oop.model.User;
 import main.java.org.social.oop.persistence.UserDAO;
 import main.java.org.social.oop.session.UserChat;
 import main.java.org.social.oop.session.UserSession;
-import main.org.social.oop.gui.shared.SharedButton;
-import main.org.social.oop.gui.shared.SharedFrame;
 
 public class ShowUsers extends SharedFrame{
 	
