@@ -1,19 +1,74 @@
-# OOPSocial-RealTimeChat
+# [OOPSocial-RealTimeChat]
+
+## Introduction
+
+OOP final project made with Java, it's a real time chat using Socket IO to comunicate and update, Guava Google to filter users/rooms, Node.js socket server and MySQL to save data.
+
+## Project structure (Apache Maven)
+
+    [OOPSocial]/
+     |_ src
+     |  |_ main 
+     |  |  |_ java 
+     |  |  |_ resources 
+     |  |_ test 
+     |  |  |_ java 
+     |  |
+     |_ database
+     |_ lib
+     |_ server
+     |_ .gitignore
+     |_ .classpath
+     |_ .project
+     |_ pom.xml
+     |_ README.md
+     |_ LICENSE
+
+## Getting Started
 
 
-## OOP Final Project
+to clone project :
+```bash
+    $ > git clone https://github.com/Nasc1mento/OOPSocial-RealTimeChat
+```
+- **Eclipse**
+
+to install maven dependences :
+
+1. Click on pom.xml
+2. Run as
+3. Maven install
+
+to create database:
+1. Copy script.sql
+2. Execute in WorkBench, CLI or whatever you want
+
+## Execute the program
+
+to start socket :
 
 
-### Execution using Eclipse IDE
-- Clone the repository
+```bash
+    $ > cd OOPSocial-RealTimeChat
+    $ > cd server
+    $ > node index.js
 ```
-git clone https://github.com/Nasc1mento/SocialJavaSwing-RealTimeChat
-```
-- On Eclipse IDE select the pom.xml, click in run as and then Maven Install option.
-- Start socket
-```
-cd /path/to/project/
-cd server/
-node index.js
-```
-- Select the Main class and run.
+- **Eclipse**
+
+to execute :
+1. Select the Main.java
+2. Run as
+3. Java Application
+
+
+## Specifications
+
+- Node 18.12.1
+- Java 11
+- MySQL Connector 8.0.30
+- Maven Compiler Plugin 3.8.1
+- Socket IO Client 2.1.0
+- Google Guava 31.1-jre
+- JUnit 4.13.2
+
+[Adryan N. Reis](https://github.com/Nasc1mento)
