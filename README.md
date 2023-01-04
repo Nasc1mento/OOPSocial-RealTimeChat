@@ -1,5 +1,11 @@
 # [OOPSocial-RealTimeChat]
 
+## Home Screen
+
+![Screenshot from 2023-01-03 22-01-03](https://user-images.githubusercontent.com/88512599/210465822-a3d26984-b2ff-4d42-9a74-5480d93c8ba2.png)
+
+
+
 ## Introduction
 
 OOP final project made with Java, it's a real time chat using Socket IO to comunicate and update, Guava Google to filter users/rooms, Node.js socket server and MySQL to save data.
