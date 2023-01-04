@@ -79,5 +79,5 @@ to execute :
 
 ## License
 
-MIT [http://rem.mit-license.org](http://rem.mit-license.org)
+MIT [https://mit-license.org](https://mit-license.org)
 
