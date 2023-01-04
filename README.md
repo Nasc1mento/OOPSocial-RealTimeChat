@@ -77,4 +77,7 @@ to execute :
 - Google Guava 31.1-jre
 - JUnit 4.13.2
 
-[Adryan N. Reis](https://github.com/Nasc1mento)
+## License
+
+MIT [http://rem.mit-license.org](http://rem.mit-license.org)
+
