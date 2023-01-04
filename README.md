@@ -79,5 +79,5 @@ to execute :
 
 ## License
 
-MIT [https://mit-license.org](https://mit-license.org)
+[MIT](https://github.com/Nasc1mento/OOPSocial-RealTimeChat/blob/main/license)
 
