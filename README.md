@@ -21,7 +21,6 @@ OOP final project made with Java, it's a real time chat using Socket IO to comun
      |  |  |_ java 
      |  |
      |_ database
-     |_ lib
      |_ server
      |_ .gitignore
      |_ .classpath
@@ -71,7 +70,7 @@ to execute :
 
 - Node 18.12.1
 - Java 11
-- MySQL Connector 8.0.30
+- MySQL Connector 8.0.31
 - Maven Compiler Plugin 3.8.1
 - Socket IO Client 2.1.0
 - Google Guava 31.1-jre
