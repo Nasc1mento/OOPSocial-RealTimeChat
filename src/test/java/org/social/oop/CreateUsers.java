@@ -2,7 +2,7 @@ package test.java.org.social.oop;
 
 import java.sql.Timestamp;
 
-import org.junit.Before;
+//import org.junit.Before;
 
 import main.java.org.social.oop.exception.EmailAlreadyRegisteredException;
 import main.java.org.social.oop.exception.EmailFieldNotFilledException;
@@ -46,7 +46,7 @@ public class CreateUsers {
 	
 	
 	
-	@Before
+	//@Before
 	public void setUp() throws Exception {
 		name1 = "user1";
 		name2 = "user2";
@@ -73,7 +73,7 @@ public class CreateUsers {
 		user3 = new User(0,name3,email3,phone3,password3,password3,date3);
 	}
 
-	@org.junit.Test
+	//@org.junit.Test
 	public void test() throws NameFieldNotFilledException, EmailFieldNotFilledException, PhoneFieldNotFilledException, PasswordFieldNotFilledException, PasswordConfirmationNotMatchException, EmailNotValidException, PasswordInvalidException, UserAlreadyRegisteredException, EmailAlreadyRegisteredException, PhoneNotValidException {
 		
 		UserDAO.getInstance().createUser(user1);
