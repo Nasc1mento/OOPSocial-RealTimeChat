@@ -168,7 +168,7 @@ public class EditProfile extends SharedFrame{
 			// TODO Auto-generated method stub
 			
 			
-			UserDAO.getInstance().removeUser();
+			UserDAO.getInstance().removeUserById();
 			
 			
 			SwingUtilities.invokeLater(new Runnable() {

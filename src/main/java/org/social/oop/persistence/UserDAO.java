@@ -103,12 +103,14 @@ public class UserDAO implements IUserPersistence{
 	}
 		
 	@Override
-	public void removeUser() {
+	public void removeUserById() {
 		try {
 			
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
-					prepareStatement("DELETE FROM OS_USERS WHERE USR_NAME = ? ;");
-			preparedStatement.setString(1, UserSession.name);
+					prepareStatement("DELETE OS_USERS, OS_MESSAGES FROM OS_USERS "
+							+ "LEFT JOIN OS_MESSAGES ON OS_MESSAGES.MSG_USR_ID_SOURCE = OS_USERS.USR_ID "
+							+ "OR OS_MESSAGES.MSG_USR_ID_DESTINY = OS_USERS.USR_ID WHERE OS_USERS.USR_ID = ? ;");
+			preparedStatement.setInt(1, UserSession.id);
 			preparedStatement.executeUpdate();
 			
 			

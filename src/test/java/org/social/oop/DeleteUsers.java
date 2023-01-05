@@ -8,26 +8,26 @@ import main.java.org.social.oop.session.UserSession;
 
 public class DeleteUsers {
 	
-	String name1;
-	String name2;
-	String name3;
+	int id1;
+	int id2;
+	int id3;
 		
 //	@Before
 	public void setUp() throws Exception {
-		name1 = "user1";
-		name2 = "user2";
-		name3 = "user3";
+		id1 = 1;
+		id2 = 2;
+		id3 = 3;
 	}
 
 //	@Test
 	public void test() {
 		
-		UserSession.name = name1;
-		UserDAO.getInstance().removeUser();
-		UserSession.name = name2;
-		UserDAO.getInstance().removeUser();
-		UserSession.name = name3;
-		UserDAO.getInstance().removeUser();
+		UserSession.id = id1;
+		UserDAO.getInstance().removeUserById();
+		UserSession.id = id2;
+		UserDAO.getInstance().removeUserById();
+		UserSession.id = id3;
+		UserDAO.getInstance().removeUserById();
 		
 	}
 

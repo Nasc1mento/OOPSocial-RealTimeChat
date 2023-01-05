@@ -24,7 +24,7 @@ public interface IUserPersistence {
 		UserAlreadyRegisteredException, EmailAlreadyRegisteredException, PhoneNotValidException;
 
 		
-		public void removeUser();
+		public void removeUserById();
 		
 		public void updateUser(User user) throws NameFieldNotFilledException, EmailFieldNotFilledException, PhoneFieldNotFilledException,
 		PasswordFieldNotFilledException, EmailNotValidException, PasswordInvalidException, UserAlreadyRegisteredException, 
