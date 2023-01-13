@@ -1,5 +1,10 @@
 # [OOPSocial-RealTimeChat]
 
+## Introduction
+
+OOP final project made with Java, it's a real time chat using Socket IO to comunicate and update, Guava Google to filter users/rooms, Node.js socket server and MySQL to save data.
+
+
 ## Screenshots
 
 #### Home page
@@ -33,9 +38,7 @@
 
 
 
-## Introduction
 
-OOP final project made with Java, it's a real time chat using Socket IO to comunicate and update, Guava Google to filter users/rooms, Node.js socket server and MySQL to save data.
 
 ## Project structure (Apache Maven)
 
