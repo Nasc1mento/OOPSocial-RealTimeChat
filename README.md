@@ -1,9 +1,9 @@
 # [OOPSocial-RealTimeChat]
 
-## Home Screen
-
+## Screenshots
+#### Home page
 ![Screenshot from 2023-01-03 22-01-03](https://user-images.githubusercontent.com/88512599/210465822-a3d26984-b2ff-4d42-9a74-5480d93c8ba2.png)
-
+### Login
 
 
 ## Introduction
