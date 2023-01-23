@@ -68,7 +68,7 @@ to clone project :
 ```
 - **Eclipse**
 
-to install maven dependences :
+to install maven dependencies :
 
 1. Click on pom.xml
 2. Run as
