@@ -12,14 +12,10 @@ public class Message {
 	private int groupId;
 	private String content;
 	
-	private Date date;
+	private Timestamp date;
 	
-	
-	
-	
-	
-	
-	public Message(int id, String content, int senderId, int receptorId, Date date) {
+
+	public Message(int id, String content, int senderId, int receptorId, Timestamp date) {
 		super();
 		this.id = id;
 		this.content = content;
@@ -28,7 +24,7 @@ public class Message {
 		this.date = date;
 	}
 	
-	public Message(int id, int senderId, String content, Date date,  int groupId) {
+	public Message(int id, int senderId, String content, Timestamp date,  int groupId) {
 		super();
 		this.id = id;
 		this.user1SenderId = senderId;
@@ -69,11 +65,11 @@ public class Message {
 		this.user2SenderId = receptorId;
 	}
 	
-	public Date getDate() {
+	public Timestamp getDate() {
 		return date;
 	}
 	
-	public void setDate(Date date) {
+	public void setDate(Timestamp date) {
 		this.date = date;
 	}
 	

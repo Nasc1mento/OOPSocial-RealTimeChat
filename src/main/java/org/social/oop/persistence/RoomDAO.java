@@ -45,7 +45,7 @@ public class RoomDAO implements IRoomPersistence{
 	}
 
 	@Override
-	public void deleteRoom() {
+	public void deleteRoomById() {
 		// TODO Auto-generated method stub
 		try {
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
@@ -63,7 +63,7 @@ public class RoomDAO implements IRoomPersistence{
 	
 	
 	@Override
-	public List<String> listRoomsTitle() {
+	public List<String> getAllRoomTitle() {
 		// TODO Auto-generated method stub
 		List<String> rooms = new ArrayList<String>();
 		
@@ -84,9 +84,9 @@ public class RoomDAO implements IRoomPersistence{
 	}
 
 	@Override
-	public ArrayList<Room> listRooms() {
+	public List<Room> getAllRooms() {
 		// TODO Auto-generated method stub
-		ArrayList<Room> rooms = new ArrayList<Room>();
+		List<Room> rooms = new ArrayList<Room>();
 		
 		try {
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().

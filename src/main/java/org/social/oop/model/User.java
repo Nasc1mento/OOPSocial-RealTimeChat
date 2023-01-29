@@ -14,11 +14,10 @@ public class User {
 	private Timestamp dateCreation;
 	
 	
-	
-	
 	public User() {
 		
 	}
+	
 	public User(int id, String name, String email, String phone, String password, String confirmPassword, Timestamp dateCreation) {
 		super();
 		this.id = id;

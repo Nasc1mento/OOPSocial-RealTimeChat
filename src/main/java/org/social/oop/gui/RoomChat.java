@@ -9,7 +9,11 @@ import java.awt.Insets;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -44,20 +48,22 @@ public class RoomChat extends SharedFrame{
 	private GridBagConstraints right;
 	private DefaultCaret caret;
 	
+	private SimpleDateFormat dateFormat;
+	
 	private ArrayList<Message> messages;
-	private ArrayList<User> users;
+	private List<User> users;
 	
 	
 	public RoomChat() {
 		
+		this.dateFormat = new SimpleDateFormat("MMM/dd/yyyy HH:mm");
 		
 		this.setTitle("OOPSocial/Room/"+RoomChatSession.title);
 		this.chat();
 		this.loadHistory();
 		this.addMessageListener();
 		this.closeRoomListener();
-		
-		
+				
 	}
 
 	public void chat() {
@@ -169,7 +175,7 @@ public class RoomChat extends SharedFrame{
 	public void loadHistory() {
 		
 		this.messages = MessageRoomDAO.getInstance().getAllMessage();
-		this.users = UserDAO.getInstance().listUsers();
+		this.users = UserDAO.getInstance().getAllUsers();
 		
 			
 			for (Message message: this.messages) {
@@ -178,7 +184,7 @@ public class RoomChat extends SharedFrame{
 				user.setId(message.getSenderId());				
 				int id = users.indexOf(user);	
 				sender = users.get(id).getName();				
-				this.chatBox.append("<"+sender+" "+message.getDate()+">: "+ message.getContent()+"\n");
+				this.chatBox.append("<"+sender+" "+this.dateFormat.format(message.getDate())+">: "+ message.getContent()+"\n");
 			}
 			
 	}
@@ -188,11 +194,11 @@ public class RoomChat extends SharedFrame{
 		public void actionPerformed(ActionEvent event) {
 			
             if (messageBox.getText().length() >= 1) {
-            	SocketClient.socket.emit("message", "<"+UserSession.name+" "+java.sql.Date.valueOf(java.time.LocalDate.now())+">: "+ messageBox.getText().trim());
+            	SocketClient.socket.emit("message", "<"+UserSession.name+" "+dateFormat.format(Timestamp.valueOf(LocalDateTime.now()))+">: "+ messageBox.getText().trim());
             	
 			MessageRoomDAO.getInstance().
 					createMessage(new Message(0, UserSession.id , messageBox.getText(), 
-						java.sql.Date.valueOf(java.time.LocalDate.now()), RoomChatSession.id));
+							 Timestamp.valueOf(LocalDateTime.now()), RoomChatSession.id));
 					
             	messageBox.setText("");
             	messageBox.grabFocus();	
@@ -232,7 +238,7 @@ public class RoomChat extends SharedFrame{
 				public void run() {
 					// TODO Auto-generated method stub
 					
-						RoomDAO.getInstance().deleteRoom();
+						RoomDAO.getInstance().deleteRoomById();
 						SocketClient.socket.emit("deleteroom");
 						deleteRoom.setEnabled(false);
 //						SocketClient.socket.off("deleteroom");

@@ -32,11 +32,11 @@ public class UserDAO implements IUserPersistence{
 	private Pattern patternEmail = Pattern.compile("^[\\w!#$%&amp;'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&amp;'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$");
 	private Pattern patternPassword = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
 	private Pattern patternPhone = Pattern.compile("\\([0-9]{2}\\) (?:9[0-9]{1}|[1-5]{1})[0-9]{3}-[0-9]{4}");
-	
-	
+		
 	private UserDAO() {
 		this.databaseMySQL = new DatabaseMySQL();
 	}
+	
 	public static UserDAO getInstance() {
 		if (instance == null) 
 			return new UserDAO();
@@ -201,8 +201,8 @@ public class UserDAO implements IUserPersistence{
 		}
 	}
 	@Override
-	public ArrayList<User> listUsers() {
-		ArrayList<User> users = new ArrayList<User>();
+	public List<User> getAllUsers() {
+		List<User> users = new ArrayList<User>();
 		
 		try {
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
@@ -224,9 +224,9 @@ public class UserDAO implements IUserPersistence{
 	}
 	
 	@Override
-	public List<String> listUsersName() {
+	public List<String> getAllUserName() {
 		// TODO Auto-generated method stub
-		ArrayList<String> users = new ArrayList<String>();
+		List<String> users = new ArrayList<String>();
 		
 		try {
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
@@ -243,14 +243,5 @@ public class UserDAO implements IUserPersistence{
 			e.printStackTrace();
 		}	
 		return users;
-	}
-	
-	
-	public static void main(String[] args) {
-		User user = new User();
-		user.setId(2);
-		ArrayList<User> users = UserDAO.getInstance().listUsers();
-		int id = users.indexOf(user);
-		System.out.println(users.get(id).getName());
 	}
 }

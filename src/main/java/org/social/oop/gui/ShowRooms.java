@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -36,7 +35,7 @@ import main.java.org.social.oop.socket.SocketClient;
 
 public class ShowRooms extends SharedFrame{
 	private List<String> roomsTitle;
-	private ArrayList<Room> rooms;
+	private List<Room> rooms;
 	private JScrollPane scrollPaneRooms;
 	private JList<String> userJList;
 	private JPanel panelButtonForm;
@@ -117,7 +116,7 @@ public class ShowRooms extends SharedFrame{
 	
 	
 	public void filterList() {
-		this.roomsTitle = RoomDAO.getInstance().listRoomsTitle();
+		this.roomsTitle = RoomDAO.getInstance().getAllRoomTitle();
 		List<String> filteredList = FluentIterable.from(roomsTitle)
 		        .filter(new Predicate<String>() {
 		            @Override
@@ -180,7 +179,7 @@ public class ShowRooms extends SharedFrame{
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						rooms = RoomDAO.getInstance().listRooms();
+						rooms = RoomDAO.getInstance().getAllRooms();
 						int roomChatId = rooms.get(userJList.getSelectedIndex()).getId();
 						int roomAdminId = rooms.get(userJList.getSelectedIndex()).getAdminId();
 						String roomChatTitle = userJList.getSelectedValue();

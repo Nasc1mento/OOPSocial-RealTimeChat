@@ -1,11 +1,10 @@
 package main.java.org.social.oop.persistence;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 import main.java.org.social.oop.model.Message;
 import main.java.org.social.oop.session.UserChat;
@@ -42,7 +41,7 @@ public class MessageDAO implements IMessagePersistence{
 			preparedStatement.setString(2, message.getContent());
 			preparedStatement.setInt(3, message.getSenderId());
 			preparedStatement.setInt(4, message.getReceptorId());
-			preparedStatement.setDate(5,  java.sql.Date.valueOf(java.time.LocalDate.now()));
+			preparedStatement.setTimestamp(5,  message.getDate());
 			preparedStatement.execute();
 			System.out.println(message.getSenderId());
 			System.out.println(message.getReceptorId());
@@ -53,9 +52,9 @@ public class MessageDAO implements IMessagePersistence{
 	}
 
 	@Override
-	public ArrayList<Message> getAllMessage() {
+	public List<Message> getAllMessage() {
 		// TODO Auto-generated method stub
-		ArrayList<Message> messages = new ArrayList<>();
+		List<Message> messages = new ArrayList<>();
 		
 		try {
 			PreparedStatement preparedStatement = this.databaseMySQL.getConnection().
@@ -70,7 +69,7 @@ public class MessageDAO implements IMessagePersistence{
 				while (resultSet.next()) {
 					messages.add(new Message(resultSet.
 							getInt("MSG_ID"),resultSet.getString("MSG_CONTENT"), resultSet.
-							getInt("MSG_USR_ID_SOURCE"), resultSet.getInt("MSG_USR_ID_DESTINY"), resultSet.getDate("MSG_DATE")));
+							getInt("MSG_USR_ID_SOURCE"), resultSet.getInt("MSG_USR_ID_DESTINY"), resultSet.getTimestamp("MSG_DATE")));
 				}
 			
 		} catch (SQLException e) {

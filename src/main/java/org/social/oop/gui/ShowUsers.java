@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -35,7 +34,7 @@ import main.java.org.social.oop.session.UserSession;
 public class ShowUsers extends SharedFrame{
 	
 	private List<String> usersName;
-	private ArrayList<User> users;
+	private List<User> users;
 	private JScrollPane scrollPaneUsers;
 	private JList<String> userList;
 	private JPanel panelButtonForm;
@@ -107,7 +106,7 @@ public class ShowUsers extends SharedFrame{
 	
 	
 	public void filterList() {
-		this.usersName = UserDAO.getInstance().listUsersName();
+		this.usersName = UserDAO.getInstance().getAllUserName();
 		List<String> filteredList = FluentIterable.from(usersName)
 		        .filter(new Predicate<String>() {
 		            @Override
@@ -147,7 +146,7 @@ public class ShowUsers extends SharedFrame{
 						
     	    if (event.getClickCount() == 2){
     	    	
-    	    	users = UserDAO.getInstance().listUsers();
+    	    	users = UserDAO.getInstance().getAllUsers();
     	    	users.removeIf(n ->(n.getId() == UserSession.id));   	    		
     	    	
     	    	int userChatId = users.get(userList.getSelectedIndex()).getId();

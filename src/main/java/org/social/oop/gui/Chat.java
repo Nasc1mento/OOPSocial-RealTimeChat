@@ -9,7 +9,11 @@ import java.awt.Insets;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.TimeZone;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -42,17 +46,19 @@ public class Chat extends SharedFrame{
 	private GridBagConstraints right;
 	private DefaultCaret caret;
 	
-	private ArrayList<Message> messages;
-	private ArrayList<User> users;
+	private SimpleDateFormat dateFormat;
+	
+	private List<Message> messages;
+	private List<User> users;
 	
 	public Chat() {
 		
+		this.dateFormat = new SimpleDateFormat("MMM/dd/yyyy HH:mm");
 		
 		this.setTitle("OOPSocial/Chat/"+UserChat.name);
 		this.chat();
 		this.loadHistory();
 		this.addMessageToChatBox();
-		
 		
 	}
 
@@ -129,28 +135,26 @@ public class Chat extends SharedFrame{
 	public void loadHistory() {
 				
 		this.messages = MessageDAO.getInstance().getAllMessage();
-		this.users = UserDAO.getInstance().listUsers();
-			for (Message message: this.messages) {
-				
-				String sender;
-				User user = new User();
-				user.setId(message.getSenderId());
-				int id = users.indexOf(user);
-				sender = users.get(id).getName();
-				
-				this.chatBox.append("<"+sender+" "+message.getDate()+">: "+ message.getContent()+"\n");
-			}
+		this.users = UserDAO.getInstance().getAllUsers();
+		
+		for (Message message: this.messages) {			
+			String sender;
+			User user = new User();
+			user.setId(message.getSenderId());
+			int id = users.indexOf(user);
+			sender = users.get(id).getName();
+			this.chatBox.append("<"+sender+" "+this.dateFormat.format(message.getDate())+">: "+ message.getContent()+"\n");
+		}
 	}
 	
 	public class SendMessageListener implements ActionListener {
 		
 		public void actionPerformed(ActionEvent event) {
-			
             if (messageBox.getText().length() >= 1) {
-            	SocketClient.socket.emit("message", "<"+UserSession.name+" "+java.sql.Date.valueOf(java.time.LocalDate.now())+">: "+ messageBox.getText().trim());            	
+            	SocketClient.socket.emit("message", "<"+UserSession.name+" "+dateFormat.format(Timestamp.valueOf(LocalDateTime.now()))+">: "+ messageBox.getText().trim());            	
 				MessageDAO.getInstance().
 					createMessage(new Message(0,messageBox.getText() , UserSession.id , 
-						UserChat.id,  java.sql.Date.valueOf(java.time.LocalDate.now())));
+						UserChat.id, Timestamp.valueOf(LocalDateTime.now())));
 					
             	messageBox.setText("");
             	messageBox.grabFocus();	
