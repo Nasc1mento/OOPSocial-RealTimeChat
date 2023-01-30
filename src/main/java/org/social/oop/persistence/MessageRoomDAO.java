@@ -66,7 +66,6 @@ public class MessageRoomDAO implements IMessagePersistence {
 				int sender = resultSet.getInt("ROM_USR_ID");
 				String content = resultSet.getString("ROM_CONTENT");
 				Timestamp date = resultSet.getTimestamp("ROM_DATE");
-				System.out.println(date);
 				Message message = new Message(id, sender, content, date, RoomChatSession.id);
 					
 				messages.add(message);

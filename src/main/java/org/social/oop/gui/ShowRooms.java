@@ -41,7 +41,7 @@ public class ShowRooms extends SharedFrame{
 	private JPanel panelButtonForm;
 	private JButton buttonBack;
 	private JTextField textfieldFilter;
-	private DefaultListModel <String> listModelTitle = new DefaultListModel<String>();
+	private DefaultListModel <String> listModelTitle;
 	private JLabel labelFilter;
 	private JButton buttonCreate;
 	private JLabel labelCreate;
@@ -50,6 +50,8 @@ public class ShowRooms extends SharedFrame{
 
 	
 	public ShowRooms() {
+		
+		this.listModelTitle = new DefaultListModel<String>();
 		
 		this.setTitle("OOPSocial/Rooms");
 		this.bottom();
@@ -207,16 +209,5 @@ public class ShowRooms extends SharedFrame{
 			textfieldCreate.setText("");
 		}
 		
-	}
-	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				new ShowRooms();
-			}
-		});
 	}
 }

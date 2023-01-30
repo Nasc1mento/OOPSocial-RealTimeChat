@@ -40,12 +40,14 @@ public class ShowUsers extends SharedFrame{
 	private JPanel panelButtonForm;
 	private JButton buttonBack;
 	private JTextField textfieldFilter;
-	private DefaultListModel <String> listModelName = new DefaultListModel<String>();
+	private DefaultListModel <String> listModelName;
 	private JLabel labelFilter;
 	
 
 	
 	public ShowUsers() {
+		
+		this.listModelName = new DefaultListModel<String>();
 		
 		this.setTitle("OOPSocial/Users");
 		this.bottom();
@@ -164,16 +166,5 @@ public class ShowUsers extends SharedFrame{
 				});
     	    }
     	}
-	}
-	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				new ShowRooms();
-			}
-		});
 	}
 }
