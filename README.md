@@ -4,42 +4,6 @@
 
 OOP final project made with Java, it's a real time chat using Socket IO to comunicate and update, Guava Google to filter users/rooms, Node.js socket server and MySQL to save data.
 
-
-## Screenshots
-
-#### Home page
-![Screenshot from 2023-01-03 22-01-03](https://user-images.githubusercontent.com/88512599/210465822-a3d26984-b2ff-4d42-9a74-5480d93c8ba2.png)
-
-#### Login
-![image](https://user-images.githubusercontent.com/88512599/212387277-29b6743b-7855-421f-84f3-9194c3870a2f.png)
-
-#### Register
-![Screenshot from 2023-01-13 14-28-57](https://user-images.githubusercontent.com/88512599/212387008-85ff193f-1711-46b2-9333-37b2d16ca3e2.png)
-
-#### Others
-![Screenshot from 2023-01-13 14-32-37](https://user-images.githubusercontent.com/88512599/212387477-a97393c3-19d9-4264-9507-0f4bc67a200e.png)
-
-![Screenshot from 2023-01-13 14-32-41](https://user-images.githubusercontent.com/88512599/212387400-15d8a336-cffd-420d-b816-3ca5cdd1d1b7.png)
-
-![Screenshot from 2023-01-13 14-32-56](https://user-images.githubusercontent.com/88512599/212387684-13b4878b-445b-4709-95b3-f660ca4af7a7.png)
-
-![Screenshot from 2023-01-13 14-32-50](https://user-images.githubusercontent.com/88512599/212387707-b907e841-9c78-4436-aeb1-e6ca4a5c9d83.png)
-
-![Screenshot from 2023-01-13 14-34-54](https://user-images.githubusercontent.com/88512599/212387738-920f5abc-478c-451b-888e-6c5f1d16fbf0.png)
-
-![Screenshot from 2023-01-13 14-35-49](https://user-images.githubusercontent.com/88512599/212387768-fbaf2fba-8c2a-49fa-a338-5b7d9b8e3636.png)
-
-
-
-
-
-
-
-
-
-
-
-
 ## Project structure (Apache Maven)
 
     [OOPSocial]/
@@ -58,6 +22,49 @@ OOP final project made with Java, it's a real time chat using Socket IO to comun
      |_ pom.xml
      |_ README.md
      |_ LICENSE
+
+## Screenshots
+
+#### Home page
+![Screenshot from 2023-01-29 20-49-43](https://user-images.githubusercontent.com/88512599/215363185-bf392551-8e53-41c2-b182-6007ce34a473.png)
+
+#### Login
+![Screenshot from 2023-01-29 20-53-30](https://user-images.githubusercontent.com/88512599/215363241-a7779666-ae43-425c-a57f-9d6754b66def.png)
+
+#### Register
+![Screenshot from 2023-01-29 20-50-01](https://user-images.githubusercontent.com/88512599/215363283-34d8a6c6-8a43-4e68-b71a-80c14e116d02.png)
+
+#### Dashboard
+![Screenshot from 2023-01-29 20-49-21](https://user-images.githubusercontent.com/88512599/215363397-4872fcf8-704d-4d49-bd1e-a8d273f82587.png)
+
+#### Edit profile
+![Screenshot from 2023-01-29 20-49-31](https://user-images.githubusercontent.com/88512599/215363413-2dc754fa-48f0-46bc-a57a-821c71198e14.png)
+
+
+#### Show rooms
+![Screenshot from 2023-01-29 20-49-03](https://user-images.githubusercontent.com/88512599/215363420-5521163d-a82d-4d2e-9f6c-ac7e584c9285.png)
+
+#### Show users
+![Screenshot from 2023-01-29 20-49-26](https://user-images.githubusercontent.com/88512599/215363453-46775253-badb-4591-a917-cf7a9920f191.png)
+
+#### Chat
+![Screenshot from 2023-01-29 20-47-05](https://user-images.githubusercontent.com/88512599/215363490-977374fc-2637-427b-ab6c-6439f719e24e.png)
+#### Room chat
+
+![Screenshot from 2023-01-29 21-01-46](https://user-images.githubusercontent.com/88512599/215363672-5894f15d-0532-4b2f-92d5-af7a774536ad.png)
+
+
+![Screenshot from 2023-01-29 21-02-00](https://user-images.githubusercontent.com/88512599/215363678-e8cbe35a-2569-40c7-85d1-308e09c1c6e6.png)
+
+
+
+
+## Database diagram
+
+![Screenshot from 2023-01-29 20-12-14](https://user-images.githubusercontent.com/88512599/215363706-7af7d8fc-4746-4a7f-81a3-fa504fa128b8.png)
+
+
+
 
 ## Getting Started
 
