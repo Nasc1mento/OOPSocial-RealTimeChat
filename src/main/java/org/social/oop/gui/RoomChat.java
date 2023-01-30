@@ -50,7 +50,7 @@ public class RoomChat extends SharedFrame{
 	
 	private SimpleDateFormat dateFormat;
 	
-	private ArrayList<Message> messages;
+	private List<Message> messages;
 	private List<User> users;
 	
 	

@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 import main.java.org.social.oop.model.Message;
 import main.java.org.social.oop.session.RoomChatSession;
@@ -49,9 +50,9 @@ public class MessageRoomDAO implements IMessagePersistence {
 	}
 
 	@Override
-	public ArrayList<Message> getAllMessage() {
+	public List<Message> getAllMessage() {
 		// TODO Auto-generated method stub
-		ArrayList<Message> messages = new ArrayList<>();
+		List<Message> messages = new ArrayList<>();
 		
 		try {
 			
