@@ -36,6 +36,8 @@ Oriented-object programming final project of the Federal Institute of Pernambuco
 #### Room/Chat
 - Realtime using Socket.io
 - Room admin
+- Create Room
+- Delete Room (Only admin)
 - Filter users/rooms list
 
 #### Storage
