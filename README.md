@@ -2,7 +2,7 @@
 
 ## Introduction
 
-OOP final project made with Java, it's a real time chat using Socket IO to comunicate and update, Guava Google to filter users/rooms, Node.js socket server and MySQL to save data.
+Oriented-object programming final project of the Federal Institute of Pernambuco - Campus Igarassu using Java and Node.js
 
 ## Project structure (Apache Maven)
 
@@ -22,6 +22,72 @@ OOP final project made with Java, it's a real time chat using Socket IO to comun
      |_ pom.xml
      |_ README.md
      |_ LICENSE
+
+## Funcionalities
+
+#### User
+- Create
+- Edit
+- Delete
+- Update
+- Login 
+- Register
+
+#### Room/Chat
+- Realtime using Socket.io
+- Room admin
+- Filter users/rooms list
+
+#### Storage
+- MySQL database
+- PBKDF2 with HMAC SHA-1
+- Each user has his salt
+
+## Patterns
+- DAO and Singleton
+
+## Getting Started
+
+** (**Considering you are in root folder of project**)
+
+### Make sure you have installed:
+
+- mysql
+- nodejs
+- open-jdk
+- open-jre
+- maven
+
+#### Clone project
+
+```bash
+    git clone https://github.com/Nasc1mento/OOPSocial-RealTimeChat
+```
+#### Compile
+``` bash
+    cd OOPSocial-RealTimeChat
+```
+
+```bash
+    mvn clean install
+```
+#### Create database**
+
+```bash
+    mysql -u<your_user> -p < database/script.sql
+```
+#### Start socket server**
+
+```bash
+    cd server && node index.js
+```
+#### 
+
+## Execute**
+
+```bash
+    mvn exec:java
+```
 
 ## Screenshots
 
@@ -64,54 +130,19 @@ OOP final project made with Java, it's a real time chat using Socket IO to comun
 ![Screenshot from 2023-01-29 20-12-14](https://user-images.githubusercontent.com/88512599/215363706-7af7d8fc-4746-4a7f-81a3-fa504fa128b8.png)
 
 
-
-
-## Getting Started
-
-
-to clone project :
-```bash
-    $ > git clone https://github.com/Nasc1mento/OOPSocial-RealTimeChat
-```
-- **Eclipse**
-
-to install maven dependencies :
-
-1. Click on pom.xml
-2. Run as
-3. Maven install
-
-to create database:
-1. Copy script.sql
-2. Execute in WorkBench, CLI or whatever you want
-
-## Execute the program
-
-to start socket :
-
-
-```bash
-    $ > cd OOPSocial-RealTimeChat
-    $ > cd server
-    $ > node index.js
-```
-- **Eclipse**
-
-to execute :
-1. Select the Main.java
-2. Run as
-3. Java Application
-
-
-## Specifications
-
-- Node 18.12.1
-- Java 11
+## Maven Dependencies
 - MySQL Connector 8.0.31
 - Maven Compiler Plugin 3.8.1
 - Socket IO Client 2.1.0
 - Google Guava 31.1-jre
 - JUnit 4.13.2
+
+## My Specifications
+- Node 18.12.1
+- Java 11
+- Maven 3.8.7
+- MySQL 8
+- Arch Linux(Distrobox)
 
 ## License
 
