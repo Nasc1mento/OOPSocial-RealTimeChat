@@ -3,6 +3,9 @@
   <groupId>org.social.oop</groupId>
   <artifactId>org.social.oop</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <properties>
+    <exec.mainClass>main.java.org.social.oop.app.Main</exec.mainClass>
+  </properties>
   <build>
   <resources>
   	<resource>
