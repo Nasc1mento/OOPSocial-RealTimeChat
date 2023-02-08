@@ -11,16 +11,20 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
 
-public abstract class PBKDF2Salt {
+public class PBKDF2Salt {
+	
+	public PBKDF2Salt() {
+		
+	}
 	
 	public static String hashing(String password, String salt) {
 		
     	String securePassword = null;
 		try {
 			securePassword = getSecurePassword(password,salt);
-		} catch (NoSuchAlgorithmException | InvalidKeySpecException exception) {
+		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			// TODO Auto-generated catch block
-			exception.printStackTrace();
+			e.printStackTrace();
 		}
     	
     	return securePassword;

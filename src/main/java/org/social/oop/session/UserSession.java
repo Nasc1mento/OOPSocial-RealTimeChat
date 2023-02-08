@@ -2,8 +2,11 @@ package main.java.org.social.oop.session;
 
 import main.java.org.social.oop.model.User;
 
-public abstract class UserSession {
+public class UserSession {
 	
+	public UserSession() {
+		
+	}
 	
 	public static int id;
 	public static String name;

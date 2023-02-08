@@ -1,12 +1,15 @@
 package main.java.org.social.oop.session;
 
-public abstract class RoomChatSession {
+public class RoomChatSession {
+	
 	
 	public static int id;
 	public static int adminId;
 	public static String title;
 	
-	
+	private RoomChatSession() {
+		
+	}
 	
 	public static void setRoomChat(int id, int adminId, String title) {
 		RoomChatSession.id = id;

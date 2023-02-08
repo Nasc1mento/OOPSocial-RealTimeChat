@@ -5,8 +5,11 @@ import java.net.URISyntaxException;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 
-public abstract class SocketClient {
-	
+public class SocketClient {
+
+	private SocketClient() {
+		
+	}
 	
 	public static Socket socket;
 	

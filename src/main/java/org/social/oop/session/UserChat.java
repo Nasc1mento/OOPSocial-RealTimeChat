@@ -1,6 +1,10 @@
 package main.java.org.social.oop.session;
 
-public abstract class UserChat {
+public class UserChat {
+	
+	private UserChat() {
+		
+	}
 	
 	public static String name;
 	public static int id;
